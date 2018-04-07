@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript" src="js/action.js"></script>
+<script type="text/javascript" src="js/scrollpic.js"></script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix blank">
+  <div class="flash fl">
+	 <div class="indexAd">
+	 <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+	 </div>
+	</div>
+	<div class="notice fr">
+	 <div class="mod1" id="mod1">
+	   <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+		 <h1 class="mod1tit">{$lang.shop_notice}</h1>
+		 <div class="mod1con shop_notice">
+		 {$shop_notice}
+		  <div class="notectAd">
+			<!-- TemplateBeginEditable name="网店公告下广告位178x72" -->
+			<a href=""><img src="images/ad1.gif" width="178" /></a>
+      <!-- TemplateEndEditable -->
+			</div> 
+		 </div>
+	 </div>
+	 <script type="text/javascript">divheight("mod1");</script>
+	</div>
+</div>
+<div class="block clearfix">
+  <div id="pageLeft" class="fl">
+	<!-- TemplateBeginEditable name="左边区域" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/invoice_query.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/order_query.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/email_list.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/vote_list.lbi" --><!-- #EndLibraryItem -->
+  <!-- TemplateEndEditable -->
+	</div>
+	<div id="pageRight" class="fr clearfix">
+	 <div class="clearfix blank">
+	  <div class="w574 fl">
+	  <!--{if $promotion_goods} promotion start-->
+		<div class="mod1 mod2 promotion">
+			<span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+			<h1 class="mod2tit">
+			{$lang.promotion_goods}	 
+			<div class="more clearfix">
+			 <div class="arrLeft" id="scrollArrLeft"></div><div class="dotList" id="scrollDotList"></div><div class="arrRight" id="scrollArrRight"></div>
+			 <div id="more"><a href="../search.php?intro=promotion">更多</a></div>
+			</div>
+			</h1>
+			<div class="clearfix">
+			  <div class="promotionAd">
+			  <!-- TemplateBeginEditable name="特价商品广告位126x182" -->
+			   <a href=""><img src="images/ad2.gif" width="126" height="182" /></a>
+        <!-- TemplateEndEditable -->
+				</div>
+				<div class="promotionGood" id="scrollCont" style="overflow:hidden;">
+				 <ul>
+				 <!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+					<li>
+					<a href="{$goods.url}"><img src="{$goods.thumb}"  alt="{$goods.name|escape:html}"/></a><br />
+	        <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|truncate:7}</a><br /> 
+					<strong class="price">{$goods.promote_price}</strong>
+					</li>
+					<!--{/foreach}-->
+				 </ul>
+				</div>
+			</div>
+		</div>
+		<script  type="text/javascript">
+		  var itemLi = $("scrollCont").getElementsByTagName("li").length;
+			if(itemLi>4){
+			$("more").style.display  = "none";
+			var scrollPic = new ScrollPic();
+			scrollPic.scrollContId   = "scrollCont";
+			scrollPic.arrLeftId      = "scrollArrLeft";
+      scrollPic.arrRightId     = "scrollArrRight"; 
+			scrollPic.dotListId      = "scrollDotList";
+			scrollPic.dotClassName   = "dotItem";
+			scrollPic.dotOnClassName   = "dotItemOn";
+			scrollPic.frameWidth     = 428;
+			scrollPic.pageWidth      = 428;
+			scrollPic.speed          = 10; 
+			scrollPic.space          = 10; 
+			scrollPic.autoPlay       = false; 
+			scrollPic.autoPlayTime   = 5; 
+			scrollPic.initialize();
+			}else{
+			$("more").style.display  = "block";
+			$("scrollArrLeft").style.display  = "none";
+			$("scrollArrRight").style.display  = "none";
+			}
+		</script>
+		<!--{/if} promotion end-->
+	 </div>
+	  <div class="w200 fr">
+	 <!-- #BeginLibraryItem "/library/new_articles.lbi" --><!-- #EndLibraryItem -->
+	 </div>
+	 </div>
+	 <!--hot start-->
+	 <div class="clearfix blank">
+			<div class="w574 fl">
+			<!-- {if $hot_goods} -->
+			<div class="mod1 mod2 promotion">
+				<span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+				<h1 class="mod2tit">
+				{$lang.hot_goods} 
+				<div class="more clearfix">
+				 <div class="arrLeft" id="scrollArrLeft_hot"></div><div class="dotList" id="scrollDotList_hot"></div><div class="arrRight" id="scrollArrRight_hot"></div>
+				 <div id="more_hot"><a href="../search.php?intro=hot">更多</a></div>
+				</div>
+				</h1>
+				<div class="clearfix">
+					<div class="promotionAd">
+					<!-- TemplateBeginEditable name="热卖商品广告位126x182" -->
+					 <a href=""><img src="images/ad3.gif" width="126" height="182" /></a>
+					<!-- TemplateEndEditable -->
+					</div>
+					<div class="promotionGood" id="scrollCont_hot" style="overflow:hidden;">
+					 <ul>
+					 <!--{foreach from=$hot_goods item=goods}-->
+						<li>
+						 <a href="{$goods.url}"><img src="{$goods.thumb}"  alt="{$goods.name|escape:html}"/></a><br />
+             <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|truncate:7}</a><br />
+						 <!-- {if $goods.promote_price neq ""} -->
+						 <strong class="price">{$goods.promote_price}</strong><br />
+						 <!-- {else}-->
+						 <strong class="price">{$goods.shop_price}</strong><br />
+						 <!--{/if}-->
+						</li>
+						<!--{/foreach}-->
+					 </ul>
+					</div>
+				</div>
+			</div>
+			<script  type="text/javascript">
+				var itemLi_hot = $("scrollCont_hot").getElementsByTagName("li").length;
+				if(itemLi_hot>4){
+				$("more_hot").style.display  = "none";
+				var scrollPic_hot = new ScrollPic();
+				scrollPic_hot.scrollContId   = "scrollCont_hot";
+				scrollPic_hot.arrLeftId      = "scrollArrLeft_hot";
+				scrollPic_hot.arrRightId     = "scrollArrRight_hot"; 
+				scrollPic_hot.dotListId      = "scrollDotList_hot";
+				scrollPic_hot.dotClassName   = "dotItem";
+				scrollPic_hot.dotOnClassName   = "dotItemOn";
+				scrollPic_hot.frameWidth     = 428;
+				scrollPic_hot.pageWidth      = 428;
+				scrollPic_hot.speed          = 10; 
+				scrollPic_hot.space          = 10; 
+				scrollPic_hot.autoPlay       = false; 
+				scrollPic_hot.autoPlayTime   = 5; 
+				scrollPic_hot.initialize();
+				}else{
+				$("more_hot").style.display  = "block";
+				$("scrollArrLeft_hot").style.display  = "none";
+				$("scrollArrRight_hot").style.display  = "none";
+				}
+			</script>
+			<!--{/if}--> 
+		 </div>
+	    <div class="w200 fr">
+	    <!-- TemplateBeginEditable name="最新文章下广告位200x214" -->
+			<a href=""><img src="images/ad4.gif" width="200" height="214" class="dis" /></a>
+			<!-- TemplateEndEditable -->
+	    </div>
+	 </div>
+	 <!--hot end-->
+	 <div class="clearfix">
+	 <!-- TemplateBeginEditable name="首页通栏广告782x60" -->
+	  <a href=""><img src="images/ad5.gif" width="782" height="60" class="dis blank" /></a>
+   <!-- TemplateEndEditable -->
+	 </div>
+	 <!--{if $best_goods} 精品推荐 START-->
+	 <!-- {if $cat_rec_sign neq 1} -->
+	 <div class="mod1 blank">
+	  <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+	  <h1 class="mod1tit">
+		 {$lang.best_goods}
+		 <div class="more clearfix best" id="itemBest">
+		  {if $cat_rec[1]}
+      <h2><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a> |</h2>
+      {foreach from=$cat_rec[1] item=rec_data}
+      <h2 class="h2bg">
+			<a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a> |
+			</h2>
+      {/foreach}
+      {/if}
+		  <a href="../search.php?intro=best">更多</a>
+		 </div>
+		</h1>
+	  <div class="bestContent clearfix">
+		  <div class="w200 fl bestAd">
+			<!-- TemplateBeginEditable name="精品推荐广告位200x368" -->
+	    <a href=""><img src="images/ad6.gif" width="200" height="368" class="dis" /></a> 
+      <!-- TemplateEndEditable -->
+			</div>
+			<div class="bestlist fr" id="show_best_area">
+			<!-- {/if} -->
+			   <!--{foreach from=$best_goods item=goods}-->
+					<div class="goodsbox">
+					 <div class="imgbox"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+					 <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a><br />
+					 <!-- {if $goods.promote_price neq ""} -->
+					 <font class="f2">{$lang.promote_price}</font><strong class="price">{$goods.promote_price}</strong><br />
+					 <!-- {else}-->
+					 <font class="f2">{$lang.shop_price}</font><strong class="price">{$goods.shop_price}</strong><br />
+					 <!--{/if}-->
+					</div>
+		     <!--{/foreach}-->
+			<!-- {if $cat_rec_sign neq 1} -->	 
+			</div>
+	  </div>
+   </div>
+	 <!-- {/if} -->
+	 <!--{/if} 精品推荐 END-->
+	 <!--{if $new_goods} 新品上市 START-->
+	 <!-- {if $cat_rec_sign neq 1} -->
+	 <div class="mod1 blank">
+	  <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+	  <h1 class="mod1tit">
+		 {$lang.new_goods}
+		 <div class="more clearfix best" id="itemNew">
+		  {if $cat_rec[2]}
+      <h2><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, 0);">{$lang.all_goods}</a> |</h2>
+      {foreach from=$cat_rec[2] item=rec_data}
+      <h2 class="h2bg">
+			<a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, {$rec_data.cat_id})">{$rec_data.cat_name}</a> |
+			</h2>
+      {/foreach}
+      {/if}
+		  <a href="../search.php?intro=new">更多</a>
+		 </div>
+		</h1>
+	  <div class="bestContent clearfix">
+		  <div class="w200 fl bestAd">
+			<!-- TemplateBeginEditable name="新品上市广告位200x368" -->
+	    <a href=""><img src="images/ad7.gif" width="200" height="368" class="dis" /></a>
+      <!-- TemplateEndEditable -->
+			</div>
+			<div class="bestlist fr" id="show_new_area">
+			<!-- {/if} -->
+			   <!--{foreach from=$new_goods item=goods}-->
+					<div class="goodsbox">
+					 <div class="imgbox"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+					 <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a><br />
+					 <!-- {if $goods.promote_price neq ""} -->
+					 <font class="f2">{$lang.promote_price}</font><strong class="price">{$goods.promote_price}</strong><br />
+					 <!-- {else}-->
+					 <font class="f2">{$lang.shop_price}</font><strong class="price">{$goods.shop_price}</strong><br /> 
+					 <!--{/if}-->
+					</div>
+		     <!--{/foreach}-->
+			<!-- {if $cat_rec_sign neq 1} --> 
+			</div>
+	  </div>
+   </div>
+	 <!-- {/if} -->
+	 <!--{/if} 新品上市 END-->
+	 <!-- TemplateBeginEditable name="右边可编辑区" -->
+	  <!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem --> 
+		<!-- #BeginLibraryItem "/library/group_buy.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/auction.lbi" --><!-- #EndLibraryItem -->
+	 <!-- TemplateEndEditable --> 
+	</div>
+</div>	
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!--{if $img_links  or $txt_links }-->
+<div class="block blank">
+  <div class="mod1 mod2" id="links">
+	 <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+	  <div class="links clearfix">
+		  <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+			<a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" /></a>
+			<!--结束图片类型的友情链接{/foreach}-->
+			<!-- {if $txt_links} -->
+			<!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+			<a href="{$link.url}" target="_blank" title="{$link.name}" class="linkTxt">{$link.name}</a>
+			<!--结束文字类型的友情链接{/foreach}-->
+			<!-- {/if} -->
+		</div>
+  </div>
+<script type="text/javascript">divheight("links");</script>	
+</div> 
+<!--{/if}-->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

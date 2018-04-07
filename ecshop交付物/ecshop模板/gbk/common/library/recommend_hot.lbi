@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $hot_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <div class="centerPadd">
+  <div class="itemNewTit" id="itemHot">
+	<div class="left_hot f_l"></div>
+	<div class="right_new f_r">
+   {if $cat_rec[3]}
+  <h2><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, 0);">{$lang.all_goods}</a>
+	</h2>
+  {foreach from=$cat_rec[3] item=rec_data}
+  <h2 class="h2bg"><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, {$rec_data.cat_id})">{$rec_data.cat_name}</a>
+	</h2>
+  {/foreach}
+  {/if}  
+  </div>
+	</div>
+ <div id="show_hot_area" class="content clearfix">
+ <!-- {/if} -->
+  <!--{foreach from=$hot_goods item=goods}-->
+    <div class="GoodsBox">
+      <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></p>
+			 <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a><br>
+       {$lang.market_price}<font class="market"> {$goods.market_price}</font><br>        
+        <font class="shop">{$lang.shop_price}{$goods.shop_price}</font><br>        
+				<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a> </span> 
+     </div>
+  <!--{/foreach}-->
+<h1><a href="../search.php?intro=hot"><span class="morepic f_r"></span></a></h1>
+ <!-- {if $cat_rec_sign neq 1} --> 
+ <script language="javascript">
+	var GoodsBox = document.getElementById("show_hot_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>	   
+ </div>
+  </div>
+	<div class="blank5"></div>
+ <!-- {/if} -->
+<!-- {/if} -->

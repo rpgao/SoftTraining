@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $goods_article_list} -->
+<div class="Modtow">
+  <h3>{$lang.article_releate}</h3>
+  <div class="ModtowBox">
+   <ul class="top10 history">
+   <!-- {foreach from=$goods_article_list item=article} 相关文章 -->
+    <li><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:13}</a></li>
+    <!--{/foreach}-->
+  </ul>  
+  </div>
+</div>
+<!--{/if}-->   

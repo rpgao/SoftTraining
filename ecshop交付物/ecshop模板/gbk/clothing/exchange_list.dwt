@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+<!--left start-->
+  <div id="areaLeft">
+	  <div id="goodsLtop">
+		 <div class="cartBox">
+		  <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+		 </div>
+			<div class="Gaction clearfix">
+		  <a href="user.php">{$lang.label_login}</a><a href="user.php?act=register">{$lang.label_regist}</a>
+			<a href="user.php?act=profile">{$lang.label_profile}</a><a href="user.php?act=collection_list">{$lang.label_collection}</a>
+		 </div>
+		</div>
+	<!-- TemplateBeginEditable name="左边区域" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/filter_attr.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+  <!-- TemplateEndEditable -->
+	</div>
+<!--left end-->
+<!--right start-->
+  <div id="areaRight">
+    <!-- #BeginLibraryItem "/library/exchange_hot.lbi" --><!-- #EndLibraryItem -->
+     <script type="text/javascript">
+      window.onload = function()
+      {
+        Compare.init();
+        fixpng();
+      }
+      var button_compare = '';
+    </script>
+	  <div class="goods_listTit">
+<div class="ListTit">&nbsp;</div>
+  <form method="GET" class="sort" name="listform" style="_margin-top:3px;">
+      <select name="sort" style="border:1px solid #ccc;">
+        {html_options options=$lang.sort selected=$pager.sort}
+      </select>
+      <select name="order" style="border:1px solid #ccc;">
+        {html_options options=$lang.order selected=$pager.order}
+      </select>
+      <input type="image" name="imageField" src="../images/bnt_go.gif" style=" position:relative; top:3px;" alt="go"/>
+      <input type="hidden" name="category" value="{$category}" />
+      <input type="hidden" name="display" value="{$pager.display}" id="display" />
+      <input type="hidden" name="brand" value="{$brand_id}" />
+      <input type="hidden" name="price_min" value="{$price_min}" />
+      <input type="hidden" name="price_max" value="{$price_max}" />
+      <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+      <input type="hidden" name="page" value="{$pager.page}" />
+    </form>
+</div>
+
+    <!-- {if $category > 0} -->
+  <form name="compareForm" action="compare.php" method="post" onSubmit="return compareGoods(this);">
+    <!-- {/if} -->
+    <div class="goodsListBg clearfix">
+    <!--{foreach from=$goods_list item=goods}-->
+    <!-- {if $goods.goods_id} -->
+     <div class="General_goodsBox">
+           <a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a><br />
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a></p>
+           {$lang.exchange_integral}<font class="price">{$goods.exchange_integral}</font>
+    </div>
+    <!--{/if}-->
+    <!--{/foreach}-->
+    </div>
+  <!-- {if $category > 0} -->
+  </form>
+  <!-- {/if} -->
+
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script>
+<script type="text/javascript">
+window.onload = function()
+{
+  Compare.init();
+  fixpng();
+}
+{foreach from=$lang.compare_js item=item key=key}
+{if $key neq 'button_compare'}
+var {$key} = "{$item}";
+{else}
+var button_compare = '';
+{/if}
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+</script>
+		<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+	</div>
+<!--right end-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

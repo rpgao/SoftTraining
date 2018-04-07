@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript" src="js/action.js"></script>
+</head>
+<body>
+<a name="top" id="top"></a>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+  <div id="left" class="fl">
+	  <!-- TemplateBeginEditable name="左边区域" -->
+		<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+	</div>
+	<div id="right" class="fr">
+	
+	<!-- TemplateBeginEditable name="拍卖列表上可编辑区域" --> 
+  <!-- TemplateEndEditable -->
+	<h3 class="mod_title2 clearfix">
+	 <div class="left"><p>{$lang.auction_goods}</p></div>
+  </h3>
+	<!-- {if $auction_list} 如果有拍卖活动 -->
+  <!-- {foreach from=$auction_list item=auction} 循环拍卖活动开始 -->
+  <ul class="auctionList clearfix">
+  <li class="auctionImg"><a href="{$auction.url}"><img src="{$auction.goods_thumb}" class="inputborder" alt="{$auction.goods_name|escape:html}" /></a></li>
+  <li>
+  {$lang.goods_name}：<a href="{$auction.url}">{$auction.goods_name|escape:html}</a><br />
+      {$lang.act_status}：
+    <!-- {if $auction.status_no eq 0} -->
+            <font class="fred">{$lang.au_pre_start}</font><br>
+            <!-- {elseif $auction.status_no eq 1} -->
+            <font class="fred">{$lang.au_under_way_1}</font><br>
+            <!-- {else} -->
+            <font class="fred">{$lang.au_finished}</font><br>
+            <!-- {/if} -->
+    {$lang.au_start_price}：<font class="promote_price">{$auction.formated_start_price}</font><br>
+    <!-- {if $auction.end_price gt 0} -->
+    {$lang.au_end_price}：<font class="promote_price">{$auction.formated_end_price}</font>
+          <!-- {/if} -->
+  </li>
+  </ul>
+  <!--{/foreach}-->
+  <!-- {else} -->
+     <div class="tips">{$lang.no_auction}</div>
+  <!-- {/if} -->
+	<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+	<!-- TemplateBeginEditable name="拍卖列表下可编辑区域" -->  
+  <!-- TemplateEndEditable -->
+	</div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

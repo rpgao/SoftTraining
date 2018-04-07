@@ -1,0 +1,49 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<ul id="page_nav" class="block clearfix">
+  <li class="left"></li>
+  <li {if $navigator_list.config.index eq 1} class="cur"{/if}>{if $navigator_list.config.index eq 1}<span></span>{/if}<a href="../index.php">{$lang.home}</a></li>
+	<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <li{if $nav.active eq 1} class="cur"{/if}>
+	{if $nav.active eq 1} <span></span>{/if}
+	<a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a>
+	</li>
+	<!-- {/foreach} -->
+  <li class="right"></li>
+</ul>
+<div id="search" class="block clearfix">
+  <span></span><span class="right"></span>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+	 <strong>商品搜索：</strong> 
+   <select name="category" id="category">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}"/>
+   <input name="imageField" type="image" src="../images/bnt_search.gif" class="bnt" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+	 {if $searchkeywords}
+   <strong class="keys">{$lang.hot_search}：</strong>
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+</div>
+<script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+				    alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+</script>

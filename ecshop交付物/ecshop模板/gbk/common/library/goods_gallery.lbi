@@ -1,0 +1,30 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $pictures}-->
+ <script type="text/javascript">
+ function picturs(){
+	var goodsimg = document.getElementById("goodsimg");
+	var imglist = document.getElementById("imglist");
+	var imgnum = imglist.getElementsByTagName("img");
+	for(var i = 0; i<imgnum.length; i++){
+		imgnum[i].onclick=function(){
+			var lang = this.getAttribute("lang");
+			goodsimg.setAttribute("src",lang);
+			for(var j=0; j<imgnum.length; j++){
+				if(imgnum[j].getAttribute("class") =="onbg" || imgnum[j].getAttribute("className") =="onbg"){
+					imgnum[j].className = "autobg";
+					break;
+				}
+			}
+			this.className = "onbg";
+		}
+	}
+}
+ </script>
+ <div class="picture" id="imglist">
+		 <img src="{$goods.goods_img}" alt="{$goods.goods_name}" lang="{$goods.goods_img}" class="onbg" />
+		  <!-- {foreach from=$pictures item=picture}-->
+       <img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}" lang="{$picture.img_url}" class="autobg" />
+     <!--{/foreach}-->
+</div>
+ <script type="text/javascript">picturs();</script>
+<!-- {/if}-->

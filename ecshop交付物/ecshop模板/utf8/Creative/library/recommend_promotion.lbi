@@ -1,0 +1,51 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_goods} -->
+<div class="recommPromotion">
+	 <span class="l"  id="left"></span>
+   <div class="recommBox fl" id="wrape">
+	  <ul id="slid">
+		<!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+			 <li><p id="tips"></p><a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}"/></a></li>
+		<!--{/foreach}-->	 
+		</ul>
+	 </div>
+	 <span class="cr" id="right"></span>
+  </div>
+	<script type="text/javascript">
+	 var width = $('wrape').clientWidth;
+	 var lis = $('slid').getElementsByTagName('li');
+	 var ulWidth = lis[0].clientWidth*lis.length;
+	 var tips = $('tips');
+	 $('slid').style.width = ulWidth + 'px';
+		if(lis.length<=4){
+		 $('left').className="l";
+		 $('right').className="r";
+		 }else{
+					$('left').onclick = function(){
+					if(isMoving)return;
+					var left = parseInt($('slid').style.left) || 0;
+					if(left < 0){
+						moveElement("slid",0,left + width,10);	
+					}
+					else{
+					 $("left").className = "l"
+					}
+					
+			 }
+					$('right').onclick = function(){
+					if(isMoving)return;
+					var left = parseInt($('slid').style.left) || 0;
+					if(-left < ulWidth - width){
+						moveElement("slid",0,left - width,10);
+					}else{
+					  $("right").className = "r"
+					}
+			 }
+	 }
+	 for(var i=0; i<$('slid').getElementsByTagName('p').length; i++){
+	  if(i%2==0){
+		$('slid').getElementsByTagName('p')[i].className = "p1";
+    }
+	 }
+	</script>
+<!-- {/if} -->

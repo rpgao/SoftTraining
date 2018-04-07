@@ -1,0 +1,5 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $best_goods} -->
+<div class="bestTit">{$lang.best_goods}</div>
+<div class="bestBox blank clearfix"><!--{foreach from=$best_goods name=best_goods item=goods}--><!-- {if $smarty.foreach.best_goods.index lt 6} 限制显示数量 --><div class="goodsbox"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div><!-- {/if} --><!--{/foreach}--></div>
+<!-- {/if} -->

@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<h1 class="mod_title">{$lang.top10}<p></p></h1>
+<div class="mod1 clearfix">
+	<!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="pic_text top10_pic clearfix">
+	<img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" class="iteration" />
+	<!-- {if $smarty.foreach.top_goods.iteration<4}-->
+      <li class="pic">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a>
+      </li>
+	<!-- {/if} -->		
+      <li class="text">
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|truncate:8}</a><br />
+      {$lang.shop_price}<font class="f1">{$goods.price}</font><br />
+      </li>
+    </ul>
+  <!-- {/foreach} -->
+</div>

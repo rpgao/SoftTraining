@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript" language="javascript">
+function articleSize(size,lineheight){
+var article = document.getElementById("article");
+article.style.fontSize = size+"px";
+article.style.lineHeight = lineheight+"px";
+}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="area mailbg clearfix">
+  <div class="AreaL f_l clearfix">
+  <!-- TemplateBeginEditable name="右侧区域广告位（左侧区域）" -->
+<!-- #BeginLibraryItem "/library/goods_related.lbi" -->
+
+<div class="box tl">
+<h1 class="TitPublic tl"><span>{$lang.releate_goods}</span></h1>
+<div class="box1">
+<!-- {if $related_goods} -->
+<!--{foreach from=$related_goods item=releated_goods_data}-->
+ <div class="GoodsBox">
+   <div class="photo"><a href="{$releated_goods_data.url}"><img src="{$releated_goods_data.goods_thumb}" alt="{$releated_goods_data.goods_name}" /></a></div>
+   <p><a href="{$releated_goods_data.url}" title="{$releated_goods_data.goods_name}">{$releated_goods_data.short_name}</a></p>
+   <!-- {if $releated_goods_data.promote_price neq 0} -->
+  {$lang.promote_price}<font class="shop">{$releated_goods_data.formated_promote_price}</font><br />
+  <!-- {else} -->
+  {$lang.shop_price}<font class="shop">{$releated_goods_data.shop_price}</font><br />
+  <!-- {/if} -->
+ </div>
+<!--{/foreach}-->
+<!--{else}-->
+<img src="../images/nopic.gif">
+<!-- {/if} -->
+</div>
+</div>
+<div class="blank5"></div>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/history.lbi" -->
+
+<div class="box">
+  <h3 class="TitPublic"><span>{$lang.view_history}</span></h3>
+  <div class="Triangle">
+   <ul>
+   {insert name="history"}
+   </ul>
+  </div>
+</div>
+<div class="blank5"></div>
+
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+ </div>
+<div class="AreaR f_r clearfix">
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="right_ad">
+ <!-- TemplateBeginEditable name="右侧区域广告位（宽度是800）" -->
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" -->
+
+<!-- {if $hot_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="centerPadd">
+  <div class="itemHotTit" id="itemHot">
+ <div class="left_hot f_l"></div>
+ <div class="right_hot f_r">
+      {if $cat_rec[3]}
+      <h2><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, 0);">{$lang.all_goods}</a></h2>
+      {foreach from=$cat_rec[3] item=rec_data}
+      <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+      {/foreach}
+      {/if}
+ </div>
+  </div>
+  <div id="show_hot_area" class="content">
+  <!-- {/if} -->
+  <!--{foreach from=$hot_goods item=goods}-->
+  <div class="GoodsBox">
+           <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a></div>
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+           <font class="shop">
+           <!-- {if $goods.promote_price neq ""} -->
+          {$lang.promote_price}{$goods.promote_price}
+          <!-- {else}-->
+          {$lang.shop_price}{$goods.shop_price}
+          <!--{/if}-->
+           </font>
+  </div>
+  <!--{/foreach}-->
+  <div class="morepic"><a href="../search.php?intro=hot"><img src="images/more.gif" /></a></div>
+  <!-- {if $cat_rec_sign neq 1} -->
+  </div>
+</div>
+<div class="blank5"></div>
+  <!-- {/if} -->
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+<div class="Content">
+<div class="articleContent">
+  <div class="articleTit">{$article.title|escape:html}</div>
+  <div class="author">
+  {$article.author|escape:html} / <font class="f10">{$article.add_time}</font>
+  <div class="articleSize">
+  [<a href="javascript:articleSize('16','30')">大</a>] [<a href="javascript:articleSize('14','24')">中</a>] [<a href="javascript:articleSize('12','21')">小</a>]  </div>
+  </div>
+  <!-- {if $article.content } -->
+  <div id="article">
+   {$article.content}
+  </div> 
+  <!-- {/if} -->
+   {if $article.open_type eq 2 or $article.open_type eq 1}<br />
+    <div class="tr"><a href="{$article.file_url}" target="_blank"><u class="fred">{$lang.relative_file}</u></a></div>
+   {/if}
+   <div class="articlePrev">
+    <!-- 上一篇文章 -->
+       {$lang.next_article}：
+       {if $next_article}
+       <a href="{$next_article.url}">{$next_article.title}</a>
+       {else}
+       Empty！
+       {/if}<br />
+     <!-- 下一篇文章 -->
+      {$lang.prev_article}：
+      {if $prev_article}
+      <a href="{$prev_article.url}">{$prev_article.title}</a>
+      {else}
+       Empty！
+      {/if}
+   </div>
+   
+  </div>
+   <!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem -->
+  <!-- TemplateBeginEditable name="右侧区域" -->
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
+
+<!-- {if $best_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="centerPadd">
+  <div class="itemBestTit" id="itemBest">
+ <div class="left_best f_l"></div>
+ <div class="right_best f_r">
+      {if $cat_rec[1]}
+      <h2><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a></h2>
+      {foreach from=$cat_rec[1] item=rec_data}
+      <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+      {/foreach}
+      {/if}
+ </div>
+  </div>
+  <div id="show_best_area" class="content">
+  <!-- {/if} -->
+  <!--{foreach from=$best_goods item=goods}-->
+  <div class="GoodsBox">
+           <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a></div>
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+           <font class="shop">
+           <!-- {if $goods.promote_price neq ""} -->
+          {$lang.promote_price}{$goods.promote_price}
+          <!-- {else}-->
+          {$lang.shop_price}{$goods.shop_price}
+          <!--{/if}-->
+           </font>
+  </div>
+  <!--{/foreach}-->
+  <div class="morepic"><a href="../search.php?intro=best"><img src="images/more.gif" /></a></div>
+  <!-- {if $cat_rec_sign neq 1} -->
+  </div>
+</div>
+<div class="blank5"></div>
+  <!-- {/if} -->
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --> 
+</div>
+ </div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

@@ -1,0 +1,41 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function chg(id){
+ var str= "a"+id
+ var oa = document.getElementById(id);
+ var ob = document.getElementById(str);
+ if(oa){
+  if(oa.style.display == "block"){
+   oa.style.display = "none";
+   ob.className = '';
+  }else{
+   oa.style.display = "block";
+   ob.className = 'open';
+  }
+ }
+ return false;
+}
+</script>
+<div class="cateTit blank">{$lang.goods_category}</div>
+<ul class="catebox blank">
+<!--{foreach name=parent-cat from=$categories item=cat}-->
+  <li>
+   <div class="cateName">
+   <img src="images/catedot1.gif"> <a href="{$cat.url}" style="cursor:pointer;">{$cat.name|escape:html}</a>
+   <!--{if $cat.cat_id}-->
+    <p id="acat{$smarty.foreach.parent-cat.iteration}" {if $cat.cat_id}onclick="return chg('cat{$smarty.foreach.parent-cat.iteration}');" style="cursor:pointer;"{/if}></p>
+      <!--{else}-->
+    <p class="open" id="acat{$smarty.foreach.parent-cat.iteration}" {if $cat.cat_id}onclick="return chg('cat{$smarty.foreach.parent-cat.iteration}');" style="cursor:pointer;"{/if}></p>
+      <!--{/if}--> 
+  </div>
+  <!--{if $cat.cat_id}-->
+    <div class="cateList" id="cat{$smarty.foreach.parent-cat.iteration}" style="display:none;">
+       <!--{foreach from=$cat.cat_id item=child}-->
+      <a href="{$child.url}">{$child.name|escape:html}</a><br />
+       <!--{/foreach}-->
+    </div>
+   <!--{/if}-->
+  </li>
+<!--{/foreach}-->
+</ul>
+

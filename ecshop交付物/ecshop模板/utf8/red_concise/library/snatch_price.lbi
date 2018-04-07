@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div id="ECS_PRICE_LIST">
+  <div class="module">
+    <h1><span></span>{$lang.new_price}</h1>
+    <div class="content">
+      <ul class="clearfix">
+        <!--{foreach from=$price_list item=item}-->
+        <li>{$item.user_name}&nbsp;&nbsp;{$item.bid_price}</li>
+        <!--{/foreach}-->
+      </ul>
+    </div>
+  </div>
+</div>

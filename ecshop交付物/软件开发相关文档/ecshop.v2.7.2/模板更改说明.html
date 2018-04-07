@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ECshopV2.7.2模板更改说明</title>
+<style type="text/css">
+body{margin:10px; padding:0px; font-size:12px; line-height:20px;}
+*{margin:0px; padding:0px;}
+h1{font-size:14px; text-align:center; padding-bottom:10px; margin-bottom:15px; border-bottom:1px solid #ccc;}
+textarea{border:1px solid #ccc; width:100%; height:150px;}
+.f1{color:#ff2200; font-size:14px;}
+</style>
+</head>
+<body>
+<h1>ECshopV2.7.2模板更改说明</h1>
+<b>一、模板文件：</b><br />
+1. 新增
+<pre>
+   <font class="f1"></font>
+</pre>
+<pre>
+   <font class="f1"></font>
+</pre>
+
+2.更改
+<pre>
+   <font class="f1">:</font>
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+
+</textarea>
+修改后：
+<textarea style="height:100px;">
+
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">user_passport.dwt</font>
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <tr>
+            <td align="right">{$lang.comment_captcha}</td>
+            <td><input type="text" size="8" name="captcha" class="inputBg" />
+            <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+          </tr>
+          <!--{/if}-->
+          <tr>
+            <td>&nbsp;</td>
+</textarea>
+修改后：
+<textarea style="height:100px;">
+          <!-- 判断是否启用验证码{if $enabled_captcha} -->
+          <tr>
+            <td align="right">{$lang.comment_captcha}</td>
+            <td><input type="text" size="8" name="captcha" class="inputBg" />
+            <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+          </tr>
+          <!--{/if}-->
+          <tr>
+            <td colspan="2"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">flow.dwt</font>
+</pre>
+修改前：
+<textarea>
+ <!-- 判断是否启用验证码{if $enabled_login_captcha} -->
+                  <tr>
+                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.comment_captcha}:</strong></div></td>
+                    <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+                    <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+                  </tr>
+                  <!--{/if}-->
+                  <tr>
+                    <td bgcolor="#ffffff" colspan="2" align="center"><a href="user.php?act=qpassword_name" class="f6">{$lang.get_password_by_question}</a>&nbsp;&nbsp;&nbsp;<a href="user.php?act=get_password" class="f6">{$lang.get_password_by_mail}</a></td>
+                  </tr>
+</textarea>
+修改后：
+<textarea>
+  <!-- 判断是否启用验证码{if $enabled_login_captcha} -->
+                  <tr>
+                    <td bgcolor="#ffffff"><div align="right"><strong>{$lang.comment_captcha}:</strong></div></td>
+                    <td bgcolor="#ffffff"><input type="text" size="8" name="captcha" class="inputBg" />
+                    <img src="captcha.php?is_login=1&{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?is_login=1&'+Math.random()" /> </td>
+                  </tr>
+                  <!--{/if}-->
+                  <tr>
+            <td colspan="2"  bgcolor="#ffffff"><input type="checkbox" value="1" name="remember" id="remember" /><label for="remember">{$lang.remember}</label></td>
+          </tr>
+                  <tr>
+                    <td bgcolor="#ffffff" colspan="2" align="center"><a href="user.php?act=qpassword_name" class="f6">{$lang.get_password_by_question}</a>&nbsp;&nbsp;&nbsp;<a href="user.php?act=get_password" class="f6">{$lang.get_password_by_mail}</a></td>
+                  </tr>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">article_cat.dwt</font>
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+          <form action="{$search_url}" name="search_form" method="get" class="article_search">
+        <input name="keywords" type="text" id="requirement" value="{$search_value}" class="inputBg" />
+        <input name="id" type="hidden" value="{$cat_id}" />
+        <input type="submit" value="{$lang.button_search}" class="bnt_blue_1" />
+      </form>
+</textarea>
+修改后：
+<textarea style="height:100px;">
+          <form action="{$search_url}" name="search_form" method="post" class="article_search">
+        <input name="keywords" type="text" id="requirement" value="{$search_value}" class="inputBg" />
+        <input name="id" type="hidden" value="{$cat_id}" />
+        <input name="cur_url" id="cur_url" type="hidden" value="" />
+        <input type="submit" value="{$lang.button_search}" class="bnt_blue_1" />
+      </form>
+</textarea>
+<br />
+修改前：
+<textarea name="" rows="" cols="">
+</body>
+</html>
+</textarea>
+修改后：
+<textarea style="height:100px;">
+</body>
+<script type="text/javascript">
+document.getElementById('cur_url').value = window.location.href;
+</script>
+</html
+</textarea>
+<br />
+
+
+<pre>
+   <font class="f1">user_clips.dwt</font>
+</pre>
+修改前：
+<textarea>
+      <td bgcolor="#ffffff">javascript {$lang.affiliate_codetype}<br>
+        <textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}" style="border:1px solid #ccc;"><script src="{$shopurl}affiliate.php?charset={$ecs_charset}&gid={$goodsid}&u={$userid}&type={$val}"></script></textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}').value);alert('{$lang.copy_to_clipboard}');"  class="f6">^</a>]
+<br>iframe {$lang.affiliate_codetype}<br><textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}_iframe"  style="border:1px solid #ccc;"><iframe width="250" height="270" src="{$shopurl}affiliate.php?charset={$ecs_charset}&gid={$goodsid}&u={$userid}&type={$val}&display_mode=iframe" frameborder="0" scrolling="no"></iframe></textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}_iframe').value);alert('{$lang.copy_to_clipboard}');" class="f6">^</a>]</td>
+</textarea>
+修改后：
+<textarea>
+      <td bgcolor="#ffffff">javascript {$lang.affiliate_codetype}<br>
+        <textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}" style="border:1px solid #ccc;"><script src="{$shopurl}affiliate.php?charset={$ecs_charset}&gid={$goodsid}&u={$userid}&type={$val}"></script></textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}').value);alert('{$lang.copy_to_clipboard}');"  class="f6">{$lang.code_copy}</a>]
+<br>iframe {$lang.affiliate_codetype}<br><textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}_iframe"  style="border:1px solid #ccc;"><iframe width="250" height="270" src="{$shopurl}affiliate.php?charset={$ecs_charset}&gid={$goodsid}&u={$userid}&type={$val}&display_mode=iframe" frameborder="0" scrolling="no"></iframe></textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}_iframe').value);alert('{$lang.copy_to_clipboard}');" class="f6">{$lang.code_copy}</a>]
+<br />{$lang.bbs}UBB {$lang.affiliate_codetype}<br /><textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}_ubb"  style="border:1px solid #ccc;">{if $val != 5}[url={$shopurl}goods.php?id={$goodsid}&u={$userid}][img]{if $val < 3}{$goods.goods_thumb}{else}{$goods.goods_img}{/if}[/img][/url]{/if}
+
+[url={$shopurl}goods.php?id={$goodsid}&u={$userid}][b]{$goods.goods_name}[/b][/url]
+{if $val != 1 && $val != 3}[s]{$goods.market_price}[/s]{/if} [color=red]{$goods.shop_price}[/color]</textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}_ubb').value);alert('{$lang.copy_to_clipboard}');"  class="f6">{$lang.code_copy}</a>]
+{if $val == 5}<br />{$lang.im_code} {$lang.affiliate_codetype}<br /><textarea cols=30 rows=2 id="txt{$smarty.foreach.types.iteration}_txt"  style="border:1px solid #ccc;">{$lang.show_good_to_you} {$goods.goods_name}
+
+{$shopurl}goods.php?id={$goodsid}&u={$userid}</textarea>[<a href="#" title="Copy To Clipboard" onClick="Javascript:copyToClipboard(document.getElementById('txt{$smarty.foreach.types.iteration}_txt').value);alert('{$lang.copy_to_clipboard}');"  class="f6">{$lang.code_copy}</a>]{/if}</td>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">goods.dwt</font>
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+       <!-- {if $goods.integral > 0} 购买此商品可使用积分-->
+</textarea>
+修改后：
+<textarea style="height:100px;">
+       <!-- {if $cfg.use_integral} 购买此商品可使用积分-->
+</textarea>
+<br />
+修改前：
+<textarea name="" rows="" cols="">
+          <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value|escape:html}</td>
+</textarea>
+修改后：
+<textarea style="height:100px;">
+          <td bgcolor="#FFFFFF" align="left" width="70%">{$property.value}</td>
+</textarea>
+<br />
+修改前：
+<textarea>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/comments.lbi" -->
+</textarea>
+修改后：
+<textarea>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/bought_note_guide.lbi" -->
+
+{insert_scripts files='transport.js,utils.js'}
+<div id="ECS_BOUGHT">{* ECSHOP 提醒您：动态载入bought_notes.lbi，显示当前商品的购买记录 *}{insert name='bought_notes' id=$id}</div>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/comments.lbi" -->
+</textarea>
+<br />
+
+<b>一、库文件：(共 个)</b><br />
+1.新增
+<pre>
+   <font class="f1"></font>
+</pre>
+<pre>
+   <font class="f1">bought_notes.lbi</font>
+</pre>
+<pre>
+   <font class="f1">bought_note_guide.lbi</font>
+</pre>
+2.更改
+<br />
+<pre>
+   <font class="f1">goods_list.lbi</font>
+</pre>
+修改前：
+<textarea>
+ <div class="box_1">
+  <h3>
+  <span>{$lang.goods_list}</span>
+  <form method="GET" class="sort" name="listform">
+  {$lang.btn_display}：
+  <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a>
+  <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a>
+  <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+      <select name="sort" style="border:1px solid #ccc;">
+        {html_options options=$lang.sort selected=$pager.sort}
+      </select>
+      <select name="order" style="border:1px solid #ccc;">
+        {html_options options=$lang.order selected=$pager.order}
+      </select>
+      <input type="image" name="imageField" src="../images/bnt_go.gif" alt="go"/>
+      <input type="hidden" name="category" value="{$category}" />
+      <input type="hidden" name="display" value="{$pager.display}" id="display" />
+      <input type="hidden" name="brand" value="{$brand_id}" />
+      <input type="hidden" name="price_min" value="{$price_min}" />
+      <input type="hidden" name="price_max" value="{$price_max}" />
+      <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+      <input type="hidden" name="page" value="{$pager.page}" />
+    </form>
+  </h3>
+</textarea>
+修改后：
+<textarea>
+ <div class="box_1">
+  <h3>
+  <span>{$lang.goods_list}</span><a name='goods_list'></a>
+  <form method="GET" class="sort" name="listform">
+  {$lang.btn_display}：
+  <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a>
+  <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a>
+  <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+
+  <a href="{$script_name}.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=goods_id&order=<!-- {if $pager.sort == 'goods_id' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list"><img src="images/goods_id_<!-- {if $pager.sort == 'goods_id'} -->{$pager.order}<!-- {else} -->default<!-- {/if} -->.gif" alt="{$lang.sort.goods_id}"></a>
+  <a href="{$script_name}.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=shop_price&order=<!-- {if $pager.sort == 'shop_price' && $pager.order == 'ASC'} -->DESC<!-- {else} -->ASC<!-- {/if} -->#goods_list"><img src="images/shop_price_<!-- {if $pager.sort == 'shop_price'} -->{$pager.order}<!-- {else} -->default<!-- {/if} -->.gif" alt="{$lang.sort.shop_price}"></a>
+  <a href="{$script_name}.php?category={$category}&display={$pager.display}&brand={$brand_id}&price_min={$price_min}&price_max={$price_max}&filter_attr={$filter_attr}&page={$pager.page}&sort=last_update&order=<!-- {if $pager.sort == 'last_update' && $pager.order == 'DESC'} -->ASC<!-- {else} -->DESC<!-- {/if} -->#goods_list"><img src="images/last_update_<!-- {if $pager.sort == 'last_update'} -->{$pager.order}<!-- {else} -->default<!-- {/if} -->.gif" alt="{$lang.sort.last_update}"></a>
+
+  <input type="hidden" name="category" value="{$category}" />
+  <input type="hidden" name="display" value="{$pager.display}" id="display" />
+  <input type="hidden" name="brand" value="{$brand_id}" />
+  <input type="hidden" name="price_min" value="{$price_min}" />
+  <input type="hidden" name="price_max" value="{$price_max}" />
+  <input type="hidden" name="filter_attr" value="{$filter_attr}" />
+  <input type="hidden" name="page" value="{$pager.page}" />
+  <input type="hidden" name="sort" value="{$pager.sort}" />
+  <input type="hidden" name="order" value="{$pager.order}" />
+  </form>
+  </h3>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">order_total.lbi</font>
+</pre>
+修改前：
+<textarea>
+      {$lang.complete_acquisition} <font class="f4_b">{$total.will_get_integral}</font> {$points_name}
+      <!-- {if $total.will_get_bonus} 是否有红包-->
+      ，{$lang.with_price} <font class="f4_b">{$total.will_get_bonus}</font>{$lang.de}{$lang.bonus}。
+      <!-- {/if} -->    </td>
+</textarea>
+修改后：
+<textarea>
+    {$lang.complete_acquisition}
+      <!-- {if $config.use_integral} 是否使用积分-->
+      <font class="f4_b">{$total.will_get_integral}</font> {$points_name}
+      <!-- {/if} -->
+      <!-- {if $config.use_integral and $config.use_bonus} 是否同时使用积分红包-->，{$lang.with_price}  <!-- {/if} -->
+      <!-- {if $config.use_bonus} 是否使用红包-->
+       <font class="f4_b">{$total.will_get_bonus}</font>{$lang.de}{$lang.bonus}。
+      <!-- {/if} -->    </td>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">article_category_tree.lbi</font>
+</pre>
+修改前：
+<textarea>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.article_cat}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <!--{foreach from=$article_categories item=cat}-->
+    <a href="{$cat.url}">{$cat.name|escape:html}</a><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <a href="{$child.url}" style="background-image:none;">{$child.name|escape:html}</a><br />
+      <!--{/foreach}-->
+    <!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+</textarea>
+修改后：
+<textarea>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK">
+<!-- {if $article_categories} -->
+<div class="box">
+ <div class="box_1">
+  <h3><span>{$lang.article_cat}</span></h3>
+  <div class="boxCenterList RelaArticle">
+    <!--{foreach from=$article_categories item=cat}-->
+    <a href="{$cat.url}">{$cat.name|escape:html}</a><br />
+      <!--{foreach from=$cat.children item=child}-->
+      <a href="{$child.url}" style="background-image:none;">{$child.name|escape:html}</a><br />
+      <!--{/foreach}-->
+    <!--{/foreach}-->
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+</textarea>
+<br />
+</body>
+</html>

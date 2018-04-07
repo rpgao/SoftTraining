@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+<div id="PageHeader" class="clearfix">
+ <div class="logo"><a href="../index.php"><img src="images/logo.gif" width="124" height="36" /></a></div>
+ <div class="topnav">
+ <!--{if $navigator_list.top}-->
+  <ul class="TopNavList">
+	<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+	<li><a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a><span></span></li>
+	<!-- {/foreach} -->
+	</ul>
+	<!-- {/if} -->
+	<div class="tr" id="ECS_MEMBERZONE">
+	{insert_scripts files='transport.js,utils.js'}
+	{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}
+	</div>
+ </div>
+ <div class="HomeNav clearfix">
+  <div class="NavItem">
+	<a href="../index.php">{$lang.home}</a> <img src="images/navLine.gif" /> 
+	<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a>
+	<!-- {if !$smarty.foreach.nav_middle_list.last} -->
+			 <img src="images/navLine.gif" />
+	<!-- {/if} -->
+  <!-- {/foreach} -->
+	</div>
+	<div class="NavCart" id="ECS_CARTINFO">
+	{insert_scripts files='transport.js'}
+  <div style="width:150px; height:20px; overflow:hidden;">{insert name='cart_info'}</div>
+	<span><a href="flow.php">结算</a></span>
+	</div>
+ </div>
+</div>

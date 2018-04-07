@@ -1,0 +1,186 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="tagTitle comments"><h2>{$lang.user_comment}</h2></div>
+<div class="tagContent">
+<form action="javascript:;" onsubmit="submitComment(this)" method="post" name="commentForm" id="commentForm">
+<table width="100%" border="0" cellspacing="3" cellpadding="3">
+  <tr>
+    <th align="right">{$lang.username}</th>
+    <td>
+		<!--{if $smarty.session.user_name}-->{$smarty.session.user_name}<!--{else}-->{$lang.anonymous}<!--{/if}-->
+		&nbsp;&nbsp;&nbsp;&nbsp;<b>E-mail </b><input type="text" name="email" id="email"  maxlength="100" value="{$smarty.session.email|escape}" class="inputBorder"/>
+		</td>
+  </tr>
+  <tr>
+    <th align="right">{$lang.comment_rank}</th>
+    <td>
+		<input name="comment_rank" type="radio" value="1" id="comment_rank1" /> <img src="../images/stars1.gif" />
+    <input name="comment_rank" type="radio" value="2" id="comment_rank2" /> <img src="../images/stars2.gif" />
+    <input name="comment_rank" type="radio" value="3" id="comment_rank3" /> <img src="../images/stars3.gif" />
+    <input name="comment_rank" type="radio" value="4" id="comment_rank4" /> <img src="../images/stars4.gif" />
+    <input name="comment_rank" type="radio" value="5" checked="checked" id="comment_rank5" /> <img src="../images/stars5.gif" />
+		</td>
+  </tr>
+  <tr>
+    <th align="right" valign="top">{$lang.comment_content}</th>
+    <td>
+		<textarea name="content" class="inputBorder" style="height:50px; width:100%;"></textarea>
+    <input type="hidden" name="cmt_type" value="{$comment_type}" />
+    <input type="hidden" name="id" value="{$id}" />
+		</td>
+  </tr>
+  <tr>
+    <th align="right">
+		<!-- 判断是否启用验证码{if $enabled_captcha} -->
+		{$lang.comment_captcha}
+		<!-- {/if} -->
+		</th>
+    <td>
+		<div style="position:relative;">
+		<!-- 判断是否启用验证码{if $enabled_captcha} -->
+		<input type="text" name="captcha"  class="inputBorder" style="width:50px;"/>
+		<img src="captcha.php?{$rand}" alt="captcha" onClick="this.src='captcha.php?'+Math.random()">
+		<!-- {/if} -->
+		<input name="" type="submit"  value="{$lang.submit_comment}" class="bnt_num4" style="position:absolute; top:0px; right:0px;">
+		</div>
+		</td>
+  </tr>
+</table>
+</form>
+ <div class="commentList">
+  <ul>
+	 <!-- {if $comments} -->
+	 <!-- {foreach from=$comments item=comment} -->
+		<li class="word">
+		<font class="f1"><!-- {if $comment.username} -->{$comment.username|escape:html}<!-- {else} -->{$lang.anonymous}<!-- {/if} --></font> ( {$comment.add_time} )<br />
+		<img src="../images/stars{$comment.rank}.gif" alt="{$comment.comment_rank}" />
+		<p>{$comment.content}</p>
+		<!-- {if $comment.re_content} -->
+		<p class="re_content">
+		<font class="f1">{$lang.admin_username}</font><br>
+		{$comment.re_content}
+		</p>
+		<!-- {/if} -->
+		</li>
+		<!-- {/foreach} -->
+		<!--{else}-->
+		<li>{$lang.no_comments}</li>
+		<!--{/if}-->
+	 </ul>
+	 
+	 <!--翻页 start-->
+       <div align="right">
+        <form name="selectPageForm" action="{$smarty.server.PHP_SELF}" method="get">
+        <!-- {if $pager.styleid eq 0 } -->
+        <div id="pager">
+          {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+            <!--{foreach from=$pager.search key=key item=item}-->
+            <input type="hidden" name="{$key}" value="{$item}" />
+            <!--{/foreach}-->
+        </div>
+        <!-- {/if} -->
+        </form>
+        <script type="Text/Javascript" language="JavaScript">
+        <!--
+        {literal}
+        function selectPage(sel)
+        {
+          sel.form.submit();
+        }
+        {/literal}
+        //-->
+        </script>
+      </div>
+      <!--翻页 END-->
+	 
+ </div>
+</div>
+<div class="tagBot"></div>
+<script type="text/javascript">
+//<![CDATA[
+{foreach from=$lang.cmt_lang item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{literal}
+/**
+ * 提交评论信息
+*/
+function submitComment(frm)
+{
+  var cmt = new Object;
+
+  //cmt.username        = frm.elements['username'].value;
+  cmt.email           = frm.elements['email'].value;
+  cmt.content         = frm.elements['content'].value;
+  cmt.type            = frm.elements['cmt_type'].value;
+  cmt.id              = frm.elements['id'].value;
+  cmt.enabled_captcha = frm.elements['enabled_captcha'] ? frm.elements['enabled_captcha'].value : '0';
+  cmt.captcha         = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+  cmt.rank            = 0;
+
+  for (i = 0; i < frm.elements['comment_rank'].length; i++)
+  {
+    if (frm.elements['comment_rank'][i].checked)
+    {
+       cmt.rank = frm.elements['comment_rank'][i].value;
+     }
+  }
+
+//  if (cmt.username.length == 0)
+//  {
+//     alert(cmt_empty_username);
+//     return false;
+//  }
+
+  if (cmt.email.length > 0)
+  {
+     if (!(Utils.isEmail(cmt.email)))
+     {
+        alert(cmt_error_email);
+        return false;
+      }
+   }
+   else
+   {
+        alert(cmt_empty_email);
+        return false;
+   }
+
+   if (cmt.content.length == 0)
+   {
+      alert(cmt_empty_content);
+      return false;
+   }
+
+   if (cmt.enabled_captcha > 0 && cmt.captcha.length == 0 )
+   {
+      alert(captcha_not_null);
+      return false;
+   }
+
+   Ajax.call('comment.php', 'cmt=' + cmt.toJSONString(), commentResponse, 'POST', 'JSON');
+   return false;
+}
+
+/**
+ * 处理提交评论的反馈信息
+*/
+  function commentResponse(result)
+  {
+    if (result.message)
+    {
+      alert(result.message);
+    }
+
+    if (result.error == 0)
+    {
+      var layer = document.getElementById('ECS_COMMENT');
+
+      if (layer)
+      {
+        layer.innerHTML = result.content;
+      }
+    }
+  }
+{/literal}
+//]]>
+</script>

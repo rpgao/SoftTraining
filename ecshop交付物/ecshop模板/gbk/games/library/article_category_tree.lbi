@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories} -->
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$lang.article_cat}</span></p></h1>
+		<div class="modContent">
+			 <!--{foreach from=$article_categories item=cat}-->
+       <a href="{$cat.url}">{$cat.name|escape:html}</a><br />
+       <!--{foreach from=$cat.children item=child}-->
+       <a href="{$child.url}" style="background-image:none;">{$child.name|escape:html}</a><br />
+       <!--{/foreach}-->
+    <!--{/foreach}-->
+		</div>	
+	</div>	 
+</div>
+<!-- {/if} -->

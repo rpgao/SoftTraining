@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<h3 class="mod_title2 clearfix">
+	 <div class="left"><p>{$goods_cat.name|escape:html}</p></div>
+	 <div class="hot_title clearfix"><div class="more"><a href="{$goods_cat.url}">更多</a></div></div>
+</h3>
+<div class="buy_goods clearfix">
+<!--{foreach from=$cat_goods item=goods}-->
+	<div class="goodsbox">
+	 <div class="imgbox">
+	 <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>
+	 </div>
+   <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+   <!-- {if $goods.promote_price neq ""} -->
+   {$lang.promote_price}<font class="promote_price">{$goods.promote_price}</font><br>
+   <!-- {else}-->
+   {$lang.shop_price}<font class="promote_price">{$goods.shop_price}</font><br>
+   <!--{/if}-->
+	</div>
+<!--{/foreach}-->
+</div>

@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='utils.js,common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+<!--left start-->
+  <div id="areaLeft">
+	  <div id="goodsLtop">
+		 <div class="cartBox">
+		  <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+		 </div>	
+			<div class="Gaction clearfix">
+		  <a href="user.php">{$lang.label_login}</a><a href="user.php?act=register">{$lang.label_regist}</a>
+			<a href="user.php?act=profile">{$lang.label_profile}</a><a href="user.php?act=collection_list">{$lang.label_collection}</a>
+		 </div>
+		</div>
+	<!-- TemplateBeginEditable name="左边区域" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+  <!-- TemplateEndEditable -->
+	</div>
+<!--left end-->
+<!--right start-->
+  <div id="areaRight">
+	  <!-- TemplateBeginEditable name="通栏广告区域（宽746px）" -->
+    <!-- TemplateEndEditable -->
+		<!-- {if $action eq "form"} -->
+    <!--  搜索的表单 -->
+		<div class="General_Title clearfix">
+     <div class="TitleBoxcon"><p>{$lang.advanced_search}</p>&nbsp;</div>
+		</div>
+		<div class="clearfix groupList">
+		<form action="search.php" method="get" name="advancedSearchForm" id="advancedSearchForm">
+    <table border="0" align="center" cellpadding="3">
+      <tr>
+        <td valign="top">{$lang.keywords}：</td>
+        <td>
+          <input name="keywords" id="keywords" type="text" size="40" maxlength="120" class="border" value="{$adv_val.keywords}" />
+          <label for="sc_ds"><input type="checkbox" name="sc_ds" value="1" id="sc_ds" {$scck} />{$lang.sc_ds}</label>
+          <br />{$lang.searchkeywords_notice}
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.category}：</td>
+        <td><select name="category" id="select" class="border">
+            <option value="0">{$lang.all_category}</option>{$cat_list}</select>
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.brand}：</td>
+        <td><select name="brand" id="brand" class="border">
+            <option value="0">{$lang.all_brand}</option>
+            {html_options options=$brand_list selected=$adv_val.brand}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{$lang.price}：</td>
+        <td><input name="min_price" type="text" id="min_price" class="border" value="{$adv_val.min_price}" size="10" maxlength="8" />
+          -
+          <input name="max_price" type="text" id="max_price" class="border" value="{$adv_val.max_price}" size="10" maxlength="8" />
+        </td>
+      </tr>
+      <!--{if $goods_type_list}-->
+      <tr>
+        <td>{$lang.extension}：</td>
+        <td><select name="goods_type" onchange="this.form.submit()" class="border">
+            <option value="0">{$lang.all_option}</option>
+            {html_options options=$goods_type_list selected=$goods_type_selected}
+          </select>
+        </td>
+      </tr>
+      <!--{/if}-->
+      <!--{if $goods_type_selected > 0}-->
+      <!--{foreach from=$goods_attributes item=item}-->
+      <!--{if $item.type eq 1}-->
+      <tr>
+        <td>{$item.attr}：</td>
+        <td colspan="3"><input name="attr[{$item.id}]" value="{$item.value}" class="border" type="text" size="20" maxlength="120" /></td>
+      </tr>
+      <!--{/if}-->
+      <!--{if $item.type eq 2}-->
+      <tr>
+        <td>{$item.attr}：</td>
+        <td colspan="3"><input name="attr[{$item.id}][from]" class="border" value="{$item.value.from}" type="text" size="5" maxlength="5" />
+          -
+          <input name="attr[{$item.id}][to]" value="{$item.value.to}"  class="border" type="text" maxlength="5" /></td>
+      </tr>
+      <!--{/if}-->
+      <!--{if $item.type eq 3}-->
+      <tr>
+        <td>{$item.attr}：</td>
+        <td colspan="3"><select name="attr[{$item.id}]" class="border">
+            <option value="0">{$lang.all_option}</option>
+            {html_options options=$item.options selected=$item.value}
+          </select></td>
+      </tr>
+      <!--{/if}-->
+      <!--{/foreach}-->
+      <!--{/if}-->
+
+      <!-- {if $use_storage eq 1} -->
+      <tr>
+        <td>&nbsp;</td>
+        <td><label for="outstock"><input type="checkbox" name="outstock" value="1" id="outstock" <!-- {if $outstock} -->checked="checked"<!--{/if}-->/> {$lang.hidden_outstock}</label>
+        </td>
+      </tr>
+      <!--{/if}-->
+
+      <tr>
+        <td colspan="4" align="center"><input type="hidden" name="action" value="form" />
+          <input type="submit" name="Submit" value="{$lang.button_search}" class="bnt_number4" /></td>
+      </tr>
+    </table>
+  </form>
+    </div>
+		<!-- {/if} -->
+		<!-- {if isset($goods_list)} -->
+		<div class="General_Title clearfix">
+    <div class="TitleBoxcon">
+		 <!-- {if $intromode eq 'best'} -->
+		 <p>{$lang.best_goods}</p>
+		 <!-- {elseif $intromode eq 'new'} -->
+		 <p>{$lang.new_goods}</p>
+		 <!-- {elseif $intromode eq 'hot'} -->
+		 <p>{$lang.hot_goods}</p>
+		 <!-- {elseif $intromode eq 'promotion'} -->
+		 <p>{$lang.promotion_goods}</p>
+		 <!-- {else} -->
+		 <p>{$lang.search_result}</p>
+		 <!-- {/if} -->
+		  <!--{if $goods_list}-->
+			<form action="search.php" method="post" class="sort" name="listform" id="form">
+					<select name="sort">
+					{html_options options=$lang.sort selected=$pager.search.sort}
+					</select>
+					<select name="order">
+					{html_options options=$lang.order selected=$pager.search.order}
+					</select>
+					<input type="image" name="imageField" src="../images/bnt_go.gif" style=" position:relative; top:3px;" alt="go"/>
+					<input type="hidden" name="page" value="{$pager.page}" />
+					<input type="hidden" name="display" value="{$pager.display}" id="display" />
+					<!--{foreach from=$pager.search key=key item=item}-->
+              {if $key neq "sort" and $key neq "order"}
+                {if $key eq 'keywords'}
+                  <input type="hidden" name="{$key}" value="{$item|escape:decode_url}" />
+                {else}
+                  <input type="hidden" name="{$key}" value="{$item}" />
+                {/if}
+              {/if}
+         <!--{/foreach}-->
+				</form>
+			<!--{/if}-->
+		</div>
+    </div>
+    <div class="clearfix groupList flowBox">
+	  <!--{if $goods_list}-->
+		<form action="compare.php" method="post" name="compareForm" id="compareForm" onsubmit="return compareGoods(this);">
+
+      <div class="clearfix goodsBox" style="border:none;">
+                <!--{foreach from=$goods_list item=goods}-->
+                <!-- {if $goods.goods_id} -->
+                 <div class="General_goodsBox">
+                       <a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" /></a><br />
+                       <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a></p>
+                       <!-- {if $show_marketprice} -->
+                        {$lang.market_prices} <font class="market_s">{$goods.market_price}</font><br />
+                        <!-- {/if} -->
+                        <!--{if $goods.promote_price neq "" } -->
+                        {$lang.promote_price} <font class="price">{$goods.promote_price}</font><br />
+                        <!--{else}-->
+                        {$lang.shop_prices} <font class="price">{$goods.shop_price}</font><br />
+                        <!--{/if}-->
+                      <div class="action">
+											<a href="javascript:collect({$goods.goods_id});">{$lang.btn_collect}</a> |
+                      <a href="javascript:addToCart({$goods.goods_id})" >{$lang.btn_buy}</a> |
+                      <a href="javascript:;" id="compareLink" onClick="Compare.add({$goods.goods_id},'{$goods.goods_name|escape:"quotes"}','{$goods.type}')">{$lang.compare}</a></div>
+                    </div>
+                <!--{/if}-->
+                <!--{/foreach}-->
+                </div>
+
+    </form>
+          <script type="text/javascript">
+        {foreach from=$lang.compare_js item=item key=key}
+        var {$key} = "{$item}";
+        {/foreach}
+				
+				{foreach from=$lang.compare_js item=item key=key}
+        {if $key neq 'button_compare'}
+        var {$key} = "{$item}";
+        {else}
+        var button_compare = '';
+        {/if}
+        {/foreach}
+				
+				
+        var compare_no_goods = "{$lang.compare_no_goods}";
+        window.onload = function()
+        {
+          Compare.init();
+          fixpng();
+        }
+    var btn_buy = "{$lang.btn_buy}";
+    var is_cancel = "{$lang.is_cancel}";
+    var select_spe = "{$lang.select_spe}";
+        </script>
+		<!--{else}-->
+		<div class="empty">{$lang.no_search_result}</div>
+    <!--{/if}-->
+    </div>
+		<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+		<!-- {/if} -->
+		
+	</div>
+<!--right end-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

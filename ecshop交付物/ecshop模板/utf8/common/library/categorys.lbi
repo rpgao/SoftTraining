@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $cat_list} -->
+<div class="box">
+	<div class="tit">
+	<h2>{$lang.goods_category}</h2>
+	</div>
+	<div class="contant clearfix">
+		<!-- {foreach from=$cat_list item=cat} -->
+  <a href="{$cat.url}"><b>{$cat.cat_name|escape:html}</b></a> <!-- {if $cat.goods_num} --><span class="f10">({$cat.goods_num})</span><!-- {/if} --><br />
+ <!-- {/foreach} -->	
+	</div>     
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="General_Title clearfix">
+ <div class="TitleBoxcon"><p>{$lang.message_board}</p>&nbsp;</div>
+</div>
+<div class="clearfix groupList flowBox">
+	<!--{foreach name=message_lists from=$msg_lists key=key item=msg}-->
+      <div style="position:relative;">
+			 [<b>{$msg.msg_type}</b>]&nbsp;<font class="empty">{$msg.user_name}<!-- {if $msg.user_name eq ''} -->{$lang.anonymous}<!-- {/if} -->：</font><!-- {if $msg.id_value gt 0} -->{$lang.feed_user_comment}<a class="f3" href="{$msg.goods_url}" target="_blank" title="{$msg.goods_name}">{$msg.goods_name}</a><!-- {/if} -->{$msg.msg_title} <font class="f1">({$msg.msg_time})</font><!-- {if $msg.comment_rank gt 0} --><img style="position:absolute; right:0px;" src="../images/stars{$msg.comment_rank}.gif" alt="{$msg.comment_rank}" /><!-- {/if} -->
+      </div>
+      <div class="msgBottomBorder word">
+      {$msg.msg_content}<br>
+      <!-- {if $msg.re_content} -->
+       <font class="f1">{$lang.shopman_reply}</font><br />
+       {$msg.re_content}
+      <!-- {/if} -->
+      </div>
+ <!--{/foreach}--> 
+</div>

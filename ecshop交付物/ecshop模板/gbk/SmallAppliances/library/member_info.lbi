@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="LoginTxt">
+{if $user_info}
+{$lang.hello}，<b class="username">{$user_info.username}</b>，{$lang.welcome_return}！
+<a href="user.php" class="userContent">{$lang.user_center}</a>
+[<a href="user.php?act=logout">{$lang.user_logout}</a>]
+{else}
+<acronym class="LoginDot"> </acronym> [<a href="user.php">登录</a>] 
+<acronym class="LoginDot"></acronym> [<a href="user.php?act=register">注册</a>]
+{/if}
+</div>

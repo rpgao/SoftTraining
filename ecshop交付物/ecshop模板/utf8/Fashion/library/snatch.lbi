@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $myprice.is_end eq false} -->
+ <h3 class="ModTit clearfix">{$lang.me_bid}</h3>
+ <div class="ModBox clearfix">
+  <form action="javascript:bid()" method="post" name="formBid" id="formBid">
+   {$lang.my_integral}：
+    <font class="f12b red">{$myprice.pay_points}</font><br />
+    <font class="f12b vertical">{$lang.bid}：</font>
+		<input name="price" type="text" class="TextInput" >
+    <input type="submit" name="Submit" class="bnt_num4 vertical" value="{$lang.me_bid}" />
+		<input type="hidden" name="snatch_id" value="{$id}" />
+  </form>
+</div>
+
+ <h3 class="ModTit clearfix">{$lang.me_now_bid}</h3>
+ <div class="ModBox clearfix">
+    <!--{foreach from=$myprice.bid_price item=item}-->
+      <font class="fGray">{$item.price}</font>
+      <!--{if $item.is_only}-->
+      <font class="fGray">({$lang.only_price})</font>
+      <!--{/if}-->
+      <br>
+    <!--{/foreach}-->
+ </div>
+
+<!-- {else} -->
+
+ <h3 class="ModTit clearfix">{$lang.view_snatch_result}</h3>
+ <div class="ModBox clearfix">
+<!--{if $result}-->
+<form name="buy" action="snatch.php" method="get">
+<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.victory_user}</td>
+</td>
+    <td bgcolor="#FFFFFF" class="f12b">{$result.user_name}
+      <input type="hidden" name="act" value="buy" />
+      <input type="hidden" name="id" value="{$id}" />
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.price_bid}</td>
+    <td bgcolor="#FFFFFF" class="shop">{$result.formated_bid_price} &nbsp;&nbsp;
+    <!-- {if $result.order_count eq 0 and $result.user_id eq $smarty.session.user_id} -->
+      <input type="submit" name="bug" class="bnt_num4" value="{$lang.button_buy}" title="{$lang.button_buy}" />
+    <!--{/if}-->
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF">{$lang.bid_time}</td>
+    <td bgcolor="#FFFFFF" class="fred">{$result.bid_time}</td>
+  </tr>
+</table>
+</form>
+<!--{else}-->
+<div class="tips">{$lang.not_victory_user}</div>
+<!--{/if}-->
+</div>
+<!-- {/if} -->

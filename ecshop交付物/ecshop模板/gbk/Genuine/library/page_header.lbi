@@ -1,0 +1,101 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+<div class="block clearfix">
+  <div class="logo fl"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></div>
+	<div class="topright fr">
+	 <ul>
+	 <li class="topnav tr">
+	   {insert_scripts files='transport.js,utils.js'}
+		 <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		 <!--{if $navigator_list.top}-->
+				<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+					 <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+						<!-- {if !$smarty.foreach.nav_top_list.last} -->
+							|
+					 <!-- {/if} -->
+				<!-- {/foreach} -->
+		 <!-- {/if} -->
+	 </li>
+	 <li class="searchbox">
+		<form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+		 	<input name="keywords" type="text" id="keyword" class="keybg1" onfocus="myonfocus();" onblur="myonblur();" value="{$search_keywords|escape}" />
+	    <input name="imageField" type="submit" value="" class="bnt_scarch" />
+	    <a href="search.php?act=advanced_search"><img src="images/advanced.gif"></a><br />
+			{if $searchkeywords}
+			<div class="hot_search">
+			 {foreach name=keywords from=$searchkeywords item=val}
+				 <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+				 <!-- {if !$smarty.foreach.keywords.last} -->
+								|
+				 <!-- {/if} -->
+			 {/foreach}
+		  </div>
+			{/if}
+			</div>
+		</form>
+		<script type="text/javascript">
+    {literal}
+		if(document.getElementById('keyword').value==""){
+		document.getElementById('keyword').className="keybg";
+		}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+				    alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+		function myonfocus(){
+		var keys = document.getElementById('keyword');
+			keys.className = "";
+		}
+		function myonblur(){
+		var keys = document.getElementById('keyword');
+		if(keys.value==""){
+		    keys.className = "keybg";
+		  }else{
+			  keys.className = "";
+			}
+		}
+    -->
+    {/literal}
+    </script>
+	 </li>
+	 </ul>
+	</div>
+</div>
+<div class="block pagenavbox blank">
+ <div class="nav fl">
+    <ul class="clearfix">
+		 <li {if $navigator_list.config.index eq 1} class="curs"{/if}>{if $navigator_list.config.index eq 1} <span class="l"></span><span class="r"></span>{/if}<a href="../index.php">{$lang.home}</a></li>
+		 <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+			<li {if $nav.active eq 1} class="curs"{/if}>{if $nav.active eq 1} <span class="l"></span><span class="r"></span>{/if}<a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a></li>
+		 <!-- {/foreach} -->
+		 </ul>
+ </div>
+ <div class="cart clearfix fr">
+  <ul>
+	<li class="w180">
+		<div id="ECS_CARTINFO" class="none">
+			{insert_scripts files='transport.js'}
+	    {insert name='cart_info'}
+		</div>
+	购物车有 <font id="a1">0</font> 件商品
+	</li>
+	<li class="w90"><a href="flow.php">去结算</a></li>
+	</ul>
+	<script type="text/javascript">cart();</script>
+ </div>
+</div>

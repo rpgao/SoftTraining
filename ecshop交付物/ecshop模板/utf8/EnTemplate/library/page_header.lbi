@@ -1,0 +1,30 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+<div class="Area clearfix tr">
+<div class="navigator f_r">
+  <span class="R"></span>
+	 <ul>
+    <!--{if $navigator_list.top}-->		
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+		 <li>
+      <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+		 </li>
+    <!-- {/foreach} -->		
+   <!-- {/if} -->
+	 </ul>
+</div>
+</div>
+<div class="Area clearfix">
+ <ul class="clearfix">
+  <li class="f_l"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></li>
+	<li class="f_r">
+	{insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+	</li>
+ </ul>
+</div>

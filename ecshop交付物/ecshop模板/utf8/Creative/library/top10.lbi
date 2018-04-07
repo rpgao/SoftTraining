@@ -1,0 +1,19 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $top_goods}-->
+<div class="block top4 blank">
+ <ul class="clearfix" id="topGoods">
+ <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  {if $smarty.foreach.top_goods.index lt 4}
+  <li>
+	 <p><a href="{$goods.url}" title="{$goods.short_name|escape:html}">{$goods.short_name|truncate:6}</a></p>
+	 <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>
+	</li>
+	 {/if}
+ <!-- {/foreach} -->
+ </ul>
+</div>
+<script type="text/javascript">
+//top10("topGoods");
+PinClass("topGoods");
+</script>
+<!--{/if}-->

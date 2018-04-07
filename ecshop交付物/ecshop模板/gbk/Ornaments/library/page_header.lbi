@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div id="page_top" class="block">
+  <div class="logo"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></div>
+	<div class="top_nav">
+	<span id="ECS_MEMBERZONE">
+		 {insert_scripts files='transport.js,utils.js'}
+		 {* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}
+	</span>
+	<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+     | <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+   <!-- {/foreach} -->
+	</div>
+	<div class="fr" id="ECS_CARTINFO">
+	{insert_scripts files='transport.js'}
+	{insert name='cart_info'}<span></span>
+	</div>
+</div>

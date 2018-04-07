@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $goods_article_list} -->
+<div class="module">
+  <h1><span></span>{$lang.article_releate}</h1>
+  <div class="content" style="padding:5px;">
+    <!-- {foreach from=$goods_article_list item=article} 相关文章 -->
+    <font style="font-family:宋体;">·</font><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|escape:html}</a><br />
+    <!--{/foreach}-->
+  </div>
+</div>
+<!-- {/if} -->

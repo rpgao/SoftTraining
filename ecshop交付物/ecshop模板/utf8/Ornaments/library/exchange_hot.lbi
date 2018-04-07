@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $hot_goods} -->
+<h3 class="mod_title2 clearfix">
+	 <div class="left"><p>{$lang.hot_goods}</p></div>
+</h3>
+<div class="category_box grid">
+<!--{foreach from=$hot_goods item=goods}-->
+	<div class="goodsbox">
+	 <div class="imgbox">
+	 <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>
+	 </div>
+	 <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+	 {$lang.exchange_integral}<font class="promote_price">{$goods.exchange_integral}</font><br>
+	</div>
+<!--{/foreach}-->
+</div>
+<!-- {/if} -->

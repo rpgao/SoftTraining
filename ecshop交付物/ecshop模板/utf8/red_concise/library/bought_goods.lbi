@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $bought_goods} -->
+<div class="module">
+  <h1><span></span>{$lang.shopping_and_other}</h1>
+  <div class="content">
+     <ul class="goods_grid">
+      <!--{foreach from=$bought_goods item=goods}-->
+      <li>
+        <p class="img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}"  class="goodsimg" /></a></p>
+        <p class="name"><a href="{$goods.url}" title="{$goods.goods_name}">{$goods.short_name}</a></p>
+        <p class="price" style="font-weight:normal; color:#74081F;">
+          <!-- {if $goods.promote_price neq 0} -->
+          {$goods.formated_promote_price}
+          <!-- {else} -->
+          {$goods.shop_price}
+          <!-- {/if} -->
+        </p>
+      </li>
+    <!-- {/foreach} -->
+    </ul>
+  </div>
+</div>
+<!-- {/if} -->

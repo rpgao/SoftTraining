@@ -1,0 +1,28 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $cat_goods} -->
+
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<h3 class="cat_goods">{$goods_cat.name|escape:html}</h3>
+	<a href="{$goods_cat.url}"><span class="titmore"></span></a>
+	<div id="cat_goods_area">
+<!--{foreach from=$cat_goods item=goods}-->
+  <div class="GoodsBox">
+   <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></p>
+   <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+    {$lang.market_price}<font class="market"> {$goods.market_price}</font><br>        
+        <font class="shop">{$lang.shop_price}{$goods.shop_price}</font><br>        
+				<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a> </span> 
+  </div>
+<!--{/foreach}-->
+<script language="javascript">
+	var GoodsBox = document.getElementById("cat_goods_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>	
+	</div>
+<div class="blank5"></div>
+  </div>
+ </div>
+</div>
+<!--{/if}-->

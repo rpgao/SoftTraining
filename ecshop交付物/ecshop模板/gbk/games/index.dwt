@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript">
+function $(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$(str+"_b").getElementsByTagName("h2");
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onclick=function(){
+      $(this.subj+"_v").innerHTML=$(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $(str+"_h").className="none";
+  $(str+"_v").innerHTML=$(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+</script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block" id="Foucs">
+ <!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+ <div class="clearfix">
+  <div id="W232">
+	<!-- TemplateBeginEditable name="焦点图左边广告（200x244）" -->
+	<img src="images/ad.gif" />
+  <!-- TemplateEndEditable -->
+	</div>
+	<div id="W522" class="clearfix">
+	<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+	<div class="ad1">
+	<!-- TemplateBeginEditable name="焦点图下左边广告（145x92）" -->
+	<img src="images/ad1.gif" width="145" height="92" />
+  <!-- TemplateEndEditable -->
+	</div>
+	<!--公告，调查，最新文章，优惠活动 START-->
+	<div class="textList clearfix">
+	 <div class="textTagTit" id="com_b">
+	  <h2>{$lang.shop_notice}</h2>
+		<h2 class="h2bg">{$lang.new_article}</h2>
+		<h2 class="h2bg">{$lang.promotion_info}</h2>
+		<h2 class="h2bg">{$lang.order_query}</h2>
+	 </div>
+	 <div class="textCenter" id="com_v"></div>
+	 <div id="com_h">
+		 <blockquote>
+			{$shop_notice}
+		 </blockquote>
+		 <blockquote>
+			<!-- #BeginLibraryItem "/library/new_articles.lbi" --><!-- #EndLibraryItem -->
+		 </blockquote>
+		 <blockquote>
+		  <!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+		 </blockquote>
+		 <blockquote>
+      <!-- #BeginLibraryItem "/library/order_query.lbi" --><!-- #EndLibraryItem -->
+		 </blockquote>
+	</div>
+	<script type="text/javascript">
+    <!--
+    reg("com");
+    //-->
+  </script>
+	</div>
+	<!--公告，调查，最新文章，优惠活动 END-->
+	</div>
+	<!--销售排行 start-->
+	<div id="W212">
+	<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem --> 
+	</div>
+	<!--销售排行 end-->
+ </div>
+</div>
+<div class="block clearfix">
+<!--left start-->
+<div id="AreaLeft">
+<!-- TemplateBeginEditable name="精品（仅数量和是否显示可编辑）" -->
+ <!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem --> 
+<!-- TemplateEndEditable --> 
+ <div class="Col clearfix">
+   <div class="ColL">
+<!-- TemplateBeginEditable name="左边区域（仅数量和是否显示可编辑）" -->		 
+	   <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem --> 
+		 <!-- #BeginLibraryItem "/library/invoice_query.lbi" --><!-- #EndLibraryItem -->
+		 <!-- #BeginLibraryItem "/library/vote_list.lbi" --><!-- #EndLibraryItem --> 
+<!-- TemplateEndEditable --> 
+     <!-- #BeginLibraryItem "/library/links.lbi" --><!-- #EndLibraryItem -->		 
+	 </div>
+	 <div class="colR">
+<!-- TemplateBeginEditable name="中间区域（仅数量和是否显示可编辑）" -->	 
+	  <!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/group_buy.lbi" --><!-- #EndLibraryItem --> 
+		<!-- #BeginLibraryItem "/library/auction.lbi" --><!-- #EndLibraryItem --> 
+<!-- TemplateEndEditable -->
+	 </div>
+ </div>
+</div>
+<!--left end-->
+<!--right start-->
+<div id="AreaRight">
+<div class="activity">
+<!-- TemplateBeginEditable name="右边广告位（宽210px）" -->
+<img src="images/ad2.gif" width="210" />
+<!-- TemplateEndEditable -->
+</div>
+
+<!-- TemplateBeginEditable name="右边区域（仅数量和是否显示可编辑）" -->
+<!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/email_list.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem --> 
+</div>
+<!--right end-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+
+</body>
+</html>

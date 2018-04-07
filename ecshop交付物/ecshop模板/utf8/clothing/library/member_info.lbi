@@ -1,0 +1,7 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{if $user_info}
+{$lang.hello}，<font class="f1">{$user_info.username}</font>， {$lang.welcome_return}！
+<a href="user.php">{$lang.user_center}</a> | <a href="user.php?act=logout">{$lang.user_logout}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{else}
+ <font class="f1">{$lang.welcome}！</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{/if}

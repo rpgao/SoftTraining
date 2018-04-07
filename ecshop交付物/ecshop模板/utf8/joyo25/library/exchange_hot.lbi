@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $hot_goods}-->
+ <h4 class="ModthreeTit clearfix">
+  <div class="text hot"></div>
+  <div class="more clearfix">&nbsp;</div>
+ </h4>
+ <div class="bestBox clearfix">
+  <!--{foreach from=$hot_goods item=goods}-->
+    <div class="GoodsBox">
+      <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+        <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+        {$lang.exchange_integral}<font class="shop">{$goods.exchange_integral}</font><br>
+     </div>
+  <!--{/foreach}-->
+ </div>
+<!-- {/if} -->

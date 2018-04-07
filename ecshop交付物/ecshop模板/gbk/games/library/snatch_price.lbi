@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$lang.new_price}</span></p></h1>
+		<div class="modContent">
+    <ul>
+    <!--{foreach from=$price_list item=item}-->
+    <li>·{$item.user_name}&nbsp;&nbsp;{$item.bid_price}</li>
+    <!--{/foreach}-->
+    </ul>
+   </div>	
+	</div>	 
+</div>
+

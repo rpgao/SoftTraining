@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div class="block clearfix" style="position:relative;">
+  <div id="logo"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></div>
+	<div id="TopNav">
+	  {insert_scripts files='transport.js,utils.js'}
+	  <span id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}</span>
+	  <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+            <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+            <!-- {if !$smarty.foreach.nav_top_list.last} -->
+             |
+            <!-- {/if} -->
+    <!-- {/foreach} -->
+	</div>
+</div>
+<div id="Nav" class="clearfix">
+  <span class="left"></span><span class="right"></span>
+	<ul>
+	<li class="left"></li>
+	<li class="tel">全国免费热线：</li>
+	<li class="cNav">
+	  <a href="../index.php">{$lang.home}</a> | 
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a>
+	 <!-- {if !$smarty.foreach.nav_middle_list.last} -->
+   |
+   <!-- {/if} -->
+  <!-- {/foreach} -->
+	</li>
+	</ul>
+</div>

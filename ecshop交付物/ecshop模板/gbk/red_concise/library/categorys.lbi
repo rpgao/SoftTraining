@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $cat_list} -->
+<div class="module" id="category_tree">
+  <h1><span></span>{$lang.goods_category}</h1>
+  <div class="content">
+    <!-- {foreach from=$cat_list item=cat} -->
+    <dl>
+      <dt><a href="{$cat.url}">{$cat.cat_name|escape:html} {if $cat.goods_num}({$cat.goods_num}){/if}</a></dt>
+    </dl>
+    <!--{/foreach}-->
+  </div>
+</div>
+<!-- {/if} -->

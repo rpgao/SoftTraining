@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $new_articles} -->
+<div class="mod3">
+ <h2>{$lang.new_article}</h2> 
+ <div class="ContantBlank">
+  <!-- {foreach name=new_articles from=$new_articles item=article} -->
+  <!-- {if $smarty.foreach.new_articles.index lt 5} 限制文章显示数量 -->
+  <a href="{$article.url}" title="{$article.title|escape:html}" class="Triangle">{$article.short_title|truncate:12}</a><br />
+  <!-- {/if} --> 
+  <!--{/foreach}-->
+ </div>
+</div>
+<!-- {/if} -->

@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- {if $top_goods} -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	 <div class="Top10">
+	 <h1></h1>
+	 <div  id="top10">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="clearfix">
+	<img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" class="iteration" />
+	<!-- {if $smarty.foreach.top_goods.iteration<4}-->
+      <li class="topimg">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>
+      </li>
+	<!-- {/if} -->		
+      <li {if $smarty.foreach.top_goods.iteration<4}class="TextWid"{/if}>
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>      
+      </li>
+    </ul>
+  <!-- {/foreach} -->
+	</div>
+	<script language="javascript">
+	var top10 = document.getElementById("top10").getElementsByTagName("ul");
+	top10[top10.length-1].style.border="none";
+	</script>
+	</div>
+  </div>
+ </div>
+</div>
+<!-- {/if} -->
+<div class="blank5"></div>

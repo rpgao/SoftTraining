@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $price_grade} -->
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$lang.price_grade}</span></p></h1>
+		<div class="modContent">
+		<!-- {foreach from=$price_grade item=grade} -->
+    <!-- {if $grade.selected} -->
+    <font class="f1">{$grade.start} - {$grade.end} {if $grade.goods_num}({$grade.goods_num}){/if}</font><br />
+    <!-- {else} -->
+    <a href="{$grade.url}">{$grade.start} - {$grade.end}</a> {if $grade.goods_num}({$grade.goods_num}){/if}<br />
+    <!-- {/if} -->
+    <!-- {/foreach} -->
+		</div>	
+	</div>	 
+</div>
+<!-- {/if} -->

@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="module">
+  <div class="caption"><span><a href="{$articles_cat.url}">更多>></a></span><a href="{$articles_cat.url}">{$articles_cat.name|escape:html}</a></div>
+  <div class="content" style="padding:5px;">
+    <ul>
+       <!--{foreach from=$articles item=article_item}-->
+      <li>
+        <font style="font-family:宋体;">·</font> <a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a> {$article_item.add_time}
+      </li>
+      <!--{/foreach}-->
+    </ul>
+  </div>
+</div>

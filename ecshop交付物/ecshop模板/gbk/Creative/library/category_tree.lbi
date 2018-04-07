@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="cateList">
+	<div class="cateTitList clearfix" id="com_b">
+	<!--{foreach from=$categories item=cat}-->
+		<h2 class="h2bg"><a href="{$cat.url}" title="{$cat.name|escape:html}">{$cat.name|truncate:6}</a></h2>
+	<!--{/foreach}-->
+	</div>
+	<div class="tl" id="com_v"></div>
+	<div id="com_h">
+	<!--{foreach from=$categories item=cat}-->
+		<blockquote>
+		<!--{if $cat.cat_id}-->
+		<!--{foreach name=childs from=$cat.cat_id item=child}-->
+		<p><a href="{$child.url}" title="{$child.name|escape:html}" class="txtdot">{$child.name|escape:html}</a></p>
+		<!--{/foreach}-->	
+		<!--{else}-->
+		&nbsp;
+		<!--{/if}-->
+		</blockquote>
+	<!--{/foreach}-->	
+	</div>
+</div>
+

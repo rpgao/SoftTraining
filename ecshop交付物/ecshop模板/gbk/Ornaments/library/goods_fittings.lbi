@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $fittings} -->
+<h3 class="good_them_tit">{$lang.accessories_releate}<a href="#top"><img src="images/top.gif" /></a></h3>
+<div class="good_them_box">
+<!--{foreach from=$fittings item=goods}-->
+  <div class="goodsbox">
+	<div class="imgbox"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}" /></a></div>
+  <p><a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.short_name|escape:html}</a></p>
+  {$lang.fittings_price}<font class="promote_price">{$goods.fittings_price}</font>
+	</div>
+	<!--{/foreach}-->
+</div>
+<!-- {/if} -->

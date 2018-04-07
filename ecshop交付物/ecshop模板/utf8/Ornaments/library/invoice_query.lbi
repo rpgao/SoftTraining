@@ -1,0 +1,22 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $invoice_list}-->
+<h1 class="mod_title">{$lang.shipping_query}<p>&nbsp;</p></h1>
+<div class="mod1 invoice">
+  <div class="actions">
+	<span title="上一条" id="pre"></span><span title="下一条" id="next"></span>
+	</div>
+	<ul id="invoice_list">
+	<!--{foreach from=$invoice_list item=invoice} -->
+	<li>
+	 <strong>{$lang.order_number}</strong> {$invoice.order_sn}<br />
+   <strong>{$lang.consignment}</strong> {$invoice.invoice_no}
+	</li>
+	<!-- {/foreach}-->
+	</ul>
+</div>
+<script language="javascript" type="text/javascript">
+var scroll2 = new ScrollText("invoice_list","pre","next",true,70,true);
+scroll2.LineHeight = 24;
+</script>
+<!-- {/if} -->
+

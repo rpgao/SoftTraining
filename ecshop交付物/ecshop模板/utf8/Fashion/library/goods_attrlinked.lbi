@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- 开始循环属性关联的商品 {foreach from=$attribute_linked item=linked}-->
+<!-- {if $linked.goods} -->
+<div class="box clearfix">
+<h1 class="TitPublic"><span title="{$linked.title}">{$linked.title|truncate:11:"...":true}</span></h1>
+<div class="Top10List">
+  <!-- {foreach from=$linked.goods item=linked_goods_data} -->		
+		 <ul class="clearfix">	
+		 <li class="topimg">      
+			<a href="{$linked_goods_data.url}" target="_blank"><img src="{$linked_goods_data.goods_thumb}" alt="{$linked_goods_data.name|escape:html}" class="samllimg"/></a>
+      </li>	
+      <li class="TextWid">
+     <a href="{$linked_goods_data.url}" target="_blank" title="{$goods.linked_goods_data_name|escape:html}">{$linked_goods_data.short_name|escape:html}</a><br />
+     <font class="f1">{$linked_goods_data.shop_price}</font>
+      </li>				
+			</ul>				
+	<!-- {/foreach} -->
+</div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+<!-- 结束属性关联的商品 {/foreach}-->
+
+
+
+
+

@@ -1,0 +1,24 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div id="user_menu">
+		  <div class="content">
+			  <dl>
+<dt>·<a href="user.php"> 	{$lang.label_welcome}</a></dt>
+<dt>·<a href="user.php?act=profile"> {$lang.label_profile}</a></dt>
+<dt>·<a href="user.php?act=order_list"> {$lang.label_order}</a></dt>
+<dt>·<a href="user.php?act=address_list"> {$lang.label_address}</a></dt>
+<dt>·<a href="user.php?act=collection_list"> {$lang.label_collection}</a></dt>
+<dt>·<a href="user.php?act=message_list"> {$lang.label_message}</a></dt>
+<dt>·<a href="user.php?act=tag_list"> {$lang.label_tag}</a></dt>
+<dt>·<a href="user.php?act=booking_list"> {$lang.label_booking}</a></dt>
+<dt>·<a href="user.php?act=bonus"> {$lang.label_bonus}</a></dt>
+<!-- {if $affiliate.on eq 1} --><dt>·<a href="user.php?act=affiliate"> {$lang.label_affiliate}</a></dt><!-- {/if} -->
+<dt>·<a href="user.php?act=comment_list"> {$lang.label_comment}</a></dt>
+<!--<a href="user.php?act=group_buy">{$lang.label_group_buy}</a>-->
+<dt>·<a href="user.php?act=track_packages"> {$lang.label_track_packages}</a></dt>
+<dt>·<a href="user.php?act=account_log"> {$lang.label_user_surplus}</a></dt>
+<!--{if $show_transform_points}-->
+<dt>·<a href="user.php?act=transform_points"> {$lang.label_transform_points}</a></dt>
+<!--{/if}-->
+			</div>
+		<div class="bottom"></div>
+</div>

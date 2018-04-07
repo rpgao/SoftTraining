@@ -1,0 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {foreach name=top_goods from=$top_goods item=goods}-->
+ <img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a><br>
+<!--{/foreach}-->

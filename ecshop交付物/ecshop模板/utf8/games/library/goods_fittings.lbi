@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $fittings} -->
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$lang.accessories_releate}</span></p></h1>
+		<div class="modContent fittings">
+			 <!--{foreach from=$fittings item=goods}-->
+			<div class="GoodMod">
+			<div class="imgBox"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.name|escape:html}" /></a></div>
+			<p><a href="{$goods.url}" target="_blank" title="{$goods.goods_name|escape:html}">{$goods.short_name|escape:html}</a></p>
+			<font class="shop">{$lang.fittings_price}{$goods.fittings_price}</font>
+			</div>
+			<!--{/foreach}-->
+		</div>	
+	</div>	 
+</div>
+<!-- {/if} -->

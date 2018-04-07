@@ -1,0 +1,1009 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>ECshopV2.6.2模板更改说明</title>
+<style type="text/css">
+body{margin:10px; padding:0px; font-size:12px; line-height:20px;}
+*{margin:0px; padding:0px;}
+h1{font-size:14px; text-align:center; padding-bottom:10px; margin-bottom:15px; border-bottom:1px solid #ccc;}
+textarea{border:1px solid #ccc; width:100%; height:150px;}
+.f1{color:#ff2200; font-size:14px;}
+</style>
+</head>
+<body>
+<h1>ECshopV2.6.2模板更改说明</h1>
+<b>一、模板文件：(共32个)</b><br />
+1. 新增
+<pre>
+   <font class="f1">新增积分商城列表模板--exchange_list.dwt</font>
+</pre>
+<pre>
+   <font class="f1">新增积分商城商品模板--exchange_goods.dwt</font>
+</pre>
+1.更改
+<pre>
+   <font class="f1">user_clips.dwt文件:</font>
+       用户中心 ==“我的推荐”
+       增加排列条目数选项
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+  <h5><span>{$lang.label_affiliate}</span></h5>
+    <div class="blank"></div>
+     <form name="theForm" method="post" action="">
+     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_need_image}</td>
+      <td bgcolor="#ffffff">
+        <select name="need_image" id="need_image" class="inputBg">
+          <option value="true" selected>{$lang.need}</option>
+          <option value="false">{$lang.need_not}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_goods_num}</td>
+      <td bgcolor="#ffffff"><input name="goods_num" type="text" id="goods_num" value="6" class="inputBg" /></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_arrange}</td>
+      <td bgcolor="#ffffff"><select name="arrange" id="arrange" class="inputBg">
+        <option value="h" selected>{$lang.horizontal}</option>
+        <option value="v">{$lang.verticle}</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_charset}</td>
+      <td bgcolor="#ffffff"><select name="charset" id="charset">
+        {html_options options=$lang_list}
+      </select></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#ffffff"><input type="button" name="gen_code" value="{$lang.generate}" onclick="genCode()" class="submit" />        </td>
+  </tr>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#ffffff"><textarea name="code" cols="80" rows="5" id="code" class="B_blue"></textarea></td>
+  </tr>
+  </table>
+     </form>
+      <script language="JavaScript">
+      var elements = document.forms['theForm'].elements;
+      var url = '{$url}';
+      var u   = '{$user_id}';
+      /**
+       * 生成代码
+       */
+      function genCode()
+      {
+          // 检查输入
+          if (isNaN(parseInt(elements['goods_num'].value)))
+          {
+              alert('{$lang.goods_num_must_be_int}');
+              return;
+          }
+          if (elements['goods_num'].value < 1)
+          {
+              alert('{$lang.goods_num_must_over_0}');
+              return;
+          }
+
+          // 生成代码
+          var code = '\<script src=\"' + url + 'goods_script.php?';
+          code += 'need_image=' + elements['need_image'].value + '&';
+          code += 'goods_num=' + elements['goods_num'].value + '&';
+          code += 'arrange=' + elements['arrange'].value + '&';
+          code += 'charset=' + elements['charset'].value + '&u=' + u;
+          code += '\"\>\</script\>';
+          elements['code'].value = code;
+          elements['code'].select();
+          if (Browser.isIE)
+          {
+              window.clipboardData.setData("Text",code);
+          }
+      }
+  </script>
+</textarea>
+修改后：
+<textarea style="height:100px;">
+<h5><span>{$lang.label_affiliate}</span></h5>
+    <div class="blank"></div>
+     <form name="theForm" method="post" action="">
+     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_need_image}</td>
+      <td bgcolor="#ffffff">
+        <select name="need_image" id="need_image" class="inputBg">
+          <option value="true" selected>{$lang.need}</option>
+          <option value="false">{$lang.need_not}</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_goods_num}</td>
+      <td bgcolor="#ffffff"><input name="goods_num" type="text" id="goods_num" value="6" class="inputBg" /></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_arrange}</td>
+      <td bgcolor="#ffffff"><select name="arrange" id="arrange" class="inputBg">
+        <option value="h" selected>{$lang.horizontal}</option>
+        <option value="v">{$lang.verticle}</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_rows_num}</td>
+      <td bgcolor="#ffffff"><input name="rows_num" type="text" id="rows_num" value="1" class="inputBg" /></td>
+    </tr>
+    <tr>
+      <td align="right" bgcolor="#ffffff">{$lang.label_charset}</td>
+      <td bgcolor="#ffffff"><select name="charset" id="charset">
+        {html_options options=$lang_list}
+      </select></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#ffffff"><input type="button" name="gen_code" value="{$lang.generate}" onclick="genCode()" class="submit" />        </td>
+  </tr>
+    <tr>
+      <td colspan="2" align="center" bgcolor="#ffffff"><textarea name="code" cols="80" rows="5" id="code" class="B_blue"></textarea></td>
+  </tr>
+  </table>
+     </form>
+      <script language="JavaScript">
+      var elements = document.forms['theForm'].elements;
+      var url = '{$url}';
+      var u   = '{$user_id}';
+      /**
+       * 生成代码
+       */
+      function genCode()
+      {
+          // 检查输入
+          if (isNaN(parseInt(elements['goods_num'].value)))
+          {
+              alert('{$lang.goods_num_must_be_int}');
+              return;
+          }
+          if (elements['goods_num'].value < 1)
+          {
+              alert('{$lang.goods_num_must_over_0}');
+              return;
+          }
+          if (isNaN(parseInt(elements['rows_num'].value)))
+          {
+              alert('{$lang.rows_num_must_be_int}');
+              return;
+          }
+          if (elements['rows_num'].value < 1)
+          {
+              alert('{$lang.rows_num_must_over_0}');
+              return;
+          }
+
+          // 生成代码
+          var code = '\<script src=\"' + url + 'goods_script.php?';
+          code += 'need_image=' + elements['need_image'].value + '&';
+          code += 'goods_num=' + elements['goods_num'].value + '&';
+          code += 'arrange=' + elements['arrange'].value + '&';
+          code += 'rows_num=' + elements['rows_num'].value + '&';
+          code += 'charset=' + elements['charset'].value + '&u=' + u;
+          code += '\"\>\</script\>';
+          elements['code'].value = code;
+          elements['code'].select();
+          if (Browser.isIE)
+          {
+              window.clipboardData.setData("Text",code);
+          }
+      }
+  </script>
+</textarea>
+<br />
+<pre>
+   <font class="f1"> goods.dwt:</font>
+新增加购买数量达到某一区间时可享受优惠价格
+
+</pre>
+修改前：
+<textarea>
+
+</textarea>
+修改后：
+<textarea>
+<!--{if $volume_price_list } -->
+<li class="padd loop" style="margin-bottom:5px; overflow:hidden; zoom:1; border-bottom:1px dashed #ccc;">
+<strong>{$lang.volume_price}：</strong><br />
+<!-- {foreach from=$volume_price_list item=price_list key=price_key} -->
+<p style="float:left; width:150px; overflow:visible; zoom:1;font-size:12px;"> <strong>{$lang.number_to}<font class="shop">{$price_list.number}</font>：</strong>
+<font class="shop">{$price_list.format_price}</font></p>
+<!-- {/foreach} -->
+</li>
+<!--{/if}-->
+</textarea>
+<br />
+<pre>
+   <font class="f1"> flow.dwt: </font>
+   新增修改数量后提示用户点击更新购物车按钮功能
+
+</pre>
+修改前：
+<textarea>
+  {* 包含脚本文件 *}
+  {insert_scripts files='showdiv.js'}
+  <div class="flowBox">
+</textarea>
+修改后：
+<textarea>
+  {* 包含脚本文件 *}
+  {insert_scripts files='showdiv.js'}
+  <script type="text/javascript">
+  {foreach from=$lang.password_js item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+  </script>
+</textarea>
+<br />
+<pre>
+   <font class="f1"> flow.dwt: </font>
+   新增修改数量后提示用户点击更新购物车按钮功能
+
+
+</pre>
+修改前：
+<textarea>
+  <!-- {if $goods.goods_id gt 0 && $goods.is_gift eq 0 && $goods.parent_id eq 0} 普通商品可修改数量 -->
+  <input type="text" name="goods_number[{$goods.rec_id}]" id="goods_number_{$goods.rec_id}" value="{$goods.goods_number}" size="4" class="inputBg" style="text-align:center "/>
+  <!-- {else} -->
+  {$goods.goods_number}
+  <!-- {/if} -->
+</textarea>
+修改后：
+<textarea>
+  <!-- {if $goods.goods_id gt 0 && $goods.is_gift eq 0 && $goods.parent_id eq 0} 普通商品可修改数量 -->
+  <input type="text" name="goods_number[{$goods.rec_id}]" id="goods_number_{$goods.rec_id}" value="{$goods.goods_number}" size="4" class="inputBg" style="text-align:center " onkeydown="showdiv(this)"/>
+  <!-- {else} -->
+  {$goods.goods_number}
+  <!-- {/if} -->
+</textarea>
+<br />
+<pre>
+   <font class="f1"> flow.dwt: </font>
+   添加语言项
+
+</pre>
+修改前：
+<textarea>
+  <!-- {if $collection_goods} -->
+  <div class="flowBox">
+    <h6><span>我的收藏</span></h6>
+    <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+      <!-- {foreach from=$collection_goods item=goods} -->
+          <tr>
+            <td bgcolor="#ffffff"><a href="goods.php?id={$goods.goods_id}" class="f6">{$goods.goods_name}</a></td>
+            <td bgcolor="#ffffff" align="center" width="100"><a href="javascript:collect_to_flow({$goods.goods_id})" class="f6">立即购买</a></td>
+          </tr>
+      <!-- {/foreach} -->
+        </table>
+      <!-- {/if} -->
+  </div>
+    <div class="blank5"></div>
+  <!-- {/if} -->
+</textarea>
+修改后：
+<textarea>
+  <!-- {if $collection_goods} -->
+  <div class="flowBox">
+    <h6><span>{$lang.label_collection}</span></h6>
+    <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+      <!-- {foreach from=$collection_goods item=goods} -->
+          <tr>
+            <td bgcolor="#ffffff"><a href="goods.php?id={$goods.goods_id}" class="f6">{$goods.goods_name}</a></td>
+            <td bgcolor="#ffffff" align="center" width="100"><a href="javascript:collect_to_flow({$goods.goods_id})" class="f6">{$lang.collect_to_flow}</a></td>
+          </tr>
+      <!-- {/foreach} -->
+        </table>
+      <!-- {/if} -->
+  </div>
+    <div class="blank5"></div>
+  <!-- {/if} -->
+</textarea>
+<br />
+<pre>
+   <font class="f1">  flow.dwt:  </font>
+   添加语言项
+
+</pre>
+修改前：
+<textarea>
+  <h6><span>优惠活动</span></h6>
+</textarea>
+修改后：
+<textarea>
+  <h6><span>{$lang.label_favourable}</span></h6>
+</textarea>
+<br />
+<pre>
+   <font class="f1">  flow.dwt:  </font>
+   【前台】能够在结算中心里显示商品关联的配件，可直接加入到购物车中（小捆绑销售）
+
+</pre>
+修改前：
+<textarea>
+
+</textarea>
+修改后：
+<textarea>
+  <!-- {if $fittings_list} 商品配件 -->
+  {insert_scripts files='transport.js'}
+  <script type="text/javascript" charset="utf-8">
+  function fittings_to_flow(goodsId,parentId)
+  {
+    var goods        = new Object();
+    var spec_arr     = new Array();
+    var number       = 1;
+    goods.spec     = spec_arr;
+    goods.goods_id = goodsId;
+    goods.number   = number;
+    goods.parent   = parentId;
+    Ajax.call('flow.php?step=add_to_cart', 'goods=' + goods.toJSONString(), fittings_to_flow_response, 'POST', 'JSON');
+  }
+  function fittings_to_flow_response(result)
+  {
+    if (result.error > 0)
+    {
+      // 如果需要缺货登记，跳转
+      if (result.error == 2)
+      {
+        if (confirm(result.message))
+        {
+          location.href = 'user.php?act=add_booking&id=' + result.goods_id;
+        }
+      }
+      else if (result.error == 6)
+      {
+        if (confirm(result.message))
+        {
+          location.href = 'goods.php?id=' + result.goods_id;
+        }
+      }
+      else
+      {
+        alert(result.message);
+      }
+    }
+    else
+    {
+      location.href = 'flow.php';
+    }
+  }
+  </script>
+  <div class="block" >
+    <div class="flowBox" style="overflow:hidden;">
+    <h6><span>{$lang.goods_fittings}</span></h6>
+    <form action="flow.php" method="post">
+          <!-- {foreach from=$fittings_list item=fittings} -->
+            <ul style="float:left;margin:2px 2px 2px;">
+              <li style="float:left;margin:2px 2px 2px;">
+                <a href="{$fittings.url}" target="_blank"><img src="{$fittings.goods_thumb}" alt="{$fittings.name|escape:html}" class="B_blue" /></a>
+              </li>
+              <li style="float:left; width:150px;margin:2px 2px 2px;">
+                <a href="{$fittings.url}" target="_blank" title="{$fittings.goods_name|escape:html}">{$fittings.short_name|escape:html}</a><br />
+                {$lang.fittings_price}<font class="f1">{$fittings.fittings_price}</font><br />
+                {$lang.parent_name}{$fittings.parent_short_name}<br /><br />
+                <a href="javascript:fittings_to_flow({$fittings.goods_id},{$fittings.parent_id})" class="f6">{$lang.collect_to_flow}</a>
+              </li>
+            </ul>
+          <!-- {/foreach} 循环商品配件结束 -->
+    </form>
+    </div>
+  </div>
+  <div class="blank5"></div>
+  <!-- {/if} -->
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  user_transaction.dwt:  </font>
+   【前/后台】增加促销礼包模块,能够将商品打包销售（大捆绑销售）
+
+</pre>
+修改前：
+<textarea>
+  <td bgcolor="#ffffff"><a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+  <!-- {if $goods.parent_id > 0} -->
+  <span style="color:#FF0000">（{$lang.accessories}）</span>
+  <!-- {elseif $goods.is_gift} -->
+  <span style="color:#FF0000">（{$lang.largess}）</span>
+  <!-- {/if} --></td>
+</textarea>
+修改后：
+<textarea>
+ <td bgcolor="#ffffff">
+  <!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+    <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+    <!-- {if $goods.parent_id > 0} -->
+    <span style="color:#FF0000">（{$lang.accessories}）</span>
+    <!-- {elseif $goods.is_gift} -->
+    <span style="color:#FF0000">（{$lang.largess}）</span>
+    <!-- {/if} -->
+  <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+    <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}<span style="color:#FF0000;">（礼包）</span></a>
+    <div id="suit_{$goods.goods_id}" style="display:none">
+        <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+          <a href="goods.php?id={$package_goods_list.goods_id}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+        <!-- {/foreach} -->
+    </div>
+  <!-- {/if} -->
+  </td>
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  goods.dwt:  </font>
+   【前/后台】增加促销礼包模块,能够将商品打包销售（大捆绑销售）
+
+</pre>
+修改前：
+   <textarea>
+   <!--商品描述，商品属性 START-->
+     <div class="box">
+     <div class="box_1">
+      <h3 style="padding:0 5px;">
+        <div id="com_b" class="history clearfix">
+        <h2>{$lang.goods_brief}</h2>
+        <h2 class="h2bg">{$lang.goods_attr}</h2>
+        </div>
+      </h3>
+      <div id="com_v" class="boxCenterList RelaArticle"></div>
+      <div id="com_h">
+</textarea>
+修改后：
+   <textarea>
+   <!--商品描述，商品属性 START-->
+     <div class="box">
+     <div class="box_1">
+      <h3 style="padding:0 5px;">
+        <div id="com_b" class="history clearfix">
+        <h2>{$lang.goods_brief}</h2>
+        <h2 class="h2bg">{$lang.goods_attr}</h2>
+        <!-- {if $package_goods_list} -->
+        <h2 class="h2bg" style="color:red;">{$lang.remark_package}</h2>
+        <!-- {/if} -->
+        </div>
+      </h3>
+      <div id="com_v" class="boxCenterList RelaArticle"></div>
+      <div id="com_h">
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  goods.dwt:  </font>
+   【前/后台】增加促销礼包模块,能够将商品打包销售（大捆绑销售）
+
+</pre>
+修改前：
+<textarea>
+
+</textarea>
+修改后：
+<textarea>
+   <!-- {if $package_goods_list} -->
+     <blockquote>
+       <!-- {foreach from=$package_goods_list item=package_goods} -->
+         <div style="overflow:hidden;">
+           <strong>{$package_goods.act_name}</strong>
+           <ul style="float:left;margin-right:20px;width:440px;">
+           <!-- {foreach from=$package_goods.goods_list item=goods_list} -->
+             <li style="overflow:hidden;width:425px;">
+               <em style="float:right;">×{$goods_list.goods_number}</em>
+               <a class="f6" target="_blank" href="goods.php?id={$goods_list.goods_id}">{$goods_list.goods_name}</a>
+             </li>
+           <!-- {/foreach} -->
+           </ul>
+           <ul style="float:left;width:140px;">
+             <li>{$lang.old_price}{$package_goods.subtotal}</li>
+             <li>{$lang.package_price}{$package_goods.package_price}</li>
+             <li>{$lang.then_old_price}{$package_goods.saving}</li>
+           </ul>
+           <div style="float:left;width:90px;">
+             <a href="javascript:addPackageToCart({$package_goods.act_id})" style="background:transparent">{$lang.add_to_cart}</a>
+           </div>
+         </div>
+       <!-- {/foreach} -->
+     </blockquote>
+     <!-- {/if} -->
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  flow.dwt:  </font>
+   【前/后台】增加促销礼包模块,能够将商品打包销售（大捆绑销售）
+
+</pre>
+修改前：
+<textarea>
+      <!-- {if $goods.goods_id gt 0} 商品 -->
+        <!-- {if $show_goods_thumb eq 1} -->
+          <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+        <!-- {elseif $show_goods_thumb eq 2} -->
+          <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" /></a>
+        <!-- {else} -->
+          <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" /></a><br />
+          <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+        <!-- {/if} -->
+        <!-- {if $goods.parent_id gt 0} 配件 -->
+        <span style="color:#FF0000">（{$lang.accessories}）</span>
+        <!-- {/if} -->
+        <!-- {if $goods.is_gift gt 0} 赠品 -->
+        <span style="color:#FF0000">（{$lang.largess}）</span>
+        <!-- {/if} -->
+      <!-- {else} 优惠活动 -->
+      {$goods.goods_name}
+      <!-- {/if} -->
+        </td>
+</textarea>
+修改后：
+<textarea>
+    <!-- {if $goods.goods_id gt 0 && $goods.extension_code neq 'package_buy'} 商品 -->
+      <!-- {if $show_goods_thumb eq 1} -->
+        <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+      <!-- {elseif $show_goods_thumb eq 2} -->
+        <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" /></a>
+      <!-- {else} -->
+        <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" /></a><br />
+        <a href="goods.php?id={$goods.goods_id}" target="_blank" class="f6">{$goods.goods_name}</a>
+      <!-- {/if} -->
+      <!-- {if $goods.parent_id gt 0} 配件 -->
+      <span style="color:#FF0000">（{$lang.accessories}）</span>
+      <!-- {/if} -->
+      <!-- {if $goods.is_gift gt 0} 赠品 -->
+      <span style="color:#FF0000">（{$lang.largess}）</span>
+      <!-- {/if} -->
+    <!-- {elseif $goods.goods_id gt 0 && $goods.extension_code eq 'package_buy'} -->
+      <a href="javascript:void(0)" onclick="setSuitShow({$goods.goods_id})" class="f6">{$goods.goods_name}<span style="color:#FF0000;">（{$lang.remark_package}）</span></a>
+      <div id="suit_{$goods.goods_id}" style="display:none">
+          <!-- {foreach from=$goods.package_goods_list item=package_goods_list} -->
+            <a href="goods.php?id={$package_goods_list.goods_id}" target="_blank" class="f6">{$package_goods_list.goods_name}</a><br />
+          <!-- {/foreach} -->
+      </div>
+    <!-- {else} 优惠活动 -->
+      {$goods.goods_name}
+    <!-- {/if} -->
+  </td>
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  flow.dwt:  </font>
+   【前/后台】增加促销礼包模块,能够将商品打包销售（大捆绑销售）
+
+</pre>
+修改前：
+<textarea>
+
+</textarea>
+修改后：
+<textarea>
+
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">message_board.dwt文件:</font>
+       留言板增加邮箱验证、留言审核功能
+</pre>
+修改前：
+<textarea name="" rows="" cols="">
+ 1：<form action="message.php" method="post" name="formMsg" onSubmit="return submitMsgBoard()">
+ 2：<input name="user_name" class="inputBg" type="text" size="15" value="{$lang.anonymous}" />
+ 3：
+          /**
+         * 提交评论信息
+        */
+        function submitMsgBoard(frm)
+        {
+            var frm         = document.forms['formMsg'];
+            var msg_title   = frm.elements['msg_title'].value;
+            var msg_content = frm.elements['msg_content'].value;
+            var msg = '';
+
+            if (msg_title.length == 0)
+            {
+                msg += msg_title_empty + '\n';
+            }
+            if (frm.elements['captcha'] && frm.elements['captcha'].value.length==0)
+            {
+                msg += msg_captcha_empty + '\n'
+            }
+            if (msg_content.length == 0)
+            {
+                msg += msg_content_empty + '\n'
+            }
+            if (msg_title.length > 200)
+            {
+                msg += msg_title_limit + '\n';
+            }
+
+            if (msg.length > 0)
+            {
+                alert(msg);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        {/literal}
+        </script>
+
+</textarea>
+修改后：
+<textarea style="height:100px;">
+1：<form action="message.php" method="post" name="formMsg" onSubmit="return submitMsgBoard(this)">
+2：{$lang.anonymous}
+3：
+        /**
+         * 提交留言信息
+        */
+        function submitMsgBoard(frm)
+        {
+            var msg = new Object;
+
+             msg.user_email  = frm.elements['user_email'].value;
+             msg.msg_title   = frm.elements['msg_title'].value;
+             msg.msg_content = frm.elements['msg_content'].value;
+             msg.captcha     = frm.elements['captcha'] ? frm.elements['captcha'].value : '';
+
+            var msg_err = '';
+
+            if (msg.user_email.length > 0)
+            {
+               if (!(Utils.isEmail(msg.user_email)))
+               {
+                  msg_err += msg_error_email + '\n';
+                }
+             }
+             else
+             {
+                  msg_err += msg_empty_email + '\n';
+             }
+            if (msg.msg_title.length == 0)
+            {
+                msg_err += msg_title_empty + '\n';
+            }
+            if (frm.elements['captcha'] && msg.captcha.length==0)
+            {
+                msg_err += msg_captcha_empty + '\n'
+            }
+            if (msg.msg_content.length == 0)
+            {
+                msg_err += msg_content_empty + '\n'
+            }
+            if (msg.msg_title.length > 200)
+            {
+                msg_err += msg_title_limit + '\n';
+            }
+
+            if (msg_err.length > 0)
+            {
+                alert(msg_err);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        {/literal}
+        </script>
+
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">  message.dwt和user_passport.dwt文件: 显示提示消息调整 </font>
+用户中心登录时增加referer参数，能够跳转到referer页面
+调整地方有3处：
+
+</pre>
+修改前：
+<textarea>
+1:user_passport.dwt 页面
+<input name="act" type="hidden" value="act_register" >
+<input name="Submit" type="submit" value="" class="us_Submit_reg">
+
+2：message.dwt 页面调整加上条件判断
+<meta http-equiv="refresh" content="3; URL={$message.href}" />
+
+3：message.dwt 提示信息支持多个提示链接
+<p><a href="{$message.href}">{$message.link}</a></p>
+
+</textarea>
+修改后：
+<textarea>
+1:user_passport.dwt 页面
+<input name="act" type="hidden" value="act_register" >
+<input type="hidden" name="back_act" value="{$back_act}" />
+<input name="Submit" type="submit" value="" class="us_Submit_reg">
+
+2：message.dwt 页面调整加上条件判断
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.back_url}" />
+{/if}
+
+3：message.dwt 提示信息支持多个提示链接
+<!-- {if $message.url_info} -->
+  <!--{foreach from=$message.url_info key=info item=url}-->
+  <p><a href="{$url}">{$info}</a></p>
+  <!--{/foreach}-->
+<!--{/if}-->
+
+</textarea>
+
+<br />
+<pre>
+   <font class="f1"> user_transaction.dwt : 定单添加积分商城信息 </font>
+
+
+</pre>
+修改前：
+<textarea>
+
+<!-- {if $order.extension_code eq "group_buy"} --><a href="./group_buy.php?act=view&id={$order.extension_id}"><strong>{$lang.order_is_group_buy}</strong></a><!--{/if}-->  <a href="user.php?act=message_list&order_id={$order.order_id}" class="f6">[{$lang.business_message}]</a></td>
+
+</textarea>
+修改后：
+<textarea>
+
+<!-- {if $order.extension_code eq "group_buy"} --><a href="./group_buy.php?act=view&id={$order.extension_id}"><strong>{$lang.order_is_group_buy}</strong></a><!-- {elseif $order.extension_code eq "exchange_goods"} --><a href="./exchange.php?act=view&id={$order.extension_id}"><strong>{$lang.order_is_exchange}</strong></a><!--{/if}-->  <a href="user.php?act=message_list&order_id={$order.order_id}" class="f6">[{$lang.business_message}]</a></td>
+
+</textarea>
+
+<br />
+<pre>
+   <font class="f1"> compare.dwt : 商品比较本店售价显示用户价格 </font>
+
+
+</pre>
+修改前：
+<textarea>
+  <tr>
+    <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$lang.shop_price}</th>
+    <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+    <td bgcolor="#ffffff">&nbsp;&nbsp;{$goods.shop_price}</td>
+    <!-- {/foreach} -->
+  </tr>
+</textarea>
+修改后：
+<textarea>
+  <tr>
+    <th align="left" bgcolor="#ffffff">&nbsp;&nbsp;{$lang.shop_price}</th>
+    <!-- {foreach name="goods_list" from=$goods_list item=goods} -->
+    <td bgcolor="#ffffff">&nbsp;&nbsp;{$goods.rank_price}</td>
+    <!-- {/foreach} -->
+  </tr>
+</textarea>
+
+<br />
+<pre>
+   <font class="f1">  重复产生水印 : gallery.dwt </font>
+
+
+</pre>
+修改前：
+<textarea>
+<embed src="data/images/pic-view.swf" quality="high" id="picview" flashvars="copyright=shopex&xml=<products name='{$gallery.goods_name}' shopname='{$shop_name}' >{foreach name=gallery_list from=$gallery.list item=photo}<smallpic{if $smarty.foreach.gallery_list.first} selected='selected'{/if}>{$photo.gallery_thumb}</smallpic><photo_desc>{$photo.img_desc}</photo_desc><bigpic{if $smarty.foreach.gallery_list.first} selected='selected'{/if}>{$photo.gallery}</bigpic>{/foreach}</products>" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%"></embed>
+</textarea>
+修改后：
+<textarea>
+<embed src="data/images/pic-view.swf" quality="high" id="picview" flashvars="copyright=shopex&xml=<products name='{$gallery.goods_name}' shopname='{$shop_name}'>{foreach name=gallery_list from=$gallery.list item=photo}<smallpic{if $smarty.foreach.gallery_list.first} selected='selected'{/if}>{$photo.gallery_thumb}</smallpic><photo_desc>{$photo.img_desc}</photo_desc><bigpic{if $smarty.foreach.gallery_list.first} selected='selected'{/if}>{$photo.gallery}</bigpic>{/foreach}</products>" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%"></embed>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">  购物车如果是积分商城并且是虚拟商品不显示支付列表 : flow.dwt </font>
+
+
+</pre>
+修改前：
+<textarea>
+    <div class="flowBox">
+    <h6><span>{$lang.payment_method}</span></h6>
+    <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" id="paymentTable">
+            <tr>
+              <th width="5%" bgcolor="#ffffff">&nbsp;</th>
+              <th width="20%" bgcolor="#ffffff">{$lang.name}</th>
+              <th bgcolor="#ffffff">{$lang.describe}</th>
+              <th bgcolor="#ffffff" width="15%">{$lang.pay_fee}</th>
+            </tr>
+            <!-- {foreach from=$payment_list item=payment} -->
+            <!-- 循环支付方式 -->
+            <tr>
+              <td valign="top" bgcolor="#ffffff"><input type="radio" name="payment" value="{$payment.pay_id}" {if $order.pay_id eq $payment.pay_id}checked{/if} isCod="{$payment.is_cod}" onclick="selectPayment(this)" {if $cod_disabled and $payment.is_cod eq "1"}disabled="true"{/if}/></td>
+              <td valign="top" bgcolor="#ffffff"><strong>{$payment.pay_name}</strong></td>
+              <td valign="top" bgcolor="#ffffff">{$payment.pay_desc}</td>
+              <td align="right" bgcolor="#ffffff" valign="top">{$payment.format_pay_fee}</td>
+            </tr>
+            <!-- {/foreach} 循环支付方式 -->
+          </table>
+    </div></textarea>
+修改后：
+<textarea>
+    <!--{if $total.real_goods_count neq 0}-->
+    <div class="flowBox">
+    <h6><span>{$lang.payment_method}</span></h6>
+    <table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd" id="paymentTable">
+            <tr>
+              <th width="5%" bgcolor="#ffffff">&nbsp;</th>
+              <th width="20%" bgcolor="#ffffff">{$lang.name}</th>
+              <th bgcolor="#ffffff">{$lang.describe}</th>
+              <th bgcolor="#ffffff" width="15%">{$lang.pay_fee}</th>
+            </tr>
+            <!-- {foreach from=$payment_list item=payment} -->
+            <!-- 循环支付方式 -->
+            <tr>
+              <td valign="top" bgcolor="#ffffff"><input type="radio" name="payment" value="{$payment.pay_id}" {if $order.pay_id eq $payment.pay_id}checked{/if} isCod="{$payment.is_cod}" onclick="selectPayment(this)" {if $cod_disabled and $payment.is_cod eq "1"}disabled="true"{/if}/></td>
+              <td valign="top" bgcolor="#ffffff"><strong>{$payment.pay_name}</strong></td>
+              <td valign="top" bgcolor="#ffffff">{$payment.pay_desc}</td>
+              <td align="right" bgcolor="#ffffff" valign="top">{$payment.format_pay_fee}</td>
+            </tr>
+            <!-- {/foreach} 循环支付方式 -->
+          </table>
+    </div>
+    <!--{else}-->
+        <input name = "payment" type="radio" value = "-1" checked="checked"  style="display:none"/>
+    <!--{/if}--></textarea>
+<br />
+
+<pre>
+   <font class="f1">  积分商城商品商品图片左侧不出现空行 : exchange_goods.dwt </font>
+
+</pre>
+修改前：
+<textarea>
+          <li class="clearfix">
+            <dd>
+              <!-- {if $cfg.show_goodssn} 显示商品货号-->
+              <strong>{$lang.goods_sn}</strong>{$goods.goods_sn}
+              <!-- {/if} -->
+            </dd>
+          </li>
+          <li class="clearfix">
+            <dd>
+              <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+              <strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a>
+              <!--{/if}-->
+            </dd>
+          </li>
+          <li class="clearfix">
+            <dd>
+            <!-- {if $cfg.show_goodsweight} 商品重量-->
+            <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
+            <!-- {/if} -->
+            </dd>
+          </li>
+</textarea>
+修改后：
+<textarea>
+          <!-- {if $cfg.show_goodssn} 显示商品货号-->
+          <li class="clearfix">
+            <dd>
+              <strong>{$lang.goods_sn}</strong>{$goods.goods_sn}
+            </dd>
+          </li>
+          <!-- {/if} -->
+          <!-- {if $goods.goods_brand neq "" and $cfg.show_brand} 显示商品品牌-->
+          <li class="clearfix">
+            <dd>
+              <strong>{$lang.goods_brand}</strong><a href="{$goods.goods_brand_url}" >{$goods.goods_brand}</a>
+            </dd>
+          </li>
+          <!--{/if}-->
+          <!-- {if $cfg.show_goodsweight} 商品重量-->
+          <li class="clearfix">
+            <dd>
+            <strong>{$lang.goods_weight}</strong>{$goods.goods_weight}
+            </dd>
+          </li>
+          <!-- {/if} -->
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">   :  </font>
+
+</pre>
+修改前：
+<textarea>
+</textarea>
+修改后：
+<textarea>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">   :  </font>
+
+</pre>
+修改前：
+<textarea>
+</textarea>
+修改后：
+<textarea>
+</textarea>
+<br />
+
+<pre>
+   <font class="f1">   :  </font>
+
+</pre>
+修改前：
+<textarea>
+</textarea>
+修改后：
+<textarea>
+</textarea>
+<br />
+
+
+<b>一、库文件：(共 个)</b><br />
+1.新增
+<pre>
+   <font class="f1">新增 积分商城热销商品 库文件-- exchange_hot.lbi</font>
+</pre>
+2.更改
+<br />
+<pre>
+   <font class="f1"> order_total.lbi:购物流程费用总计</font>
+
+</pre>
+修改前：
+<textarea>
+  {if $is_group_buy}<br />
+  {$lang.notice_gb_order_amount}{/if}</td>
+</textarea>
+修改后：
+<textarea>
+  {if $is_group_buy}<br />
+  {$lang.notice_gb_order_amount}{/if}
+  {if $total.exchange_integral}<br />{$lang.notice_eg_integral}<font class="f4_b">{$total.exchange_integral}</font>{/if}</td>
+</textarea>
+<br />
+<pre>
+   <font class="f1"> wholesale_list.dwt 增加分页</font>
+
+</pre>
+修改前：
+<textarea>
+<!-- {else} -->
+  <div style="margin:2px 10px; font-size:14px; text-align:center; line-height:36px;">{$lang.no_wholesale}</div>
+  <!-- {/if} -->
+</div>
+</textarea>
+修改后：
+<textarea>
+<!-- {else} -->
+  <div style="margin:2px 10px; font-size:14px; text-align:center; line-height:36px;">{$lang.no_wholesale}</div>
+  <!-- {/if} -->
+   <div class="blank5"></div>
+     <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+</div>
+</textarea>
+<br />
+<pre>
+   <font class="f1"></font>
+
+
+</pre>
+修改前：
+<textarea>
+
+</textarea>
+修改后：
+<textarea>
+
+</textarea>
+<br />
+
+
+</body>
+</html>

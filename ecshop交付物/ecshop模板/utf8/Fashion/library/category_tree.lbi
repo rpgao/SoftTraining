@@ -1,0 +1,52 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function chg(id){
+ var str= "a"+id
+ var oa = document.getElementById(id);
+ var ob = document.getElementById(str);
+ if(oa){
+  if(oa.style.display == "block"){
+   oa.style.display = "none";
+   ob.innerHTML = "<em style='padding-right:5px'>+<\/em>";
+  }else{
+   oa.style.display = "block";
+   ob.innerHTML = "<em style='padding-right:5px'>-<\/em>";
+  }
+ }
+ return false;
+}
+</script>
+<div id="category_tree">
+  <div class="pople"></div>
+	<h3></h3>
+	<ul>
+<!--{foreach name=parent-cat from=$categories item=cat}-->
+ <li>
+ <div>
+  <span id="acat{$smarty.foreach.parent-cat.iteration}" onclick="return chg('cat{$smarty.foreach.parent-cat.iteration}');" style="cursor:pointer;">
+	  <em>
+	    <!--{if $cat.cat_id}-->
+			+
+			<!--{else}-->
+			-
+			<!--{/if}-->   
+	</em>
+	</span>	
+	<a href="{$cat.url}">{$cat.name|escape:html}</a></div>
+  <!--{if $cat.cat_id}-->
+   <div class="child_cat" id="cat{$smarty.foreach.parent-cat.iteration}" style="display:none;">
+    <ul>
+   <!--{foreach from=$cat.cat_id item=child}--> 
+    <li>
+    <a href="{$child.url}">{$child.name|escape:html}</a>
+    </li>
+      <!--{/foreach}-->
+    </ul>
+ </div>
+  <!--{/if}-->
+ </li>
+ <!--{/foreach}-->
+	</ul>
+	<div class="bottompic"></div>
+</div>
+<div class="blank5"></div>

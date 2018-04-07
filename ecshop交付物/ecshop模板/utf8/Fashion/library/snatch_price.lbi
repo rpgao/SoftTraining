@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="box">
+<h1 class="TitPublic"><span>{$lang.new_price}</span></h1>
+<div class="Triangle">
+    <ul>
+    <!--{foreach from=$price_list item=item}-->
+    <li class="f12b shop">{$item.user_name}<br /><span class="red">{$item.bid_price}</span></li>
+    <!--{/foreach}-->
+    </ul>
+</div>
+</div>

@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $cat_list} -->
+<div class="CommonModelOne clearfix">
+<h2 class="TitLext red">{$lang.goods_category}</h2>
+<ul>
+<!-- {foreach from=$cat_list item=cat} -->
+  <li>
+  <a href="{$cat.url}"><b>{$cat.cat_name|escape:html}</b></a> <!-- {if $cat.goods_num} --><span class="f10">({$cat.goods_num})</span><!-- {/if} --><br />
+   </li>
+  <!-- {/foreach} -->
+</ul>
+</div>
+<!-- {/if} -->
+<div class="blank5"></div>

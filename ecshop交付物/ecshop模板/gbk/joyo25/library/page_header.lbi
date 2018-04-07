@@ -1,0 +1,80 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div class="area clearfix">
+ <div class="Logo f_l"><a href="../index.php"><img src="images/logo.gif" /></a></div>
+ <div class="NavBox f_r">
+ <!--{if $navigator_list.top}-->
+  <div class="tr">
+  <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+    <a href="{$nav.url}" {if $nav.opennew eq 1} target="_blank" {/if}>{$nav.name}</a>
+    <!-- {if !$smarty.foreach.nav_top_list.last} -->
+     | 
+    <!-- {/if} -->
+  <!-- {/foreach} -->
+  </div>
+  <!-- {/if} -->
+  <ul>
+   <li {if $navigator_list.config.index eq 1} class="cur" {/if}><a href="../index.php">{$lang.home}</a><span></span></li>
+   <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+   <li {if $nav.active eq 1} class="cur" {/if}><a href="{$nav.url}" {if $nav.opennew eq 1} target="_blank"{/if} >{$nav.name}</a><span></span></li>
+   <!-- {/foreach} -->
+  </ul>
+ </div>
+</div>
+<div id="Search">
+ <div class="Row_1 area">
+ <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+        <font class="f14b">{$lang.search_goods}：</font>
+        <select name="category" id="category" class="vertical-middle">
+          <option value="0">{$lang.all_category}</option>
+          {$category_list}
+        </select>
+        <input name="keywords" class="textbox" type="text" id="keyword" value="{$search_keywords|escape}" />
+        <input type="image" name="imageField" src="images/bnt_search.gif" class="bnt" />
+        <a href="search.php?act=advanced_search" class="advanced">{$lang.advanced_search}</a>
+  </form>
+ </div>
+ <div class="area clearfix">
+  <div class="f_l">
+   <!-- {if $searchkeywords} -->
+   <font class="f14b">{$lang.hot_search}：</font>
+     <!-- {foreach from=$searchkeywords item=val} -->
+     <a href="search.php?keywords={$val|escape:url}">{$val}</a>  |  
+     <!-- {/foreach} -->
+  <!-- {/if} -->
+  </div>
+  <div class="f_r"  id="ECS_CARTINFO">
+  {insert_scripts files='transport.js'}
+  {insert name='cart_info'}
+  </div>
+ </div>
+</div>
+<div class="area clearfix ur_here">
+ <div class="f_l">
+  {$lang.ur_here} {$ur_here}
+ </div>
+ <div class="f_r">
+ {insert_scripts files='transport.js,utils.js'}
+ {* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}
+ </div>
+</div>

@@ -1,0 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+
+{insert_scripts files="transport.js"}
+<div class="title-02">
+  <div class="title-02-arrow">购物车</div>
+</div>
+<div class="sort-box02" id="ECS_CARTINFO"> {insert name="cart_info"} </div>
+<!--End sort-box02-->

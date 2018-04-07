@@ -1,0 +1,82 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+
+{if $user_info}
+
+{$lang.hello} <strong>{$user_info.username}</strong> {$lang.welcome_return}！<a href="user.php">{$lang.user_center}</a> | <a href="user.php?act=logout">{$lang.user_logout}</a>
+
+{else}
+{insert_scripts files="transport.js"}
+
+<a href="user.php?act=login">{$lang.label_login}</a> | <a href="user.php?act=register">{$lang.sign_up}</a> | <a href="user.php?act=get_password">{$lang.forgot_password}</a> 
+
+<!--End sort-box01-->
+{/if}
+
+{literal}
+<script type="text/javascript">
+/**
+ * 会员登录
+ */
+function signIn()
+{
+  var frm = document.forms['ECS_LOGINFORM'];
+
+  if (frm)
+  {
+    var username = frm.elements['username'].value;
+    var password = frm.elements['password'].value;
+    var captcha = '';
+    if (frm.elements['captcha'])
+    {
+      captcha = frm.elements['captcha'].value;
+    }
+
+    if (username.length == 0 || password.length == 0)
+    {
+{/literal}
+       alert("{$lang.empty_username_password}");
+{literal}
+        return;
+    }
+    else
+    {
+       Ajax.call('user.php?act=signin', 'username=' + username + '&password=' + encodeURIComponent(password) + '&captcha=' + captcha, signinResponse, "POST", "TEXT");
+    }
+  }
+  else
+  {
+    alert('Template error!');
+  }
+}
+
+function signinResponse(result)
+{
+  var userName = document.forms['ECS_LOGINFORM'].elements['username'].value;
+  var mzone = document.getElementById("ECS_MEMBERZONE");
+  var res   = result.parseJSON();
+
+  if (res.error > 0)
+  {
+    // 登录失败
+    alert(res.content);
+    if(res.html)
+  {
+      mzone.innerHTML = res.html;
+    document.forms['ECS_LOGINFORM'].elements['username'].value = userName;
+  }
+  }
+  else
+  {
+    if (mzone)
+    {
+      mzone.innerHTML = res.content;
+    evalscript(res.ucdata);
+    }
+    else
+    {
+      alert("Template Error!");
+    }
+  }
+}
+</script>
+{/literal}

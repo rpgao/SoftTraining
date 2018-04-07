@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $new_goods} -->
+  <!--{foreach from=$new_goods item=goods}-->
+  <div class="goodsbox">
+           <div class="imgbox"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a></div>
+           <span><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></span><br />
+           <font class="shop">
+         {$goods.shop_price}
+           </font>  
+  </div>
+  <!--{/foreach}-->
+<p> <div class="more f_r"><a href="../search.php?intro=new">更多</a></div></p>
+<!-- {/if} -->

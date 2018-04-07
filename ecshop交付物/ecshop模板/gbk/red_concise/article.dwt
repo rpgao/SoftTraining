@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+  <div id="wrap">
+    <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+    <div class="container">
+      <div class="global_l">
+        <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+        <!-- TemplateBeginEditable name="左边区域" -->
+        
+<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+        <!-- TemplateEndEditable -->
+      </div>
+      <div class="global_r">
+        <div class="module">
+          <h1><span></span></h1>
+          <div class="content" style="padding:8px;">
+            <font class="f10">{$article.title|escape:html}</font>
+            <font class="f3" style="display:block; text-align:center;">{$article.author|escape:html} / {$article.add_time}</font>
+            <!-- {if $article.content } -->
+            {$article.content}
+            <!-- {/if} -->
+            {if $article.open_type eq 2 or $article.open_type eq 1}<br />
+            <div><a href="{$article.file_url}" target="_blank">{$lang.relative_file}</a></div>
+            {/if}
+            <div style="padding:8px; margin-top:15px; text-align:left; border-top:1px solid #ccc;">
+              <!-- 上一篇文章 -->
+              {if $next_article}
+              {$lang.next_article}:<a href="{$next_article.url}" class="f6">{$next_article.title}</a><br />
+              {/if}
+              <!-- 下一篇文章 -->
+              {if $prev_article}
+              {$lang.prev_article}:<a href="{$prev_article.url}" class="f6">{$prev_article.title}</a>
+              {/if}
+            </div>
+          </div>
+        </div>
+        <!-- TemplateBeginEditable name="右边区域" -->
+          <!-- #BeginLibraryItem "/library/comments.lbi" --><!-- #EndLibraryItem -->
+          
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+          
+<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+        
+<!-- TemplateEndEditable -->
+      </div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+  </div>
+</body>
+</html>

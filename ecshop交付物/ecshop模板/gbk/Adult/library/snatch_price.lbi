@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="CommonModel clearfix">
+<div class="Toptit">
+  <h2 class="red">{$lang.new_price}</h2>
+  </div>
+ <div class="modContent">
+ <ul>
+    <!--{foreach from=$price_list item=item}-->
+    <li class="f12b">{$item.user_name}<span class="red">{$item.bid_price}</span></li>
+    <!--{/foreach}-->
+    </ul> 
+ </div>
+</div>
+

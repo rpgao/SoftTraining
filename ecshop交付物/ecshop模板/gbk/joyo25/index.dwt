@@ -1,0 +1,929 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <!-- TemplateBeginEditable name="doctitle" -->
+  <!-- TemplateEndEditable -->
+  <!-- TemplateBeginEditable name="head" -->
+  <!-- TemplateEndEditable -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+  <link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+  <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+  <title>{$page_title}</title>
+  {* 包含脚本文件 *}{insert_scripts files='common.js,index.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="area">
+<!-- TemplateBeginEditable name="导航下通栏广告（1000X60）" -->
+<a href="http://www.ecshop.com"><img src="images/ad.gif" /></a>
+<!-- TemplateEndEditable -->
+</div>
+<div class="area clearfix">
+ <div id="Left" class="f_l">
+ <!-- TemplateBeginEditable name="左边区域" -->
+<!-- #BeginLibraryItem "/library/category_tree.lbi" -->
+
+<h1 class="ModTit">{$lang.goods_category}<span></span></h1>
+<div class="Modone" id="category-tree">
+ <!--{foreach from=$categories item=cat}-->
+  <h3><a href="{$cat.url}">{$cat.name|escape:html}</a><div class="yiji"></div></h3>
+  <ul class="erji">
+    <!--{foreach from=$cat.children item=child}-->
+    <li>- <a href="{$child.url}">{$child.name|escape:html}</a></li>
+    <!--{/foreach}-->
+  </ul>
+  <!-- {/foreach}-->
+</div>
+<script type="text/javascript">
+      {literal}
+var Class = {
+    create: function() {
+        return function() {
+            this.initialize.apply(this, arguments);
+        }
+    }
+}
+
+Object.extend = function(destination, source) {
+    for (property in source) destination[property] = source[property];
+    return destination;
+}
+
+Function.prototype.bind = function(object) {
+    var __method = this;
+    return function() {
+        return __method.apply(object, arguments);
+    }
+}
+
+Function.prototype.bindAsEventListener = function(object) {
+var __method = this;
+    return function(event) {
+        __method.call(object, event || window.event);
+    }
+}
+
+function $() {
+    if (arguments.length == 1) return get$(arguments[0]);
+    var elements = [];
+    $c(arguments).each(function(el){
+        elements.push(get$(el));
+    });
+    return elements;
+
+    function get$(el){
+        if (typeof el == 'string') el = document.getElementById(el);
+        return el;
+    }
+}
+
+if (!window.Element) var Element = new Object();
+
+Object.extend(Element, {
+    remove: function(element) {
+        element = $(element);
+        element.parentNode.removeChild(element);
+    },
+
+    hasClassName: function(element, className) {
+        element = $(element);
+        if (!element) return;
+        var hasClass = false;
+        element.className.split(' ').each(function(cn){
+            if (cn == className) hasClass = true;
+        });
+        return hasClass;
+    },
+
+    addClassName: function(element, className) {
+        element = $(element);
+        Element.removeClassName(element, className);
+        element.className += ' ' + className;
+    },
+  
+    removeClassName: function(element, className) {
+        element = $(element);
+        if (!element) return;
+        var newClassName = '';
+        element.className.split(' ').each(function(cn, i){
+            if (cn != className){
+                if (i > 0) newClassName += ' ';
+                newClassName += cn;
+            }
+        });
+        element.className = newClassName;
+    },
+
+    cleanWhitespace: function(element) {
+        element = $(element);
+        $c(element.childNodes).each(function(node){
+            if (node.nodeType == 3 && !/\S/.test(node.nodeValue)) Element.remove(node);
+        });
+    },
+
+    find: function(element, what) {
+        element = $(element)[what];
+        while (element.nodeType != 1) element = element[what];
+        return element;
+    }
+});
+
+var Position = {
+    cumulativeOffset: function(element) {
+        var valueT = 0, valueL = 0;
+        do {
+            valueT += element.offsetTop  || 0;
+            valueL += element.offsetLeft || 0;
+            element = element.offsetParent;
+        } while (element);
+        return [valueL, valueT];
+    }
+};
+
+document.getElementsByClassName = function(className) {
+    var children = document.getElementsByTagName('*') || document.all;
+    var elements = [];
+    $c(children).each(function(child){
+        if (Element.hasClassName(child, className)) elements.push(child);
+    });  
+    return elements;
+}
+
+Array.prototype.iterate = function(func){
+    for(var i=0;i<this.length;i++) func(this[i], i);
+}
+if (!Array.prototype.each) Array.prototype.each = Array.prototype.iterate;
+
+function $c(array){
+    var nArray = [];
+    for (var i=0;i<array.length;i++) nArray.push(array[i]);
+    return nArray;
+}
+
+var fx = new Object();
+fx.Base = function(){};
+fx.Base.prototype = {
+    setOptions: function(options) {
+    this.options = {
+        duration: 500,
+        onComplete: '',
+        transition: fx.sinoidal
+    }
+    Object.extend(this.options, options || {});
+    },
+
+    step: function() {
+        var time  = (new Date).getTime();
+        if (time >= this.options.duration+this.startTime) {
+            this.now = this.to;
+            clearInterval (this.timer);
+            this.timer = null;
+            if (this.options.onComplete) setTimeout(this.options.onComplete.bind(this), 10);
+        }
+        else {
+            var Tpos = (time - this.startTime) / (this.options.duration);
+            this.now = this.options.transition(Tpos) * (this.to-this.from) + this.from;
+        }
+        this.increase();
+    },
+
+    custom: function(from, to) {
+        if (this.timer != null) return;
+        this.from = from;
+        this.to = to;
+        this.startTime = (new Date).getTime();
+        this.timer = setInterval (this.step.bind(this), 13);
+    },
+
+    hide: function() {
+        this.now = 0;
+        this.increase();
+    },
+
+    clearTimer: function() {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+}
+
+fx.Layout = Class.create();
+fx.Layout.prototype = Object.extend(new fx.Base(), {
+    initialize: function(el, options) {
+        this.el = $(el);
+        this.el.style.overflow = "hidden";
+        this.iniWidth = this.el.offsetWidth;
+        this.iniHeight = this.el.offsetHeight;
+        this.setOptions(options);
+    }
+});
+
+fx.Height = Class.create();
+Object.extend(Object.extend(fx.Height.prototype, fx.Layout.prototype), {    
+    increase: function() {
+        this.el.style.height = this.now + "px";
+    },
+
+    toggle: function() {
+        if (this.el.offsetHeight > 0) this.custom(this.el.offsetHeight, 0);
+        else this.custom(0, this.el.scrollHeight);
+    }
+});
+
+fx.Width = Class.create();
+Object.extend(Object.extend(fx.Width.prototype, fx.Layout.prototype), { 
+    increase: function() {
+        this.el.style.width = this.now + "px";
+    },
+
+    toggle: function(){
+        if (this.el.offsetWidth > 0) this.custom(this.el.offsetWidth, 0);
+        else this.custom(0, this.iniWidth);
+    }
+});
+
+fx.Opacity = Class.create();
+fx.Opacity.prototype = Object.extend(new fx.Base(), {
+    initialize: function(el, options) {
+        this.el = $(el);
+        this.now = 1;
+        this.increase();
+        this.setOptions(options);
+    },
+
+    increase: function() {
+        if (this.now == 1 && (/Firefox/.test(navigator.userAgent))) this.now = 0.9999;
+        this.setOpacity(this.now);
+    },
+    
+    setOpacity: function(opacity) {
+        if (opacity == 0 && this.el.style.visibility != "hidden") this.el.style.visibility = "hidden";
+        else if (this.el.style.visibility != "visible") this.el.style.visibility = "visible";
+        if (window.ActiveXObject) this.el.style.filter = "alpha(opacity=" + opacity*100 + ")";
+        this.el.style.opacity = opacity;
+    },
+
+    toggle: function() {
+        if (this.now > 0) this.custom(1, 0);
+        else this.custom(0, 1);
+    }
+});
+
+fx.sinoidal = function(pos){
+    return ((-Math.cos(pos*Math.PI)/2) + 0.5);
+}
+fx.linear = function(pos){
+    return pos;
+}
+fx.cubic = function(pos){
+    return Math.pow(pos, 3);
+}
+fx.circ = function(pos){
+    return Math.sqrt(pos);
+}
+fx.Scroll = Class.create();
+fx.Scroll.prototype = Object.extend(new fx.Base(), {
+    initialize: function(options) {
+        this.setOptions(options);
+    },
+
+    scrollTo: function(el){
+        var dest = Position.cumulativeOffset($(el))[1];
+        var client = window.innerHeight || document.documentElement.clientHeight;
+        var full = document.documentElement.scrollHeight;
+        var top = window.pageYOffset || document.body.scrollTop || document.documentElement.scrollTop;
+        if (dest+client > full) this.custom(top, dest - client + (full-dest));
+        else this.custom(top, dest);
+    },
+
+    increase: function(){
+        window.scrollTo(0, this.now);
+    }
+});
+
+fx.Text = Class.create();
+fx.Text.prototype = Object.extend(new fx.Base(), {
+    initialize: function(el, options) {
+        this.el = $(el);
+        this.setOptions(options);
+        if (!this.options.unit) this.options.unit = "em";
+    },
+
+    increase: function() {
+        this.el.style.fontSize = this.now + this.options.unit;
+    }
+});
+
+fx.Combo = Class.create();
+fx.Combo.prototype = {
+    setOptions: function(options) {
+        this.options = {
+            opacity: true,
+            height: true,
+            width: false
+        }
+        Object.extend(this.options, options || {});
+    },
+
+    initialize: function(el, options) {
+        this.el = $(el);
+        this.setOptions(options);
+        if (this.options.opacity) {
+            this.o = new fx.Opacity(el, options);
+            options.onComplete = null;
+        }
+        if (this.options.height) {
+            this.h = new fx.Height(el, options);
+            options.onComplete = null;
+        }
+        if (this.options.width) this.w = new fx.Width(el, options);
+    },
+    
+    toggle: function() { this.checkExec('toggle'); },
+
+    hide: function(){ this.checkExec('hide'); },
+    
+    clearTimer: function(){ this.checkExec('clearTimer'); },
+    
+    checkExec: function(func){
+        if (this.o) this.o[func]();
+        if (this.h) this.h[func]();
+        if (this.w) this.w[func]();
+    },
+    
+    resizeTo: function(hto, wto) {
+        if (this.h && this.w) {
+            this.h.custom(this.el.offsetHeight, this.el.offsetHeight + hto);
+            this.w.custom(this.el.offsetWidth, this.el.offsetWidth + wto);
+        }
+    },
+
+    customSize: function(hto, wto) {
+        if (this.h && this.w) {
+            this.h.custom(this.el.offsetHeight, hto);
+            this.w.custom(this.el.offsetWidth, wto);
+        }
+    }
+}
+
+fx.Accordion = Class.create();
+fx.Accordion.prototype = {
+    setOptions: function(options) {
+        this.options = {
+            delay: 100,
+            opacity: false
+        }
+        Object.extend(this.options, options || {});
+    },
+
+    initialize: function(yijis, elements, options) {
+        this.elements = elements;
+        this.setOptions(options);
+        var options = options || '';
+        this.fxa = [];
+        if (options && options.onComplete) options.onFinish = options.onComplete;
+        elements.each(function(el, i){
+            options.onComplete = function(){
+                if (el.offsetHeight > 0) el.style.height = '1%';
+                if (options.onFinish) options.onFinish(el);
+            }
+            this.fxa[i] = new fx.Combo(el, options);
+            this.fxa[i].hide();
+        }.bind(this));
+
+        yijis.each(function(tog, i){
+            if (typeof tog.onclick == 'function') var exClick = tog.onclick;
+            tog.onclick = function(){
+                if (exClick) exClick();
+                this.showThisHideOpen(elements[i]);
+            }.bind(this);
+        }.bind(this));
+    },
+
+    showThisHideOpen: function(toShow){
+        this.elements.each(function(el, j){
+            if (el.offsetHeight > 0 && el != toShow) this.clearAndToggle(el, j);
+            if (el == toShow && toShow.offsetHeight == 0) setTimeout(function(){this.clearAndToggle(toShow, j);}.bind(this), this.options.delay);
+        }.bind(this));
+    },
+
+    clearAndToggle: function(el, i){
+        this.fxa[i].clearTimer();
+        this.fxa[i].toggle();
+    }
+}
+
+var Remember = new Object();
+Remember = function(){};
+Remember.prototype = {
+    initialize: function(el, options){
+        this.el = $(el);
+        this.days = 365;
+        this.options = options;
+        this.effect();
+        var cookie = this.readCookie();
+        if (cookie) {
+            this.fx.now = cookie;
+            this.fx.increase();
+        }
+    },
+
+    setCookie: function(value) {
+        var date = new Date();
+        date.setTime(date.getTime()+(this.days*24*60*60*1000));
+        var expires = "; expires="+date.toGMTString();
+        document.cookie = this.el+this.el.id+this.prefix+"="+value+expires+"; path=/";
+    },
+
+    readCookie: function() {
+        var nameEQ = this.el+this.el.id+this.prefix + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;c=ca[i];i++) {
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return false;
+    },
+
+    custom: function(from, to){
+        if (this.fx.now != to) {
+            this.setCookie(to);
+            this.fx.custom(from, to);
+        }
+    }
+}
+
+fx.RememberHeight = Class.create();
+fx.RememberHeight.prototype = Object.extend(new Remember(), {
+    effect: function(){
+        this.fx = new fx.Height(this.el, this.options);
+        this.prefix = 'height';
+    },
+    
+    toggle: function(){
+        if (this.el.offsetHeight == 0) this.setCookie(this.el.scrollHeight);
+        else this.setCookie(0);
+        this.fx.toggle();
+    },
+    
+    resize: function(to){
+        this.setCookie(this.el.offsetHeight+to);
+        this.fx.custom(this.el.offsetHeight,this.el.offsetHeight+to);
+    },
+
+    hide: function(){
+        if (!this.readCookie()) {
+            this.fx.hide();
+        }
+    }
+});
+
+fx.RememberText = Class.create();
+fx.RememberText.prototype = Object.extend(new Remember(), {
+    effect: function(){
+        this.fx = new fx.Text(this.el, this.options);
+        this.prefix = 'text';
+    }
+});
+
+Array.prototype.iterate = function(func){
+    for(var i=0;i<this.length;i++) func(this[i], i);
+}
+if (!Array.prototype.each) Array.prototype.each = Array.prototype.iterate;
+
+fx.expoIn = function(pos){
+    return Math.pow(2, 10 * (pos - 1));
+}
+fx.expoOut = function(pos){
+    return (-Math.pow(2, -10 * pos) + 1);
+}
+
+fx.quadIn = function(pos){
+    return Math.pow(pos, 2);
+}
+fx.quadOut = function(pos){
+    return -(pos)*(pos-2);
+}
+
+fx.circOut = function(pos){
+    return Math.sqrt(1 - Math.pow(pos-1,2));
+}
+fx.circIn = function(pos){
+    return -(Math.sqrt(1 - Math.pow(pos, 2)) - 1);
+}
+
+fx.backIn = function(pos){
+    return (pos)*pos*((2.7)*pos - 1.7);
+}
+fx.backOut = function(pos){
+    return ((pos-1)*(pos-1)*((2.7)*(pos-1) + 1.7) + 1);
+}
+
+fx.sineOut = function(pos){
+    return Math.sin(pos * (Math.PI/2));
+}
+fx.sineIn = function(pos){
+    return -Math.cos(pos * (Math.PI/2)) + 1;
+}
+fx.sineInOut = function(pos){
+    return -(Math.cos(Math.PI*pos) - 1)/2;
+}
+      {/literal}
+</script>
+<script type=text/javascript>
+      {literal}
+    var contents = document.getElementsByClassName('erji');
+    var toggles = document.getElementsByClassName('yiji');
+  
+    var myAccordion = new fx.Accordion(
+      toggles, contents, {opacity: true, duration: 400}
+    );
+    /*if (document.location.href.indexOf('category.php')>0)*/
+     if (document.location.href.indexOf('category')>0)
+    {
+      var tree = document.getElementById("category-tree");
+      var tags = tree.getElementsByTagName("H3");
+      for (var i=0;i<tags.length;i++)
+      {
+        if(document.location.href.toLowerCase().indexOf(tags[i].childNodes[0].href)>=0)
+        {
+          myAccordion.showThisHideOpen(contents[i]);
+        }
+      }
+    }
+    else
+    {
+     myAccordion.showThisHideOpen(contents[0]); /* 注释掉这就的话默认所有的二级分类不显示*/
+    }
+    
+        {/literal}
+</script>
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/promotion_info.lbi" -->
+
+<!-- {if $promotion_info} -->
+<!-- 促销信息 -->
+<h1 class="ModTit">{$lang.promotion_info}<span></span></h1>
+<div class="Modone promotion_info">
+  <!-- {foreach from=$promotion_info item=item key=key} -->
+    <!-- {if $item.type eq "snatch"} -->
+    <a href="snatch.php" title="{$lang.$item.type}">{$lang.snatch_promotion}</a>
+    <!-- {elseif $item.type eq "group_buy"} -->
+    <a href="group_buy.php" title="{$lang.$item.type}">{$lang.group_promotion}</a>
+    <!-- {elseif $item.type eq "auction"} -->
+    <a href="auction.php" title="{$lang.$item.type}">{$lang.auction_promotion}</a>
+    <!-- {elseif $item.type eq "favourable"} -->
+    <a href="activity.php" title="{$lang.$item.type}">{$lang.favourable_promotion}</a>
+    <!-- {/if} -->
+    <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}" class="bgnone">{$item.act_name}</a><br />
+    <!-- {/foreach} -->
+</div>
+<!-- {/if} -->
+
+
+
+
+
+
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/order_query.lbi" -->
+
+<!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<h1 class="ModTit">{$lang.order_query}<span></span></h1>
+<div class="Modone promotion_info">
+  <form name="ecsOrderQuery">
+    <input type="text" name="order_sn" class="TextInput" /><br />
+    <input type="button" value="{$lang.query_order}" class="bnt_num6" onclick="orderQuery()" />
+  </form>
+  <div id="ECS_ORDER_QUERY">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+      <b>{$lang.order_number}：</b><a href="user.php?act=order_detail&order_id={$order_query.order_id}">{$order_query.order_sn}</a><br>
+        <!--{else}-->
+      <b>{$lang.order_number}：</b>{$order_query.order_sn}<br>
+        <!--{/if}-->
+      <b>{$lang.order_status}：</b>{$order_query.order_status}<br>
+        <!--{if $order_query.invoice_no }-->
+      <b>{$lang.consignment}：</b>{$order_query.invoice_no}<br>
+        <!--{/if}-->
+      {if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}<br>
+  <!--{/if}-->
+ <!--{/if}-->
+    </div>
+</div> 
+ 
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/vote_list.lbi" -->
+
+{insert name='vote'}
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/email_list.lbi" -->
+
+<h1 class="ModTit">{$lang.email_subscribe}<span></span></h1>
+<div class="Modone promotion_info">
+<input type="text" id="user_email" class="TextInput" /><br />
+<input type="button" value="{$lang.email_list_ok}" class="bnt_num2" onclick="add_email_list();" />
+<input type="button"  value="{$lang.email_list_cancel}" class="bnt_num2" onclick="cancel_email_list();" />
+</div>
+<script type="text/javascript">
+//<![CDATA[
+var email = document.getElementById('user_email');
+function add_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=add&email=' + email.value, '', rep_add_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_add_email_list(text)
+{
+  alert(text);
+}
+function cancel_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=del&email=' + email.value, '', rep_cancel_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_cancel_email_list(text)
+{
+  alert(text);
+}
+function check_email()
+{
+  if (Utils.isEmail(email.value))
+  {
+    return true;
+  }
+  else
+  {
+    alert('{$lang.email_invalid}');
+    return false;
+  }
+}
+//]]>
+</script>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+ </div>
+ <div id="Content" class="f_l">
+ <div class="flash">
+<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+ </div>
+ <!-- TemplateBeginEditable name="中间区域" -->
+<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" -->
+
+<!-- {if $promotion_goods} -->
+<h4 class="ModthreeTit clearfix">
+  <div class="text promotion"></div>
+  <div class="more line"><a href="../search.php?intro=promotion">more...</a></div>
+</h4>
+<div class="bestBox clearfix">
+<!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+    <div class="GoodsBox">
+      <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+        <p><a href="{$goods.url}">{$goods.short_name|escape:html}</a></p>
+        {$lang.promote_price}<font class="shop">{$goods.promote_price}</font><br>
+     </div>
+<!--{/foreach}-->
+ </div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" -->
+
+<!-- {if $hot_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <h4 class="ModthreeTit clearfix">
+  <div class="text hot"></div>
+  <div class="more clearfix" id="itemHot">
+   {if $cat_rec[3]}
+  <h2><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, 0);">{$lang.all_goods}</a></h2>
+  {foreach from=$cat_rec[3] item=rec_data}
+  <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+  {/foreach}
+  {/if}
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="search.php?intro=hot" class="line">more...</a>
+  </div>
+ </h4>
+ <div class="bestBox clearfix"  id="show_hot_area">
+ <!-- {/if} -->
+  <!--{foreach from=$hot_goods item=goods}-->
+    <div class="GoodsBox">
+      <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+        <p><a href="{$goods.url}">{$goods.short_name|escape:html}</a></p>
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<font class="market">{$goods.promote_price}</font><br>
+        <!-- {else}-->
+        {$lang.shop_price}<font class="shop">{$goods.shop_price}</font><br>
+        <!--{/if}-->
+     </div>
+  <!--{/foreach}-->
+ <!-- {if $cat_rec_sign neq 1} -->                     
+ </div>
+ <!-- {/if} -->
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
+
+<!-- {if $best_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <h4 class="ModthreeTit clearfix">
+  <div class="text"></div>
+  <div class="more clearfix" id="itemBest">
+   {if $cat_rec[1]}
+   <h2><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a></h2>
+   {foreach from=$cat_rec[1] item=rec_data}
+   <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+   {/foreach}
+  {/if}
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="search.php?intro=best" class="line">more...</a>
+  </div>
+ </h4>
+ <div class="bestBox clearfix"  id="show_best_area">
+ <!-- {/if} -->
+  <!--{foreach from=$best_goods item=goods}-->
+    <div class="GoodsBox">
+      <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+        <p><a href="{$goods.url}">{$goods.short_name|escape:html}</a></p>
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<font class="market">{$goods.promote_price}</font><br>
+        <!-- {else}-->
+        {$lang.shop_price}<font class="shop">{$goods.shop_price}</font><br>
+        <!--{/if}-->
+     </div>
+  <!--{/foreach}-->
+ <!-- {if $cat_rec_sign neq 1} -->    
+ </div>
+ <!-- {/if} -->
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" -->
+
+<!-- {if $new_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <h4 class="ModthreeTit clearfix">
+  <div class="text new"></div>
+  <div class="more clearfix" id="itemNew">
+  {if $cat_rec[2]}
+   <h2><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, 0);">{$lang.all_goods}</a></h2>
+   {foreach from=$cat_rec[2] item=rec_data}
+  <h2 class="h2bg"><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, {$rec_data.cat_id})">{$rec_data.cat_name}</a></h2>
+  {/foreach}
+  {/if}
+  &nbsp;&nbsp;&nbsp;&nbsp;<a href="search.php?intro=new"  class="line">more...</a>
+  </div>
+ </h4>
+ <div class="bestBox clearfix"  id="show_new_area">
+ <!-- {/if} -->
+  <!--{foreach from=$new_goods item=goods}-->
+    <div class="GoodsBox">
+      <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+        <p><a href="{$goods.url}">{$goods.short_name|escape:html}</a></p>
+        <!-- {if $goods.promote_price neq ""} -->
+        {$lang.promote_price}<font class="market">{$goods.promote_price}</font><br>
+        <!-- {else}-->
+        {$lang.shop_price}<font class="shop">{$goods.shop_price}</font><br>
+        <!--{/if}-->
+     </div>         
+  <!--{/foreach}-->
+ <!-- {if $cat_rec_sign neq 1} -->    
+ </div>
+ <!-- {/if} -->
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/auction.lbi" -->
+
+<!-- {if $auction_list} -->
+<h2 class="ModfourTit clearfix">
+ <div class="left">{$lang.auction}</div>
+ <div class="right"><a href="../auction.php"><img src="../images/more.gif"></a></div>
+</h2>
+<div class="ModfourBox cat_goods">
+ <!-- {foreach from=$auction_list item=auction} -->
+  <div class="GoodsBox">
+   <div class="photo"><a href="{$auction.url}"><img src="{$auction.thumb}" alt="{$auction.goods_name|escape:html}" /></a></div>
+   <p><a href="{$auction.url}" title="{$auction.goods_name|escape:html}">{$auction.short_style_name|escape:html}</a></p>
+   {$lang.au_start_price}<font class="shop">{$auction.formated_start_price}</font>
+  </div>
+<!--{/foreach}-->
+</div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/group_buy.lbi" -->
+
+<!-- {if $group_buy_goods} -->
+<h2 class="ModfourTit clearfix">
+ <div class="left">{$lang.group_buy_goods}</div>
+ <div class="right"><a href="../group_buy.php"><img src="../images/more.gif"></a></div>
+</h2>
+<div class="ModfourBox cat_goods">
+<!--{foreach from=$group_buy_goods item=goods}-->
+  <div class="GoodsBox">
+   <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}" /></a></div>
+   <p><a href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_style_name|escape:html}</a></p>
+   <font class="shop">{$goods.last_price}</font>
+  </div>
+<!--{/foreach}-->
+</div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+ 
+ </div>
+ <div id="Right" class="f_r">
+ <div class="Modtow">
+  <h3>{$lang.shop_notice}</h3>
+  <div class="ModtowBox">
+   {$shop_notice}
+  </div>
+ </div>
+ <!-- TemplateBeginEditable name="右边区域" -->
+<!-- #BeginLibraryItem "/library/new_articles.lbi" -->
+
+<!-- {if $new_articles} -->
+<div class="Modtow">
+  <h3>{$lang.new_article}</h3>
+  <div class="ModtowBox">
+   <!-- {foreach name=new_articles from=$new_articles item=article} -->
+      <!-- {if $smarty.foreach.new_articles.iteration lte 6} 限制文章显示数量 -->
+      [<a href="{$article.cat_url}">{$article.cat_name}</a>] <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:9}</a><br />
+      <!-- {/if} -->
+      <!-- {/foreach} -->
+  </div>
+</div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/top10.lbi" -->
+
+<!-- {if $top_goods} -->
+<div class="Modtow">
+  <h3>销售排行</h3>
+  <div class="ModtowBox">
+   <ul class="top10">
+   <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li><img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></li>
+    <!--{/foreach}-->
+  </ul>
+  </div>
+</div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/invoice_query.lbi" -->
+
+<!--{if $invoice_list}-->
+<div class="Modtow">
+  <h3>{$lang.shipping_query}</h3>
+  <div class="ModtowBox invoice">
+    <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+    {$lang.order_number}：{$invoice.order_sn}<br />
+    {$lang.consignment}：{$invoice.invoice_no}<br />
+    <!-- 结束发货单查询{/foreach}-->
+  </div>
+</div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/brands.lbi" -->
+
+<!-- {if $brand_list} -->
+<div class="Modtow">
+  <h3 class="clearfix">
+   <div class="f_l">{$lang.brand}</div>
+   <div class="f_r f12"><a href="../brand.php">more</a></div>
+  </h3>
+  <div class="ModtowBox brands clearfix">
+   <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+      {if $smarty.foreach.brand_foreach.index <= 9}
+      <!-- {if $brand.brand_logo} -->
+      <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div>
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+      {/if}
+  <!-- {/foreach} -->
+  </div>
+</div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+ </div>
+</div>
+<!-- #BeginLibraryItem "/library/links.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+</body>
+</html>

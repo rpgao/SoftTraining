@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+  <div id="wrap">
+    <!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+    <div class="container">
+      <div class="global_l">
+        <!-- TemplateBeginEditable name="左边区域" -->
+        <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+        <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+        <!-- #BeginLibraryItem "/library/filter_attr.lbi" --><!-- #EndLibraryItem -->
+        <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+        <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+        <!-- TemplateEndEditable -->
+        <!-- TemplateBeginEditable name="左边广告区域（宽200px）" -->
+        <!-- TemplateEndEditable -->
+      </div>
+      <div class="global_r">
+        <!-- TemplateBeginEditable name="右边区域" -->
+        <!-- #BeginLibraryItem "/library/exchange_hot.lbi" --><!-- #EndLibraryItem -->
+        <!-- TemplateEndEditable -->
+        <!-- 商品列表 -->
+        <script type="text/javascript">
+          window.onload = function()
+          {
+            Compare.init();
+            fixpng();
+          }
+          var button_compare = '';
+        </script>
+        <div class="module goods_list">
+          <div class="caption">
+            <form method="GET" class="sort" name="listform">
+              {$lang.btn_display}：
+              <a href="javascript:;" onClick="javascript:display_mode('list')"><img src="images/display_mode_list<!-- {if $pager.display == 'list'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.list}"></a>
+              <a href="javascript:;" onClick="javascript:display_mode('grid')"><img src="images/display_mode_grid<!-- {if $pager.display == 'grid'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.grid}"></a>
+              <a href="javascript:;" onClick="javascript:display_mode('text')"><img src="images/display_mode_text<!-- {if $pager.display == 'text'} -->_act<!-- {/if} -->.gif" alt="{$lang.display.text}"></a>&nbsp;&nbsp;
+              <select name="sort" style="border:1px solid #ccc;">
+              {html_options options=$lang.exchange_sort selected=$pager.sort}
+              </select>
+              <select name="order" style="border:1px solid #ccc;">
+              {html_options options=$lang.order selected=$pager.order}
+              </select>
+              <input type="image" name="imageField" src="../images/search_go.gif" class="go" alt="go"/>
+              <input type="hidden" name="category" value="{$category}" />
+              <input type="hidden" name="display" value="{$pager.display}" id="display" />
+              <input type="hidden" name="integral_min" value="{$integral_min}" />
+              <input type="hidden" name="integral_max" value="{$integral_max}" />
+              <input type="hidden" name="page" value="{$pager.page}" />
+            </form>
+           <font style="padding-left:6px;">{$lang.goods_list}</font>
+          </div>
+          <div class="content">
+            <!-- {if $category > 0} -->
+            <form name="compareForm" method="post">
+            <!-- {/if} -->
+              <!-- {if $pager.display == 'list'} -->
+              <ul class="goods_item">
+                <!--{foreach from=$goods_list item=goods}-->
+                <li>
+                  <!-- {if $goods.goods_id} -->
+                  <p class="img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a></p>
+                  <p class="name">
+                    <a href="{$goods.url}">{$goods.goods_name}</a><br/>
+                    <!-- {if $goods.goods_brief} 商品描述-->
+                    {$lang.goods_brief}{$goods.goods_brief}
+                    <!-- {/if} -->
+                  </p>
+                  <p class="price">
+                    {$lang.exchange_integral}<font class="f1">{$goods.exchange_integral}</font>
+                  </p>
+                  <!--{/if}-->
+                </li>
+                <!--{/foreach}-->
+              </ul>
+              <!-- {elseif $pager.display == 'grid'} -->
+              <ul class="goods_grid2">
+              <!--{foreach from=$goods_list item=goods}-->
+                <!-- {if $goods.goods_id} 不加此句会多循环出一个商品来-->
+                <li>
+                  <p class="img"><a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}" class="goodsimg" /></a></p>
+                  <p class="name">
+                    <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a>
+                  </p>
+                  <p class="price">
+                    {$lang.exchange_integral}<font class="f1">{$goods.exchange_integral}</font>
+                  </p>
+                </li>
+                <!-- {/if} -->
+              <!--{/foreach}-->
+              </ul>
+              <!-- {elseif $pager.display == 'text'} -->
+              <ul class="goods_text">
+                <!--{foreach from=$goods_list item=goods}-->
+                <li>
+                  <!-- {if $goods.goods_id} -->
+                  <p class="name">
+                    <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a><br/>
+                    <!--{if $goods.goods_brief} 商品描述-->
+                    {$lang.goods_brief}{$goods.goods_brief}
+                    <!--{/if}-->
+                  </p>
+                  <p class="price">
+                    {$lang.exchange_integral}<font class="f1">{$goods.exchange_integral}</font>
+                  </p>
+                  <!--{/if}-->
+                </li>
+                <!--{/foreach}-->
+              </ul>
+              <!-- {/if} -->
+            </form>
+            <!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+  </div>
+</body>
+</html>

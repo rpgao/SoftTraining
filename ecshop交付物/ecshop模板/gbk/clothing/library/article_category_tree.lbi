@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories} -->
+<div class="general">
+	<h1>
+	<span class="left"></span><span class="right"></span>
+	<p>{$lang.article_cat}</p>
+	</h1>
+	<div class="content">
+	<div class="contentR vote">
+		<!--{foreach from=$article_categories item=cat}-->
+    <img src="../images/alone.gif" style="position:relative; bottom:2px;"> <a href="{$cat.url}">{$cat.name|escape:html}</a><br />
+      <!--{foreach from=$cat.children item=child}-->
+      &nbsp;·<a href="{$child.url}">{$child.name|escape:html}</a><br />
+      <!--{/foreach}-->
+    <!--{/foreach}-->
+	</div>
+	</div>
+</div>
+<!--{/if}-->
+
+
+
+

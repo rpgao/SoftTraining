@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!--{if $helps}-->
+<div class="block">
+  <div class="general">
+		  <h1>
+			<span class="left"></span><span class="right"></span>
+			<p class="helpTit">&nbsp;</p>
+			</h1>
+			<div class="content">
+			<div class="contentR clearfix" id="help">
+			<!-- {foreach from=$helps item=help_cat} -->
+				<dl>
+				<dt>
+				<div class="helpArticleTit">{$help_cat.cat_name}</div>
+				<div class="helpMore"><a href='{$help_cat.cat_id}'><img src="images/bnt_more_2.gif" /></a></div>
+				</dt>
+				<!-- {foreach from=$help_cat.article item=item} -->
+        <dd>·<a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></dd>
+        <!-- {/foreach} -->
+				</dl>
+     <!-- {/foreach} -->
+			</div>
+			</div>
+		</div>
+</div>
+<!--{/if}-->

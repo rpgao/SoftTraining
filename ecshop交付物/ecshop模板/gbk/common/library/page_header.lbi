@@ -1,0 +1,76 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div class="area clearfix">
+  <div class="HeadLeft f_l">
+	  <div class="Logo"><a href="../index.php" name="top"><img src="images/logo.gif"  /></a></div>
+		<div class="Bigsale"></div>
+	</div>
+	<div class="HeadRight f_r">
+		<!--{if $navigator_list.top}-->
+  <div class="NavBox f_r clearfix">	 	
+	<ul>
+	<li class="Welcom">
+	{insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+	</li>
+	<!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+	<li>
+	<a href="{$nav.url}" {if $nav.opennew eq 1} target="_blank" {/if}>{$nav.name}</a>  
+	</li>
+	<span></span>
+	<!-- {/foreach} -->
+	</ul>    
+  </div>
+  <!-- {/if} -->
+	<div style="height:54px;"></div>
+	<!--主体导航*-->
+	<div id="MailNav" class="clearfix">
+  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}>{$lang.home}<span></span></a>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}<span></span></a>
+ <!-- {/foreach} -->
+</div>
+
+<div id="search"  class="clearfix">  
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()"  style="_position:relative; top:6px;">
+   <select name="category" id="category">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" size="50" class="TextInput"/>
+   <input name="imageField" type="submit" value="搜索" class="bnt_num2" style="position:relative;_top:-2px;*top:-2px; _padding-top:4px;*padding-top:4px;" /> 
+	 <font class="advan"><a href="search.php?act=advanced_search">{$lang.advanced_search}</a></font>
+   </form>	 
+	 <div class="key">  
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {$lang.hot_search} ：
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}	 
+	 </div>
+</div>
+
+
+	</div>
+</div>

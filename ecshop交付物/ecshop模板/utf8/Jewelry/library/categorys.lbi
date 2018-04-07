@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $cat_list} -->
+
+<div class="mod2 blank">
+<h2>{$lang.goods_category}</h2>
+ <span class="TL"></span>
+ <span class="TR"></span>
+ <div class="PublicBlank"> 
+ <div class="Category">
+ <!-- {foreach from=$cat_list item=cat} -->
+    <a href="{$cat.url}" class="Triangle"><b>{$cat.cat_name|escape:html}</b> {if $cat.goods_num}({$cat.goods_num}){/if}</a><br />
+   <!--{/foreach}-->
+</div> 
+ </div> 
+</div>
+
+<!-- {/if} -->

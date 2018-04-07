@@ -1,0 +1,25 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $promotion_goods} -->
+ <h2 class="tit">{$lang.promotion_goods}
+<a href="../search.php?intro=promotion" class="more"><img src="../images/more.gif"/></a>
+ </h2>
+<div class="mod1 clearfix">
+ <span class="TL"></span>
+ <span class="TR"></span>
+ <span class="BL"></span>
+ <span class="BR"></span>
+  <div class="PromotionPic">
+ <!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+  <!-- {if $smarty.foreach.promotion_foreach.index lt 2} 限制显示数量 -->
+   <div class="goodsbox">
+    <div class="imgbox">
+   <div {if $smarty.foreach.promotion_foreach.iteration<2}class="Pic1"{else}class="Pic2"{/if}></div>
+   <a href="{$goods.url}"><img src="{$goods.thumb}" border="0" alt="{$goods.name|escape:html}"/></a></div>    
+    <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|truncate:4}</a><br />
+   <strong class="PriceTwo">{$goods.promote_price}</strong>
+ </div>
+  <!-- {/if} -->
+   <!--{/foreach}-->
+  </div>
+</div>
+<!-- {/if} -->

@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="box">
+  <h3 class="TitPublic"><span>{$articles_cat.name|escape:html}</span>   
+  </h3>
+  <div class="Triangle">
+	<ul>
+   <!--{foreach from=$articles item=article_item}-->
+	 	<li>
+  	<a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a> {$article_item.add_time}
+			</li>
+    <!--{/foreach}-->
+		</ul>
+  </div>
+	<div class="morepic"><a href="{$articles_cat.url}"><img src="../images/more.gif"></a></div>
+</div>
+<div class="blank5"></div>

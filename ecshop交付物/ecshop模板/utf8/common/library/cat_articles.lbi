@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<h4>{$articles_cat.name|escape:html}</h4>
+   <ul style="padding:4px 0">
+  <!--{foreach from=$articles item=article_item}-->
+	<li class="seq">
+  <a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a> <font class="des">{$article_item.add_time}</font>
+	</li>
+  <!--{/foreach}-->		
+   </ul>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>

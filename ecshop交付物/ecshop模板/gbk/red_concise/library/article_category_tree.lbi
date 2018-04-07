@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories} -->
+<div class="module" id="category_tree">
+  <h1><span></span>{$lang.article_cat}</h1>
+  <div class="content">
+    <dl>
+      <!--{foreach from=$article_categories item=cat}-->
+      <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+      <!--{foreach from=$cat.children item=child}-->
+      <dd style="padding-left:10px;"><a href="{$child.url}" style="background-image:none;">{$child.name|escape:html}</a></dd>
+      <!--{/foreach}-->
+      <!--{/foreach}-->
+    </dl>
+  </div>
+</div>
+ <!--{/if}-->

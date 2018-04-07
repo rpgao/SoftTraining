@@ -1,0 +1,11 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $new_articles} -->
+<!-- {foreach name=new_articles from=$new_articles item=article} -->
+<!-- {if $smarty.foreach.new_articles.index lt 8} 限制文章显示数量 -->
+	·<a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:12}</a><br />
+<!-- {/if} -->	
+<!--{/foreach}-->
+<!--{else}-->
+当前没有最新文章！
+<!-- {/if} -->
+	

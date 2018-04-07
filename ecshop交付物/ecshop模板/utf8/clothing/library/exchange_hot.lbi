@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $hot_goods} -->
+<div class="Tagtitle  Tagtitle_Hot">
+	<div class="TitleBox clearfix"  id="itemHot">
+			<h2 class="h2bg" style="border-right:none; margin-left:10px;">
+			<a href="#"></a>
+			</h2>
+	</div>
+</div>
+<div class="NewHot">
+	<div id="show_hot_area" class="goodsList clearfix">
+  <!--{foreach from=$hot_goods item=goods}-->
+		<div class="goodsBox" style="height:150px;">
+	    <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" class="goodsimg" /></a><br />
+		  <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>
+		  {$lang.exchange_integral}<font class="price">{$goods.exchange_integral}</font>
+		</div>
+		<!--{/foreach}-->
+	</div>
+</div>
+<!-- {/if} -->

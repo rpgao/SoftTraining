@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk"> 
+<div class="modTit">
+ <div class="modTxt"><span class="L"></span><span class="R"></span>{$lang.new_price}</div>
+</div>
+<div class="attribute">
+  <!--{foreach from=$price_list item=item}-->
+    {$item.user_name}&nbsp;&nbsp;<font class="f1">{$item.bid_price}</font><br />
+  <!--{/foreach}-->
+</div>
+

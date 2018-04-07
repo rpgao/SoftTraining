@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="Description" content="{$description}" />
+{if $auto_redirect}
+<meta http-equiv="refresh" content="3;URL={$message.href}" />
+{/if}
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block" id="GoodSearchBox">
+ <!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+</div>
+<div class="block clearfix">
+<!--left start-->
+<div id="ColLeft">
+<!-- TemplateBeginEditable name="左边区域（仅数量和是否显示可编辑）" -->		 
+	   <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem --> 
+		 <!-- #BeginLibraryItem "/library/filter_attr.lbi" --><!-- #EndLibraryItem -->
+     <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+		 <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem --> 
+<!-- TemplateEndEditable -->
+</div>
+<!--left end-->
+<!--right start-->
+<div id="ColRight">
+
+<div class="modThree w755">
+<span class="ltop"></span><span class="lbottom"></span><span class="rtop"></span><span class="rbottom"></span>
+<div class="modThreeBox clearfix">
+<h3 class="flowh3">{$lang.all_tags}</h3>
+	 <p>&nbsp;&nbsp; {$lang.tag_cloud_desc} &nbsp;&nbsp;</p>
+    <!-- {if $tags} -->
+          <!-- 标签云开始 {foreach from=$tags item=tag}-->
+          <font style="font-size:{$tag.size}; line-height:36px;"> <a href="{$tag.url}" style="color:{$tag.color}">
+          {if $tag.bold}
+          <b>{$tag.tag_words|escape:html}</b>
+          {else}
+          {$tag.tag_words|escape:html}
+          {/if}
+          </a>
+          <!-- {if $tags_from eq 'user'} -->
+          <a href="user.php?act=act_del_tag&amp;tag_words={$tag.tag_words|escape:url}&amp;uid={$tag.user_id}" title="{$lang.drop}"> <img src="images/drop.gif" alt="{$lang.drop}" /> </a>&nbsp;&nbsp;
+          <!-- {/if} -->
+          </font>
+          <!-- 标签云结束 {/foreach}-->
+          <!-- {else} -->
+          <div class="tips">{$lang.no_tag}</div>
+          <!-- {/if} -->
+</div>
+</div>
+</div>
+<!--right end-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+</body>
+</html>

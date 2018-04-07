@@ -1,0 +1,22 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $cat_goods} -->
+<div class="CommonModelOne clearfix">
+<h2 class="TitLext red">{$goods_cat.name|escape:html}</h2>
+<div class="modConter">
+ <!--{foreach from=$cat_goods item=goods}-->
+  <div class="goodsbox">
+   <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+   <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+   <!-- {if $goods.promote_price neq ""} -->
+   <font class="shop">{$goods.promote_price}</font><br>
+   <!-- {else}-->
+   <font class="shop">{$goods.shop_price}</font><br>
+   <!--{/if}-->
+  </div> 
+<!--{/foreach}-->
+<p><div class="more f_r"><a href="{$goods_cat.url}">更多</a></div></p>
+</div>
+</div>
+<div class="blank5"></div>
+<!--{/if}-->
+

@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $new_articles} -->
+<div id="newArticles">
+<h3></h3>
+<div class="cont">
+ <ul> 
+ <!-- {foreach name=new_articles from=$new_articles item=article} -->
+   <li>
+    <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a>
+    </li> 
+	<!-- {/foreach} -->
+ </ul>
+</div>
+<div class="bot"></div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

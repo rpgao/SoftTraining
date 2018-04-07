@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories } -->
+<h1 class="ModTit">{$lang.article_cat}<span></span></h1>
+<div class="Modone promotion_info">
+ <dl>
+  <!--{foreach from=$article_categories item=cat}-->
+    <dt><a href="{$cat.url}"><strong>{$cat.name|escape:html}</strong></a></dt>
+      <dd style="margin-left:5px;">
+      <!--{foreach from=$cat.children item=child}-->
+      <a href="{$child.url}" style="background:none;">{$child.name|escape:html}</a><br>
+      <!--{/foreach}-->
+      </dd>
+    <!--{/foreach}-->
+  </dl> 
+</div>
+<!--{/if} -->

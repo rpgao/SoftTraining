@@ -1,0 +1,17 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="general">
+	<h1>
+	<span class="left"></span><span class="right"></span>
+	<p>在线会员</p>
+	</h1>
+	<div class="content">
+	<div class="contentR vote">
+		{$info}<br>
+    {if $member}
+    {foreach from=$member item=val}
+      {$val.user_name} 
+    {/foreach}
+    {/if}
+	</div>
+	</div>
+</div>

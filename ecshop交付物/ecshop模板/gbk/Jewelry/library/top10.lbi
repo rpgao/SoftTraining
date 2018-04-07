@@ -1,0 +1,29 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!--{if $top_goods}-->
+<div class="mod2 blank">
+<h2>{$lang.top10}</h2>
+ <span class="TL"></span>
+ <span class="TR"></span>
+ <ul id="top10">
+   <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li>
+    <div class="first">
+    <img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>   
+    </div>
+    <div class="last">
+     <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>
+     <div class="tc PublicBlank wd120">
+    <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>    
+    </div> 
+    <div class="price">
+      {$goods.price}
+     </div>        
+    </div>
+   </li>
+   <!-- {/foreach} --> 
+   </ul> 
+</div>
+<script type="text/javascript">
+top10("top10","cur");
+</script>
+<!--{/if}-->

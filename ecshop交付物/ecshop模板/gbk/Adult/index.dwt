@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <!-- TemplateBeginEditable name="doctitle" -->
+  <!-- TemplateEndEditable -->
+  <!-- TemplateBeginEditable name="head" -->
+  <!-- TemplateEndEditable -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+  <link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+  <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+  <title>{$page_title}</title>
+  {* 包含脚本文件 *}{insert_scripts files='common.js,index.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="blank5"></div>
+<!--主体内容 start-->
+<div class="Area clearfix">
+<div class="UpperLeft f_l">
+ <!--左侧start-->
+ <div class="page_left f_l">
+ <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+ </div>  
+ <!--左侧end-->
+  <!--中间start-->
+   <div class="page_middle f_l">
+<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->  
+  </div>  
+ <!--中间end-->
+ <div class="blank5"></div>
+ <!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem -->
+</div>
+ <!--右侧start-->
+  <div class="page_right f_r">
+	 <!-- #BeginLibraryItem "/library/new_articles.lbi" --><!-- #EndLibraryItem -->
+	 <div class="blank5"></div>
+ <!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+ </div> 
+<!--主体右侧end-->
+</div>
+<div class="blank5"></div>
+ <!--新品上市-->
+<div class="Column NewsProduct">
+<div class="inside clearfix">
+<div class="Newleft f_l">
+<div class="title"></div>
+<div class="Leftad">
+<!-- TemplateBeginEditable name="新品上市的左侧广告位240px" -->
+
+<!-- TemplateEndEditable -->
+</div>
+</div>
+<div class="Newright f_r clearfix">
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->
+<div class="rightad">
+<!-- TemplateBeginEditable name="新品上市的右侧广告位710px" -->
+<!-- TemplateEndEditable -->
+</div>
+<!-- TemplateBeginEditable name="新品上市的右侧的文章列表" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<div class="TextList font13">
+  <ul>
+ <!--{foreach from=$articles item=article_item}-->
+  <li>
+  <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:22:"":true}</a>
+  </li>
+  <!--{/foreach}-->
+  </ul>
+</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+</div>
+</div>
+<div class="Column BestProduct">
+<div class="inside clearfix">
+<div class="Newleft f_l">
+<div class="title"></div>
+<div class="Leftad">
+<!-- TemplateBeginEditable name="精品推荐的左侧广告位240px" -->
+<!-- TemplateEndEditable -->
+</div>
+</div>
+<div class="Newright f_r clearfix">
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem -->
+</div>
+</div>
+</div>
+<div class="HotProductLine Area">
+<div class="Column HotProduct">
+<div class="inside clearfix">
+<div class="Newleft f_l">
+<div class="title"></div>
+<div class="Leftad">
+<!-- TemplateBeginEditable name="热卖产品的左侧广告位240px" -->
+<!-- TemplateEndEditable -->
+</div>
+</div>
+<div class="Newright f_r clearfix">
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem --> 
+</div>
+</div>
+</div>
+</div>
+<div class="Area">
+<!-- TemplateBeginEditable name="通栏广告" -->
+<!-- TemplateEndEditable -->
+</div>
+ <!--新品上市 end-->
+<!--主体内容 end-->
+<div class="blank5"></div>
+<div class="Area">
+ <!-- #BeginLibraryItem "/library/links.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->  
+</div>
+</body>
+</html>

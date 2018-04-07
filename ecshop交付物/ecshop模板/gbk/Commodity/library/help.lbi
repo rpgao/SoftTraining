@@ -1,0 +1,26 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $helps} -->
+<div class="block blank clearfix" id="helpbox">
+<!-- {foreach from=$helps item=help_cat} -->
+ <div class="help blank">
+ <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+ <h1>{$help_cat.cat_name}</h1>
+ <ul class="clearfix">
+ <!-- {foreach from=$help_cat.article item=item} -->
+ <li><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+ <!-- {/foreach} -->
+ </ul>
+ </div>
+<!-- {/foreach} -->
+</div>
+<script type="text/javascript">
+function divheight(){
+		var itemnum = document.getElementById("helpbox").getElementsByTagName("div");
+		for(var i=0; i<itemnum.length; i++){
+		  //var divh = itemnum[i].scrollHeight;
+			if( (itemnum[i].scrollHeight % 2) !== 0){itemnum[i].style.height = itemnum[i].scrollHeight+1+'px'}
+		}	
+}
+divheight();
+</script>
+<!-- {/if} -->

@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="gb2312" >
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gb2312" />
+  <meta name="author" content="Smiling Dolphin" />
+  <meta name="keywords" content="design, css, cascading, style, sheets, xhtml, graphic design, w3c, web standards, visual, display, java, javascript, c++, php, jsp, asp, py, pl" />
+  <meta name="description" content="my favorites language." />
+  <meta name="robots" content="all" />
+  <title>ECShop2.6.1 模板更改记录文档</title>
+  <style type="text/css" title="currentStyle" media="screen">
+    textarea{width:90%;overflow:auto;height:100px;}
+  </style>
+
+</head>
+<body>
+<pre>
+  <strong>修改文件：</strong>flow.dwt
+  <strong>修改简述：</strong>
+    购物车内容的商品显示方式（文字，图片，文字+图片）
+    属性列可选择显示与否
+  <strong>修改区块：</strong>
+    &lt;!-- 购物车内容 --&gt;
+  <strong>修改内容1：</strong>
+	修改前：
+	<textarea name="" rows="" cols=""><th>{$lang.goods_attr}</th></textarea>
+	修改后：
+	<textarea name="" rows="" cols=""><!-- {if $show_goods_attribute eq 1} 显示商品属性 -->
+  <th>{$lang.goods_attr}</th>
+<!-- {/if} --></textarea>
+  <strong>修改内容2：</strong>
+	修改前：
+	<textarea name="" rows="" cols=""><td>{$goods.goods_attr|nl2br}</td></textarea>
+	修改后：
+	<textarea name="" rows="" cols=""><!-- {if $show_goods_attribute eq 1} 显示商品属性 -->
+  <td>{$goods.goods_attr|nl2br}</td>
+<!-- {/if} --></textarea>
+  <strong>修改内容3：</strong>
+	修改前：
+	<textarea name="" rows="" cols=""><a href="goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name}</a></textarea>
+	修改后：
+	<textarea name="" rows="" cols=""><!-- {if $show_goods_thumb eq 1} -->
+  <a href="goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name}</a>
+<!-- {elseif $show_goods_thumb eq 2} -->
+  <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" class="goods_thumb" /></a>
+<!-- {else} -->
+  <a href="goods.php?id={$goods.goods_id}" target="_blank"><img src="{$goods.goods_thumb}" border="0" title="{$goods.goods_name|escape:html}" class="goods_thumb" /></a><br />
+  <a href="goods.php?id={$goods.goods_id}" target="_blank">{$goods.goods_name}</a>
+<!-- {/if} --></textarea>
+
+  <strong>修改文件：</strong>user_passport.dwt
+  <strong>修改简述：</strong>
+    修改用户注册页面模板，增加暂停注册的页面
+  <strong>修改区块：</strong>
+    &lt;!-- 会员注册界面 --&gt;
+  <strong>修改内容1：</strong>
+	修改前：
+	<textarea name="" rows="" cols=""><div class="title-div"><img src="images/register.gif" width="158" height="39"  alt="" /></div>
+<div class="content-div">
+<form action="user.php" method="post" name="formUser" onsubmit="return register();">
+<br />
+<table width="70%"  border="0" align="center">
+<tr>
+  <td width="43%" align="right"><strong>{$lang.label_username}:</strong></td>
+  <td width="57%"><input name="username" type="text" id="username" onblur="is_registered(this.value);"/>
+    <span id="username_notice" style="color:#FF0000"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_email}:</strong></td>
+  <td><input name="email" type="text" id="email" onblur="checkEmail(this.value);"/>
+    <span id="email_notice" style="color:#FF0000"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_password}:</strong></td>
+  <td><input name="password" type="password" id="password" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" />
+    <span style="color:#FF0000" id="password_notice"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_password_intensity}:</strong></td>
+  <td>
+    <table width="145" border="0" cellspacing="0" cellpadding="1">
+      <tr align="center">
+	<td width="33%" id="pwd_lower">{$lang.pwd_lower}</td>
+	<td width="33%" id="pwd_middle">{$lang.pwd_middle}</td>
+	<td width="33%" id="pwd_high">{$lang.pwd_high}</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_confirm_password}:</strong></td>
+  <td><input name="confirm_password" type="password" id="conform_password" onblur="check_conform_password(this.value);" />
+    <span style="color:#FF0000" id="conform_password_notice"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_msn}:</strong></td>
+  <td><input name="other[msn]" type="text" />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_qq}:</strong></td>
+  <td><input name="other[qq]" type="text"  />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_office_phone}:</strong></td>
+  <td><input name="other[office_phone]" type="text"  />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_home_phone}:</strong></td>
+  <td><input name="other[home_phone]" type="text"  />
+  </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_mobile_phone}:</strong></td>
+  <td><input name="other[mobile_phone]" type="text"  />
+   </td>
+</tr>
+<!-- 判断是否启用验证码{if $enabled_captcha} -->
+<tr>
+<td align="right"><strong>{$lang.comment_captcha}:</strong></td>
+<td><input type="text" size="8" name="captcha" />
+<img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+</tr>
+<!--{/if}-->
+<tr>
+  <td>&nbsp;</td>
+  <td><label>
+    <input name="agreement" type="checkbox" value="1" checked="checked" />
+    <b>{$lang.agreement}</b></label></td>
+</tr>
+<tr>
+  <td colspan="2" align="center"><input name="act" type="hidden" value="act_register" >
+    <input name="Submit" type="submit" value="{$lang.confirm_register}"></td>
+</tr>
+<tr>
+  <td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><li style="border-bottom: 1px dashed #CECECE;width:150px;"> <a href="user.php?act=login">{$lang.want_login}</a></li>
+    <li style="border-bottom: 1px dashed #CECECE;width:150px;"> <a href="user.php?act=get_password">{$lang.forgot_password}</a></li></td>
+</tr>
+</table>
+<br />
+</form></div></textarea>
+	修改后：
+	<textarea name="" rows="" cols=""><!-- {if $shop_reg_closed eq 1} -->
+<div class="title-div"><img src="images/register.gif" width="158" height="39"  alt="" /></div>
+<div class="content-div">
+<p class="register-closed">{$lang.shop_register_closed}</p>
+</div>
+<!-- {else} -->
+{insert_scripts files='utils.js'}
+<div class="title-div"><img src="images/register.gif" width="158" height="39"  alt="" /></div>
+<div class="content-div">
+<form action="user.php" method="post" name="formUser" onsubmit="return register();">
+<br />
+<table width="70%"  border="0" align="center">
+<tr>
+  <td width="43%" align="right"><strong>{$lang.label_username}:</strong></td>
+  <td width="57%"><input name="username" type="text" id="username" onblur="is_registered(this.value);"/>
+    <span id="username_notice" style="color:#FF0000"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_email}:</strong></td>
+  <td><input name="email" type="text" id="email" onblur="checkEmail(this.value);"/>
+    <span id="email_notice" style="color:#FF0000"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_password}:</strong></td>
+  <td><input name="password" type="password" id="password" onblur="check_password(this.value);" onkeyup="checkIntensity(this.value)" />
+    <span style="color:#FF0000" id="password_notice"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_password_intensity}:</strong></td>
+  <td>
+    <table width="145" border="0" cellspacing="0" cellpadding="1">
+      <tr align="center">
+	<td width="33%" id="pwd_lower">{$lang.pwd_lower}</td>
+	<td width="33%" id="pwd_middle">{$lang.pwd_middle}</td>
+	<td width="33%" id="pwd_high">{$lang.pwd_high}</td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.label_confirm_password}:</strong></td>
+  <td><input name="confirm_password" type="password" id="conform_password" onblur="check_conform_password(this.value);" />
+    <span style="color:#FF0000" id="conform_password_notice"> *</span></td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_msn}:</strong></td>
+  <td><input name="other[msn]" type="text" />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_qq}:</strong></td>
+  <td><input name="other[qq]" type="text"  />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_office_phone}:</strong></td>
+  <td><input name="other[office_phone]" type="text"  />
+   </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_home_phone}:</strong></td>
+  <td><input name="other[home_phone]" type="text"  />
+  </td>
+</tr>
+<tr>
+  <td align="right"><strong>{$lang.other_mobile_phone}:</strong></td>
+  <td><input name="other[mobile_phone]" type="text"  />
+   </td>
+</tr>
+<!-- 判断是否启用验证码{if $enabled_captcha} -->
+<tr>
+<td align="right"><strong>{$lang.comment_captcha}:</strong></td>
+<td><input type="text" size="8" name="captcha" />
+<img src="captcha.php?{$rand}" alt="captcha" style="vertical-align: middle;cursor: pointer;" onClick="this.src='captcha.php?'+Math.random()" /> </td>
+</tr>
+<!--{/if}-->
+<tr>
+  <td>&nbsp;</td>
+  <td><label>
+    <input name="agreement" type="checkbox" value="1" checked="checked" />
+    <b>{$lang.agreement}</b></label></td>
+</tr>
+<tr>
+  <td colspan="2" align="center"><input name="act" type="hidden" value="act_register" >
+    <input name="Submit" type="submit" value="{$lang.confirm_register}"></td>
+</tr>
+<tr>
+  <td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td><li style="border-bottom: 1px dashed #CECECE;width:150px;"> <a href="user.php?act=login">{$lang.want_login}</a></li>
+    <li style="border-bottom: 1px dashed #CECECE;width:150px;"> <a href="user.php?act=get_password">{$lang.forgot_password}</a></li></td>
+</tr>
+</table>
+<br />
+</form></div>
+<!--{/if}--></textarea>
+
+  <strong>修改文件：</strong>index.dwt
+  <strong>修改简述：</strong>
+    修改首页Flash轮播页面
+  <strong>修改区块：</strong>
+    &lt;!-- Flash --&gt;
+  <strong>修改内容1：</strong>
+	修改前：
+	<textarea name="" rows="" cols="">
+  // 0xffffff:文字颜色|1:文字位置|0x0066ff:文字背景颜色|60:文字背景透明度|0xffffff:按键文字颜色|0x0066ff:按键默认颜色|0x000033:按键当前颜色|8:自动播放时间(秒)|2:图片过渡效果|1:是否显示按钮|_blank:打开窗口
+  var swf_config = "|2|||0xFFFFFF|0xFF6600||4|3|1|_blank"
+
+  document.write('<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="'+ swf_width +'" height="'+ swf_height +'">');
+  document.write('<param name="movie" value="data/images/bcastr.swf?bcastr_xml_url=cycle_image.php"><param name="quality" value="high">');
+  document.write('<param name="menu" value="false"><param name=wmode value="opaque">');
+  document.write('<param name="FlashVars" value="bcastr_config='+swf_config+'">');
+  document.write('<embed src="data/images/bcastr.swf?bcastr_xml_url=cycle_image.php" wmode="opaque" FlashVars="bcastr_config='+swf_config+'" menu="false" quality="high" width="'+ swf_width +'" height="'+ swf_height +'" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />');
+  document.write('</object>');
+	</textarea>
+	修改后：
+	<textarea>
+  <script type="text/javascript">
+
+  var swf_width=377;
+  var swf_height=165;
+
+  </script>
+  <script type="text/javascript" src="data/flashdata/{$flash_theme}/cycle_image.js"></script>
+	</textarea>
+
+  <strong>修改文件：</strong>pages.lbi
+  <strong>修改简述：</strong>
+    修改分页显示方式
+  <strong>修改区块：</strong>
+    &lt;!-- pages.lbi --&gt;
+  <strong>修改内容1：</strong>
+	修改前：
+	<textarea name="" rows="" cols="">
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+	</textarea>
+	修改后：
+	<textarea>
+<!-- {if $pager.styleid eq 0 } -->
+  <div id="pager"> {$lang.pager_1}{$pager.record_count}{$lang.pager_2}{$lang.pager_3}{$pager.page_count}{$lang.pager_4} <span> <a href="{$pager.page_first}">{$lang.page_first}</a> <a href="{$pager.page_prev}">{$lang.page_prev}</a> <a href="{$pager.page_next}">{$lang.page_next}</a> <a href="{$pager.page_last}">{$lang.page_last}</a> </span>
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <select name="page" id="page" onchange="selectPage(this)">
+    {html_options options=$pager.array selected=$pager.page}
+    </select>
+  </div>
+<!-- {else} -->
+    <div id="pager" class="pages"><em>{$pager.record_count}</em><!-- {if $pager.page_first} --><a class="first" href="{$pager.page_first}">1 ...</a><!-- {/if} --><!-- {if $pager.page_prev} --><a class="prev" href="{$pager.page_prev}">&lsaquo;&lsaquo;</a><!-- {/if} -->
+    <!--{foreach from=$pager.page_number key=key item=item}-->
+        <!-- {if $pager.page eq $key} -->
+        <strong>{$key}</strong>
+        <!-- {else} -->
+        <a href="{$item}">{$key}</a>
+        <!-- {/if} -->
+    
+    <!--{/foreach}-->
+    <!-- {if $pager.page_next} --><a class="next" href="{$pager.page_next}">&rsaquo;&rsaquo;</a><!-- {/if} --><!-- {if $pager.page_last} --><a class="last" href="{$pager.page_last}">...{$pager.page_count}</a><!-- {/if} -->
+    <!-- {if $pager.page_kbd} -->
+    <!--{foreach from=$pager.search key=key item=item}-->
+    <input type="hidden" name="{$key}" value="{$item}" />
+    <!--{/foreach}-->
+    <kbd><input type="text" name="page" onkeydown="if(event.keyCode==13)selectPage(this)" size="3" /></kbd>
+    <!-- {/if} -->
+    </div>
+<!-- {/if} -->
+	</textarea>
+
+  <strong>增加文件：</strong>message_board.dwt
+  <strong>模板简述：</strong>
+    留言板的模板文件
+</pre>
+</body>
+</html>

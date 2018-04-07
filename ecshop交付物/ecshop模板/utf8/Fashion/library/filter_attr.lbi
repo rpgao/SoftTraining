@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $filter_attr_list} -->
+<div class="box">
+<h1 class="TitPublic"><span>{$filter_attr_name}</span></h1>
+<div class="box1">
+  <!-- {foreach from=$filter_attr_list item=attr} -->
+    <!-- {if $attr.selected} -->
+    <span class="shop">{$attr.attr_value}</span> <!-- {if $attr.goods_num} --><span class="fec">({$attr.goods_num})</span><!-- {/if} --><br />
+    <!-- {else} -->
+      <a href="{$attr.url}">{$attr.attr_value}</a> <!-- {if $attr.goods_num} --><span class="fec">({$attr.goods_num})</span><!-- {/if} --><br />
+    <!-- {/if} -->
+  <!-- {/foreach} -->
+</div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

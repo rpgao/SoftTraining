@@ -1,0 +1,24 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+{if $tag_nums }
+<div id="tag_box">
+<!--{foreach from=$tag_list item=data key=key}-->
+{if $key neq $appid}
+{if $data.type eq "ecshop"}
+<div class="goods-title">{$data.name}</div>
+<ul class="img">
+<!--{foreach from=$data.data item=tag key=key}-->
+<li><img src="{$tag.image}" /><a href="{$tag.url}">{$tag.goods_name}</a></li>
+<!--{/foreach}-->
+</ul>
+{elseif $data.type eq "discuz"}
+<ul>
+<div class="goods-title">{$data.name}</div>
+<!--{foreach from=$data.data item=tag key=key}-->
+<li><a href="{$tag.url}">{$tag.subject}</a></li>
+<!--{/foreach}-->
+</ul>
+{/if}
+{/if}
+<!--{/foreach}-->
+</div>
+{/if}

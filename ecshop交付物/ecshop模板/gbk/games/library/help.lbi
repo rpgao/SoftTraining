@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $helps} -->
+<!-- {foreach from=$helps key=key item=help_cat} -->
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$help_cat.cat_name}</span></p></h1>
+		<div class="modContent help">
+			<!-- {foreach from=$help_cat.article item=item} -->
+      ·<a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a><br />
+      <!-- {/foreach} -->
+		</div>	
+	</div>	 
+</div>
+<!-- {/foreach} -->	
+<!-- {/if} -->

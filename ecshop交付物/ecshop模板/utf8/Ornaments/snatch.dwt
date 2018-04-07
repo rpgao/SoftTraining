@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+<script type="text/javascript" src="js/action.js"></script>
+</head>
+<body>
+<a name="top" id="top"></a>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+  <div id="left" class="fl">
+	  <!-- TemplateBeginEditable name="左边区域" -->
+		<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+		<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+		<h1 class="mod_title1">{$lang.activity_list}<p>&nbsp;</p></h1>
+		<div class="mod1">
+			<ul class="history">
+      <!--{foreach from=$snatch_list item=item}-->
+      <li><a href="{$item.url}">{$item.snatch_name}</a>&nbsp;&nbsp;
+        <!--{if $item.overtime }-->
+        <font class="fred">({$lang.end})</font>
+        <!--{/if}-->
+      </li>
+      <!--{/foreach}-->
+      </ul>
+		</div>
+		<div id="ECS_PRICE_LIST">
+    <!-- #BeginLibraryItem "/Library/snatch_price.lbi" --><!-- #EndLibraryItem -->
+    </div>
+	</div>
+	<div id="right" class="fr">
+	<!-- TemplateBeginEditable name="拍卖详情上可编辑区域" --> 
+  <!-- TemplateEndEditable -->
+	<h3 class="mod_title2 clearfix">
+	 <div class="left"><p>{$lang.treasure_info}</p></div>
+  </h3>
+	<ul class="auctionList clearfix">
+	 <li class="auctionImg">
+	 <a href="{$snatch_goods.url}"><img src="{$snatch_goods.goods_thumb}" alt="{$snatch_goods.goods_name|escape:html}" class="inputborder"  /></a>
+	 </li>
+	 <li>
+		{insert_scripts files='lefttime.js'}
+     <a href="{$snatch_goods.url}"><b class="f1">{$snatch_goods.goods_name|escape:html}</b></a><br />
+     {$lang.shop_price} <font class="promote_price">{$snatch_goods.formated_shop_price}</font><br />
+     {$lang.market_price} <font class="market">{$snatch_goods.formated_market_price}</font> <br />
+     {$lang.residual_time} <font class="fred"><span id="leftTime">{$lang.please_waiting}</span></font><br />
+     {$lang.activity_desc}：<br />{$snatch_goods.desc|escape:html|nl2br}
+	 </li>
+  </ul>
+	
+  <div class="mod_title3">
+		<div class="boxcontent">
+			<div class="left fl">{$lang.activity_intro}</div>
+			<div class="right fr">&nbsp;</div>
+		</div>
+		<div class="goods_filter">
+		{$snatch_goods.snatch_time}<br />
+    {$lang.price_extent}{$snatch_goods.formated_start_price} - {$snatch_goods.formated_end_price} <br />
+    {$lang.user_to_use_up}{$snatch_goods.cost_points} {$points_name}<br />
+    {$lang.snatch_victory_desc}<br />
+    <!--{if $snatch_goods.max_price neq 0}-->    {$lang.price_less_victory}{$snatch_goods.formated_max_price}，{$lang.price_than_victory}{$snatch_goods.formated_max_price}，{$lang.or_can}{$snatch_goods.formated_max_price}{$lang.shopping_product}。
+		<!--{/if}-->
+		</div>
+	</div> 
+
+	<div id="ECS_SNATCH">
+  <!-- #BeginLibraryItem "/Library/snatch.lbi" --><!-- #EndLibraryItem -->
+  </div>
+	
+
+	</div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+var gmt_end_time = {$snatch_goods.gmt_end_time|default:0};
+var id = {$id};
+{foreach from=$lang.snatch_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    window.setInterval("newPrice(" + id + ")", 8000);
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</html>

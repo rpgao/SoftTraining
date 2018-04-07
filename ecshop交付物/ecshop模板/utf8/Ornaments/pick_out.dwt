@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable --><!-- TemplateBeginEditable name="head" --><!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,global.js,compare.js'}
+<script type="text/javascript" src="js/action.js"></script>
+</head>
+<body>
+<a name="top" id="top"></a>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+  <div id="left" class="fl">
+	  <h1 class="mod_title1">{$lang.your_choice}<p>&nbsp;</p></h1>
+		<div class="mod1">
+			<ul class="history">
+       <!--{foreach from = $picks item=pick }-->
+       <li style="word-break:break-all;"><a href="{$pick.url}">{$pick.name}</a></li>
+       <!--{/foreach}-->
+     </ul>
+		</div>
+	  <!-- TemplateBeginEditable name="左边区域" -->
+		<!-- #BeginLibraryItem "/library/categorys.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateEndEditable -->
+	</div>
+	<div id="right" class="fr">
+	 <div class="mod_title3">
+		<div class="boxcontent">
+			<div class="left fl">{$lang.search_result} <font class="f1">({$count})</font></div>
+			<div class="right fr">&nbsp;</div>
+		</div>
+	</div>
+	<div class="grid">
+    <!--{foreach from=$pickout_goods item=goods name=goods}-->
+      <div class="goodsbox">
+      <div class="imgbox"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+       <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></p>
+       <!-- {if $goods.promote_price neq ""} -->
+       {$lang.promote_price}<font class="promote_price">{$goods.promote_price}</font><br>
+       <!-- {else}-->
+       {$lang.shop_price}<font class="promote_price">{$goods.shop_price}</font><br>
+       <!--{/if}-->
+       </font>
+       <a href="javascript:collect({$goods.id})"><img src="images/but_coll.gif"></a> <a href="javascript:addToCart({$goods.id})"><img src="images/but_buy.gif"></a>
+      </div>
+    <!--{/foreach}-->
+  </div>
+	
+	<div class="mod_title3">
+		<div class="boxcontent">
+			<div class="left fl">{$lang.pick_out}</div>
+			<div class="right fr">&nbsp;</div>
+		</div>
+	</div>
+	<div class="goods_filter">
+   <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+      <!--{foreach from=$condition item=caption}-->
+      <tr>
+        <td bgcolor="#f1f9e6">
+          <img src="images/title_01.gif" alt="no alt" />&nbsp;&nbsp;<font class="f12b">{$caption.name}</font></td>
+      </tr>
+      <!--{foreach from=$caption.cat item=cat}-->
+      <tr>
+        <td bgcolor="#ffffff">&nbsp;&nbsp;<strong>{$cat.cat_name}</strong></td>
+      </tr>
+      <tr>
+        <td bgcolor="#ffffff">&nbsp;&nbsp;
+          <!--{foreach from = $cat.list item=list}-->
+          &nbsp;&nbsp;<a href="{$list.url}">{$list.name}</a>
+          <!--{/foreach}-->
+        </td>
+      </tr>
+      <!--{/foreach}-->
+      <!--{/foreach}-->
+    </table>
+  </div>
+	
+
+	</div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript">
+var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</html>

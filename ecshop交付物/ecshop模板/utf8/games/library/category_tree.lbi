@@ -1,0 +1,50 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function $(element) {
+  return document.getElementById(element);
+}
+//切屏--是按钮，_v是内容平台，_h是内容库
+function reg(str){
+  var bt=$(str+"_b").getElementsByTagName("h2");
+	bt[0].className = "";
+  for(var i=0;i<bt.length;i++){
+    bt[i].subj=str;
+    bt[i].pai=i;
+    bt[i].style.cursor="pointer";
+    bt[i].onmouseover=function(){
+      $(this.subj+"_v").innerHTML=$(this.subj+"_h").getElementsByTagName("blockquote")[this.pai].innerHTML;
+      for(var j=0;j<$(this.subj+"_b").getElementsByTagName("h2").length;j++){
+        var _bt=$(this.subj+"_b").getElementsByTagName("h2")[j];
+        var ison=j==this.pai;
+        _bt.className=(ison?"":"h2bg");
+      }
+    }
+  }
+  $(str+"_h").className="none";
+  $(str+"_v").innerHTML=$(str+"_h").getElementsByTagName("blockquote")[0].innerHTML;
+}
+</script>
+<div class="CateTit"></div>
+<div class="CateCentent clearfix">
+ <div class="YiTit" id="category_b">
+  <!--{foreach from=$categories item=cat}-->
+	<h2 class="h2bg"><a href="{$cat.url}">{$cat.name|escape:html}</a></h2>
+	<!--{/foreach}--> 
+ </div>
+ <div class="Erji" id="category_v"></div>
+ <div id="category_h">
+ <!--{foreach from=$categories item=cat}-->
+  <blockquote>
+  <!--{foreach from=$cat.cat_id item=child}-->
+  <a href="{$child.url}">{$child.name|escape:html}</a> | 
+  <!--{/foreach}-->
+  </blockquote>
+<!--{/foreach}--> 
+ </div>
+</div>
+<div class="CateBot"></div>
+<script type="text/javascript">
+    <!--
+    reg("category");
+    //-->
+</script>

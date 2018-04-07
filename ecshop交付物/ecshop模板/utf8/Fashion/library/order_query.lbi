@@ -1,0 +1,28 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<div class="box">
+<h1 class="TitQuery"></h1>
+<div class="box1 PFontColor">
+  <form name="ecsOrderQuery">
+    <input type="text" name="order_sn"  size="16" class="TextInput2" /><br />
+    <input type="button" value="{$lang.query_order}" class="bnt_num6 fwhite" onclick="orderQuery()" />
+  </form>
+  <div id="ECS_ORDER_QUERY">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+     {$lang.order_number}：<br><a href="user.php?act=order_detail&order_id={$order_query.order_id}" >{$order_query.order_sn}</a><br>
+        <!--{else}-->
+      {$lang.order_number}：{$order_query.order_sn}<br>
+        <!--{/if}-->
+      {$lang.order_status}：<br><font class="fGray">{$order_query.order_status}</font><br>
+        <!--{if $order_query.invoice_no }-->
+      {$lang.consignment}：<br>{$order_query.invoice_no}<br>
+        <!--{/if}-->
+      {if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}<br>
+  <!--{/if}-->
+ <!--{/if}-->
+    </div>
+</div> 
+ </div>
+ <div class="blank5"></div>

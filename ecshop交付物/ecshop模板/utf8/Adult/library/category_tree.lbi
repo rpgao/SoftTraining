@@ -1,0 +1,33 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function $(element) {
+ return document.getElementById(element);
+}
+function showMenu(menuID,index) {
+ $(menuID).style.display=(index==0?"none":"block");
+}
+
+</script>
+<div id="category_tree">
+ <h2 class="red">{$lang.goods_category}</h2>
+ <ul>
+     <!--{foreach name=parent-cat from=$categories item=cat}-->
+    <li onMouseOver="<!--{if $cat.cat_id}-->showMenu('c{$smarty.foreach.parent-cat.iteration}',1);<!--{/if}-->"  onMouseOut="<!--{if $cat.cat_id}-->showMenu('c{$smarty.foreach.parent-cat.iteration}',0);<!--{/if}-->">
+   <a href="{$cat.url}">{$cat.name|escape:html}</a>
+   <!--{if $cat.cat_id}-->
+   <div id="c{$smarty.foreach.parent-cat.iteration}" class="children">   
+   <div class="conter">
+   <div class="suq"></div>
+   <!--{foreach name=cat_child  from=$cat.cat_id item=child}-->
+    <a href="{$child.url}">{$child.name|escape:html}</a><br />
+   <!--{/foreach}-->
+   </div>
+   </div>   
+   <!--{/if}-->     
+     </li>
+   <!--{/foreach}-->
+  </ul>
+ <div class="ad"><img src="../images/category-adbgimg.gif"></div>
+ <div class="bottom"></div>
+</div>
+<div class="blank5"></div>

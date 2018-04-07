@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+
+{insert_scripts files="transport.js"}
+<div class="ModOne">
+ <div class="car" id="ECS_CARTINFO">
+ {insert name="cart_info"}
+ </div>
+</div>
+<div class="blank5"></div>
+
+
+
+

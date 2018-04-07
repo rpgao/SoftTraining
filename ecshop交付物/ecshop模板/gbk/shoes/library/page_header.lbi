@@ -1,0 +1,86 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+<div class="block header">
+ <div class="logo"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></div>
+ <div class="topnav tr">
+   {insert_scripts files='transport.js,utils.js'}
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'} </font>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <!--{if $navigator_list.top}-->
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+      <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+      <!-- {if !$smarty.foreach.nav_top_list.last} -->
+       |
+      <!-- {/if} -->
+    <!-- {/foreach} -->
+   <!-- {/if} -->
+   <div class="searchbox tr">
+    {if $searchkeywords}
+    {$lang.hot_search}：
+    {foreach name=keywords from=$searchkeywords item=val}
+    <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+    <!-- {if !$smarty.foreach.keywords.last} -->
+       |
+    <!-- {/if} -->
+    {/foreach}
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    {/if}
+   <script type="text/javascript">
+   {literal}
+   <!--
+   function checkSearchForm()
+   {
+     if(document.getElementById('keyword').value)
+     {
+       return true;
+     }
+     else
+     {
+       alert("{$lang.no_keywords}");
+       return false;
+     }
+   }
+   -->
+   {/literal}
+   </script>
+   <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="inline">
+   <select name="category" id="category">
+    <option value="0">{$lang.all_category}</option>
+    {$category_list}
+   </select>
+   <input name="keywords" type="text" id="keyword" class="InputBorder" value="{$search_keywords|escape}"/>
+   <input name="imageField" type="image" src="images/search.gif" class="submit" />
+   <a href="search.php?act=advanced_search"><font class="username">{$lang.advanced_search}</font></a>
+   </form>
+  </div>
+ </div>
+</div>
+<!--nav-->
+<div class="block nav blank">
+ <ul>
+  <li {if $navigator_list.config.index eq 1} class="cur"{/if}><a href="../index.php">{$lang.home}</a><span></span></li>
+ <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <li {if $nav.active eq 1}class="cur"{/if}>
+  <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a><span></span>
+  </li>
+ <!-- {/foreach} -->
+ <li class="cart" id="enter">
+   <div id="cartInfo"></div>
+  <div id="flying"></div>
+  <div id=all-links style="display:none;">
+   <div id="ECS_CARTINFO">
+   {insert_scripts files='transport.js'}
+     {insert name='cart_info'}
+   </div>
+  </div>  
+  <script type="text/javascript">
+  CartMenu();
+  </script>
+ </li>
+ </ul>
+</div>

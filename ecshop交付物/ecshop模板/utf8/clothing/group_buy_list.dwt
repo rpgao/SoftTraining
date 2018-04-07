@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/ur_here.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+<!--left start-->
+  <div id="areaLeft">
+	  <div id="goodsLtop">
+		 <div class="cartBox">
+		  <!-- #BeginLibraryItem "/library/cart.lbi" --><!-- #EndLibraryItem -->
+		 </div>	
+			<div class="Gaction clearfix">
+		  <a href="user.php">{$lang.label_login}</a><a href="user.php?act=register">{$lang.label_regist}</a>
+			<a href="user.php?act=profile">{$lang.label_profile}</a><a href="user.php?act=collection_list">{$lang.label_collection}</a>
+		 </div>
+		</div>
+	<!-- TemplateBeginEditable name="左边区域" -->
+	<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/history.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/goods_article.lbi" --><!-- #EndLibraryItem -->
+	<!-- #BeginLibraryItem "/library/goods_attrlinked.lbi" --><!-- #EndLibraryItem -->
+  <!-- #BeginLibraryItem "/library/price_grade.lbi" --><!-- #EndLibraryItem -->
+  <!-- TemplateEndEditable -->
+	</div>
+<!--left end-->
+<!--right start-->
+  <div id="areaRight">
+	  <!-- TemplateBeginEditable name="通栏广告区域（宽746px）" -->
+    <!-- TemplateEndEditable -->
+		<div class="General_Title clearfix">
+     <div class="TitleBoxcon"><p>{$lang.gb_goods_name}</p>&nbsp;</div>
+		</div>
+		<!-- {if $gb_list} 如果有团购活动 -->
+		<div class="clearfix groupList">
+		<!-- {foreach from=$gb_list item=group_buy} 循环团购活动开始 -->
+      <ul class="clearfix">
+			<li class="groupImg">
+			  <a href="{$group_buy.url}"><img src="{$group_buy.goods_thumb}" alt="{$group_buy.goods_name|escape:html}" /></a>
+			</li>
+			<li class="groupInfo">
+			<b>{$lang.gb_goods_name}</b><a href="{$group_buy.url}" class="f5">{$group_buy.goods_name|escape:html}</a><br />
+      <b>{$lang.act_time}：</b><font class="f1">{$group_buy.formated_start_date} -- {$group_buy.formated_end_date}</font><br />
+      <b>{$lang.gb_price_ladder}</b><br />
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
+       <tr>
+          <th width="29%" bgcolor="#FFFFFF">{$lang.gb_ladder_amount}</th>
+         <th width="71%" bgcolor="#FFFFFF">{$lang.gb_ladder_price}</th>
+        </tr>
+        <!-- {foreach from=$group_buy.price_ladder item=item} -->
+        <tr>
+          <td width="29%" bgcolor="#FFFFFF">{$item.amount}</td>
+         <td width="71%" bgcolor="#FFFFFF">{$item.formated_price}</td>
+        </tr>
+        <!-- {/foreach} -->
+      </table>
+			</li>
+			</ul>
+	 <!--{/foreach}-->	
+    </div>
+		<!-- {else} -->
+		<div class="clearfix groupList">
+      <div class="empty">{$lang.group_goods_empty}</div>
+    </div>
+    <!-- {/if} -->
+		<!-- #BeginLibraryItem "/library/pages.lbi" --><!-- #EndLibraryItem -->
+	</div>
+<!--right end-->
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

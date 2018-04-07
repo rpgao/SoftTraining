@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div id="globalSearch">
+  <div>
+    <div style="height:44px;">
+      <form id="searchForm" name="searchForm" method="post" action="search.php" style="padding:10px 0 0 30px;">
+        
+        <input name="keywords" type="text" id="keyword" />
+        <input type="image" src="../images/btn_search.gif" style="float:left;margin-left:10px !important;margin-left:8px;" />
+        <span style="float:right;padding:5px 20px;"><a href="search.php?act=advanced_search">{$lang.advanced_search}</a> | <a href="index.php">使用帮助</a></span>
+      </form>
+    </div>
+  </div>
+</div>
+<!--End #globalSearch-->

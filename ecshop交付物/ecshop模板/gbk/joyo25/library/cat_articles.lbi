@@ -1,0 +1,12 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="Modtow">
+  <h3 class="clearfix">
+   <div class="f_l">{$articles_cat.name|escape:html}</div>
+   <div class="f_r f12"><a href="{$articles_cat.url}">more</a></div>
+  </h3>
+  <div class="ModtowBox promotion_info">
+  <!--{foreach from=$articles item=article_item}-->
+  <a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a> {$article_item.add_time}<br />
+  <!--{/foreach}-->		
+  </div>
+</div>

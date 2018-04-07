@@ -1,0 +1,36 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<div id="HeadTop" class="clearfix">
+  <div class="f_l logo"><a href="../index.php"><img src="images/logo.gif" alt="{$page_title}" /></a></div>
+	<div class="f_r logoRight">
+	  <!--topNav start-->
+		<!--{if $navigator_list.top}-->
+		<div class="f_r TopNav">
+		  <span class="left"></span><span class="right"></span>
+		    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+            <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+            <!-- {if !$smarty.foreach.nav_top_list.last} -->
+             |
+            <!-- {/if} -->
+    <!-- {/foreach} -->
+		</div>
+		<!-- {/if} -->
+		<!--topNav end-->
+		<!--userInfo start-->
+		<div id="ECS_MEMBERZONE">
+		 {insert_scripts files='transport.js,utils.js'}
+		 {* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}
+		</div>
+		<!--userInfo end-->
+		<!--Nav start-->
+		<div id="Nav" class="clearfix">
+		  <a href="../index.php"{if $navigator_list.config.index eq 1} class="cur"{/if}><span class="left"></span><span class="right"></span>{$lang.home}</a>
+			<!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+      <a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if} {if $nav.active eq 1} class="cur"{/if}>{$nav.name}<span class="left"></span><span class="right"></span></a>
+      <!-- {/foreach} -->
+		</div>
+		<!--Nav end-->
+	</div>
+</div>

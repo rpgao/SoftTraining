@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript" src="js/action.js"></script>
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="Area clearfix">
+ <div class="PageLeft f_l">
+ <div class="PuplicBg clearfix blank">
+<div class="CategoryTit"></div>
+  
+   <ul class="CagegoryBrands clearfix">
+      <li class="CageTit" id="ECS_ARTICLE">  
+    {$lang.goods_category}
+   </li>
+   <li class="BrandTit" id="ECS_NOTICE">
+    {$lang.all_brand}
+   </li>
+  </ul> 
+<div class="Mar10 clearfix">  
+   <div class="Category clearfix" id="ECS_ARTICLE_BODY">
+<!--{foreach from=$categories item=cat}-->
+ <dl>
+ <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+ <!--{if $cat.cat_id}-->
+ <dd>
+ <!--{foreach name=childs from=$cat.cat_id item=child}-->
+    <a href="{$child.url}" title="{$child.name|escape:html}" class="txtdot">{$child.name|escape:html}</a> 
+  <!-- {if !$smarty.foreach.childs.last} -->
+        | 
+      <!-- {/if} -->
+ <!--{/foreach}-->
+ </dd>
+ <!--{/if}-->
+ </dl>
+ <!--{/foreach}-->
+</div>
+    <!-- {if $brand_list} -->
+   <div class="brandboxs blank clearfix" id="ECS_NOTICE_BODY" style="display:none;">
+  <ul>
+   <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+   <li>
+      <!-- {if $brand.brand_logo} -->
+   <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+        <a href="{$brand.url}" class="brandtxt">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      <!-- {/if} -->
+   </li>
+   <!-- {/foreach} -->
+  </ul>
+  <p><a href="../brand.php" class="brandMore">全部品牌</a>
+   </p>   
+</div>
+   <!-- {/if} -->
+  
+ </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+{literal}
+  var cycleList = ['ECS_ARTICLE', 'ECS_NOTICE'];
+  var tabFront = 'CageTit';
+  var tabBack = 'BrandTit';
+  function cycleShow(obj)
+  {
+    var curObj;
+    var curBody;
+    for (i=0; i < cycleList.length; i++)
+    {
+      curObj = document.getElementById(cycleList[i]);
+      curBody = document.getElementById(cycleList[i] + '_BODY');
+      if (obj.id == curObj.id)
+      {
+        curObj.className = tabFront;
+        curBody.style.display = "";
+      }
+      else
+      {
+        curObj.className = tabBack;
+        curBody.style.display = "none";
+      }
+    }
+  }
+
+  // 添加事件
+  for (i=0; i< cycleList.length; i++)
+  {
+    document.getElementById(cycleList[i]).onmousemove = function()
+    {
+      cycleShow(this);
+    };
+  }
+{/literal}
+//]]>
+</script>
+ <!-- TemplateBeginEditable name="左侧区域" -->
+<!-- #BeginLibraryItem "/library/order_query.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/invoice_query.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/email_list.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/vote_list.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+ </div>
+ <div class="PageRight f_r">
+   <!-- #BeginLibraryItem "/library/search_form.lbi" --><!-- #EndLibraryItem -->
+    <ul class="PageThree blank clearfix">
+     <li class="flash f_l">
+      <!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+     </li>
+    <li class="Special f_l">
+      <div class="PublicBorder">
+     <div class="adback">
+       <!-- TemplateBeginEditable name="flash右侧广告位置" -->
+			 <!-- TemplateEndEditable -->
+     </div>
+     <!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+     </div>
+    </li>
+    <li class="Notice f_r">
+     <div class="mod2 blank">
+          <h2>{$lang.shop_notice}</h2>
+          <span class="TL"></span>
+          <span class="TR"></span>
+          <div class="ContantBlank">{$shop_notice}</div> 
+         </div>
+     <!-- #BeginLibraryItem "/library/new_articles.lbi" --><!-- #EndLibraryItem -->
+     <div class="Ad2">
+		 <!-- TemplateBeginEditable name="最新文章下广告位置" -->
+		 <!-- TemplateEndEditable -->
+		 </div>
+    </li>
+   </ul>
+  <!-- TemplateBeginEditable name="右侧区域" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/group_buy.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/auction.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+</div> 
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!--{if $img_links  or $txt_links }-->
+<div class="Area blank">
+<div class="mod3">
+<h2>友情链接</h2>
+<div class="ContantBlank links clearfix">
+ <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+   <a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" /></a>
+   <!--结束图片类型的友情链接{/foreach}-->
+   <!-- {if $txt_links} -->
+   <!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+   <a href="{$link.url}" target="_blank" title="{$link.name}" class="linkTxt">{$link.name}</a>
+   <!--结束文字类型的友情链接{/foreach}-->
+   <!-- {/if} -->
+</div>
+</div> 
+</div> 
+<!--{/if}-->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

@@ -1,0 +1,54 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $top_goods} -->
+  <div class="CommonModel">
+  <div class="Toptit clearfix">
+  <h2 class="red">{$lang.top10}</h2>
+  </div>
+  <div>
+  <ul id="top10">
+   <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+    <li>
+    <div class="first clearfix">
+     <span class="f_l">
+    <img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" /> <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>
+    </span>
+    <span class="f_r"><font class="red">{$goods.price}</b></font></span>
+    </div>
+    <div class="last clearfix">
+     <span class="left f_l"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></span>
+    <span class="f_r">
+    <b class="red">{$smarty.foreach.top_goods.iteration}。</b> <a href="{$goods.url}" title="{$goods.name|escape:html}"><b>{$goods.short_name}</b></a><br />
+    {$lang.shop_price}<b class="red">{$goods.price}</b><br /> 
+    </span>
+    </div>   
+   </li>
+   <!-- {/foreach} --> 
+   </ul>  
+ </div> 
+ </div>
+<!-- {/if} -->
+<div class="blank5"></div>
+ <script>
+   elems("top10","cur");
+   function elems(id,cur){
+var id = document.getElementById(id).getElementsByTagName("li");
+for(var i=0; i<id.length; i++)
+ {
+  id[0].className = "cur";
+   id[i].onmouseover = function()
+   {
+    this.className="";
+  for(var j=0; j<id.length; j++)
+  {
+    if((id[j].getAttribute("class") == cur) || (id[j].getAttribute("className") == cur))
+    {
+    id[j].className = "";
+    break;
+    }
+  }
+ this.className = cur; 
+   }
+ }
+}
+
+   </script>

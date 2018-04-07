@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $brand_list} -->
+<div class="brandsbg">
+	<ul class="brandsbox" id="marqueebox0">
+	
+	 <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+      <li>
+      <!-- {if $brand.brand_logo} -->
+			<a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+        <a href="{$brand.url}" class="brandtxt">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      <!-- {/if} -->
+      </li>
+   <!-- {/foreach} -->
+
+	</ul>
+</div>
+<script type="text/javascript">
+startmarquee(40,30,3000,0);
+</script>
+<!-- {/if} -->

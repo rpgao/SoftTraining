@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+<script type="text/javascript" src="js/action.js"></script>
+
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="block tc clearfix">
+ <div class="w226 categorybox fl">
+	 <!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+ </div>
+ <script type="text/javascript">
+  reg("com");
+ </script>
+ <div class="w226 fr clearfix">
+   {if $searchkeywords}
+	 <div class="searchkeys blank">
+	 {$lang.hot_search}
+   {foreach from=$searchkeywords name=keywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>  
+   {/foreach}
+	 </div>
+   {/if}
+	 <div class="tl">
+	  <div class="noticeTit">{$lang.shop_notice}</div>
+		<div class="noticebox">
+		{$shop_notice}
+		</div>
+		<!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/brands.lbi" --><!-- #EndLibraryItem --> 
+	 </div>
+ </div> 
+ <div class="w533">
+  <!-- #BeginLibraryItem "/library/promotion_info.lbi" --><!-- #EndLibraryItem --> 
+  <div class="flashbox blank">
+	<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+	</div>
+	<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+ </div>
+</div>
+<!-- #BeginLibraryItem "/library/top10.lbi" --><!-- #EndLibraryItem -->
+<div class="block clearfix">
+ <div class="w500 fl">
+ <!-- TemplateBeginEditable name="左边区域" -->
+ <!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/group_buy.lbi" --><!-- #EndLibraryItem -->
+ <!-- TemplateEndEditable -->
+ </div>
+ <div class="w500 fr">
+ <!-- TemplateBeginEditable name="右边区域" -->
+ <!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+ <!-- #BeginLibraryItem "/library/auction.lbi" --><!-- #EndLibraryItem -->
+ <!-- TemplateEndEditable -->
+ </div>
+</div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!--{if $img_links  or $txt_links }-->
+<div class="block blank">
+	  <div class="links clearfix">
+		  <!--开始图片类型的友情链接{foreach from=$img_links item=link}-->
+			<a href="{$link.url}" target="_blank" title="{$link.name}"><img src="{$link.logo}" alt="{$link.name}" /></a>
+			<!--结束图片类型的友情链接{/foreach}-->
+			<!-- {if $txt_links} -->
+			<!--开始文字类型的友情链接{foreach from=$txt_links item=link}-->
+			<a href="{$link.url}" target="_blank" title="{$link.name}" class="linkTxt">{$link.name}</a>
+			<!--结束文字类型的友情链接{/foreach}-->
+			<!-- {/if} -->
+		</div>
+</div>
+</div> 
+<!--{/if}-->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

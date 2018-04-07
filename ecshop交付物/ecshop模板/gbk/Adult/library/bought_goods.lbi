@@ -1,0 +1,42 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="blank5"></div>
+<!-- {if $bought_goods} -->
+<div class="ModelTwo clearfix" id="linel3">
+<em class="Tt"></em>
+<em class="Tr"></em>
+<em class="Bt"></em>
+<em class="Br"></em>
+<div class="TxtTlt">
+  <div class="Title f_l">
+ <h2 class="LPink">{$lang.shopping_and_other}
+ <span class="RPink"></span>
+ </h2>
+ </div>  
+</div>
+<div class="modConter clearfix">
+
+<!--{foreach from=$bought_goods item=bought_goods_data}-->
+  <div class="goodsbox">
+   <div class="imgbox"><a href="{$bought_goods_data.url}"><img src="{$bought_goods_data.goods_thumb}" alt="{$bought_goods_data.goods_name}" /></a></div>
+   <p><a href="{$bought_goods_data.url}" title="{$bought_goods_data.goods_name}">{$bought_goods_data.short_name}</a></p> 
+  <!-- {if $bought_goods_data.promote_price neq 0} -->
+  <font class="shop">{$bought_goods_data.formated_promote_price}</font><br>
+  <!-- {else} -->
+  <font class="shop">{$bought_goods_data.shop_price}</font><br>
+  <!-- {/if} -->  
+  </div>
+  <!-- {/foreach} -->
+</div>
+</div>
+<script type="text/javascript">
+divheight('linel3');
+</script>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+
+
+
+
+ 
+  

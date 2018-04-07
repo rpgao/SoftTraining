@@ -1,0 +1,134 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+<script type="text/javascript">
+function navbg(){
+if(document.getElementById("nav").getElementsByTagName("li").length >= 3)
+ {
+  document.getElementById("nav").getElementsByTagName("li")[0].className = "bg0";
+  document.getElementById("nav").getElementsByTagName("li")[1].className = "bg1";
+  document.getElementById("nav").getElementsByTagName("li")[2].className = "bg2";
+ }
+}
+</script>
+<script type="text/javascript">
+function cccc(){
+document.getElementById("aaa").style.display = "block";
+}
+function gb(){
+document.getElementById("aaa").style.display = "none";
+}
+</script>
+ <!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<div class="order" id="aaa" style="z-index:99;">
+ <div class="Contains tl">
+ <p class="f_r cursore" onclick="gb();"><img src="../images/closh.gif" ></p>
+ <h2 class="CommonTit tl">{$lang.order_query}<span></span></h2>
+  <form name="ecsOrderQuery">
+    <input type="text" name="order_sn" class="TextInput" /><br />
+    <input type="button" value="{$lang.query_order}" class="bnt_num6" onclick="orderQuery()" />
+  </form>
+  <div id="ECS_ORDER_QUERY">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+      {$lang.order_number}：<a href="user.php?act=order_detail&order_id={$order_query.order_id}">{$order_query.order_sn}</a>
+        <!--{else}-->
+      {$lang.order_number}：{$order_query.order_sn}
+        <!--{/if}-->
+      {$lang.order_status}：{$order_query.order_status}
+        <!--{if $order_query.invoice_no }-->
+      {$lang.consignment}：{$order_query.invoice_no}<br>
+        <!--{/if}-->
+      {if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}
+  <!--{/if}-->
+ <!--{/if}-->
+    </div>
+ </div>
+</div>
+<div class="HeadFirst clearfix">
+  <ul>
+ <li class="Logo f_l"><a href="../index.php" name="top"><img src="images/logo.gif" /></a></li>
+ <li class="f_l">
+ <div class="clearfix">
+   <!--登录 注册 start-->
+  <span class="Login f_l">
+ {insert_scripts files='transport.js,utils.js'}
+ <div id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}{insert name='member_info'}</div> 
+ </span>
+ <!-- 登录 注册 end--> 
+ <div class="TopNav f_r tr" style="position:relative;">
+  <!--{if $navigator_list.top} -->
+        <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+    <a href="{$nav.url}" {if $nav.opennew eq 1} target="_blank" {/if}>{$nav.name}</a>
+    <!-- {if !$smarty.foreach.nav_top_list.last} -->
+     | 
+    <!-- {/if} -->
+        <!-- {/foreach} -->
+  <!-- {/if} --> 
+ <font onclick="cccc();" class="font12 cursore">| {$lang.order_query}</font> 
+
+
+ </div>
+ </div>
+ <div id="search" class="tr f_r">
+ <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" style="position:relative;" >
+   <select name="category" id="category" >
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="TextInput" style="position:relative; top:3px;"/>
+   <input name="imageField" type="submit" value="" class="go" style="position:relative;top:2px;top:7px\9;_top:1px;*top:-1px;" />
+    <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+  </div>
+ </li>
+ </ul>
+</div>
+ <!--主体导航 start -->
+<div class="main_nav clearfix Area">
+<ul id="nav" class="clearfix">
+  <li><a href="../index.php">{$lang.home}</a> </li>
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  <li><a href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>{$nav.name}</a> </li>
+  <!-- {/foreach} -->
+</ul> 
+<script>navbg();</script>
+</div>
+ <!--主体导航 end -->
+ <div class="HeadThree Area clearfix">
+ <span class="L"></span>
+ <span class="R"></span>
+  <!--关键字 start -->
+ <div class="key f_l">
+ <div class="keyImg"></div>
+  <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("请输入搜索关键词！");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+    {if $searchkeywords}
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   {/if}
+ </div>
+  <!--关键字 end -->
+ <!--购物车 start -->
+  <div id="ECS_CARTINFO" class="f_r">{insert name="cart_info"}</div>
+ <!--购物车 end -->
+ </div>

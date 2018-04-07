@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $cat_list} -->
+<h1 class="cagegoryTit">{$lang.goods_category}</h1>
+<div class="cagegoryCon clearfix">
+	 <!-- {foreach from=$cat_list item=cat} -->
+    <a href="{$cat.url}"><b>{$cat.cat_name|escape:html}</b> {if $cat.goods_num}({$cat.goods_num}){/if}</a><br />
+   <!--{/foreach}-->
+</div>
+<div class="cagegoryBnt blank"></div>
+<!-- {/if} -->

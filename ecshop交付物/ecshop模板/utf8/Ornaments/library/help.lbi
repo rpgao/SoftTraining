@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $helps}-->
+<div class="links block">
+ <div class="content">
+  <span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>
+	<!-- {foreach from=$helps item=help_cat} -->
+	<div class="goodsbox">
+   <h3 class="help_tit">{$help_cat.cat_name}</h3>
+	 <!-- {foreach from=$help_cat.article item=item} -->
+    ·<a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a><br />
+   <!-- {/foreach} -->
+	</div>
+	<!-- {/foreach} -->
+ </div>	
+</div>
+<!--{/if}-->

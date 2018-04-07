@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<h1 class="mod_title1">{$lang.new_price}<p>&nbsp;</p></h1>
+<div class="mod1">
+	<ul class="history">
+	 <!--{foreach from=$price_list item=item}-->
+	 <li>{$item.user_name}&nbsp;&nbsp;{$item.bid_price}</li>
+	 <!--{/foreach}-->
+	</ul>
+</div>
+

@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $brand_list} -->
+	<ul id="brands">
+	  <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+	  {if $smarty.foreach.brand_foreach.index <=9}
+	  <!-- {if $brand.brand_logo} -->
+	  <li>
+	    <a href="{$brand.url}" title="{$brand.brand_name|escape:html} ({$brand.goods_num})">
+	      <img src="../data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" />
+	    </a>
+	  </li>
+	  <!-- {else} -->
+	  <li class="textLink">
+	    <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+	  </li>
+	  <!-- {/if} -->
+	  {/if}
+	  <!-- {/foreach} -->
+    <li style="width:32px; height:42px; margin:0px; margin-top:5px;"><a href="../brand.php"><img style="width:32px; height:42px;" src="images/brand_gd.jpg" /></a></li>
+	</ul>
+<!-- {/if} -->

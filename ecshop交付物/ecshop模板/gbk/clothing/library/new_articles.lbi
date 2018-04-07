@@ -1,0 +1,10 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<ul>
+	<!--{foreach from=$new_articles item=article name=article_foreach}-->
+	<!--{if $smarty.foreach.article_foreach.index <= 6} 文章显示条数-->
+  <li>
+	<a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:12:"...":true}</a>
+	</li>
+	<!--{/if}-->
+	<!--{/foreach}-->
+</ul>

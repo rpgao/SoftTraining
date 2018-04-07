@@ -1,0 +1,38 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<script language="javascript">
+function GamesorderQuery()
+{
+  //var order_sn = document.forms['ecsOrderQuery']['order_sn'].value;
+	var order_sn = document.getElementById("order_sn").value;
+
+  var reg = /^[\.0-9]+/;
+  if (order_sn.length < 10 || ! reg.test(order_sn))
+  {
+    alert(invalid_order_sn);
+    return;
+  }
+  Ajax.call('user.php?act=order_query&order_sn=s' + order_sn, '', orderQueryResponse, 'GET', 'JSON');
+}
+</script>
+<form name="ecsOrderQuery">
+<input type="text" name="order_sn" id="order_sn" class="inputBorder1" />
+<input type="button" value="查询" class="bnt_num2" onclick="GamesorderQuery()" />
+</form>
+<div id="ECS_ORDER_QUERY">
+	<!--{else}-->
+	<!--{if $order_query.user_id}-->
+	<b>{$lang.order_number}：</b><a href="user.php?act=order_detail&order_id={$order_query.order_id}">{$order_query.order_sn}</a><br />
+		<!--{else}-->
+	<b>{$lang.order_number}：</b>{$order_query.order_sn}<br />
+		<!--{/if}-->
+	<b>{$lang.order_status}：</b><font class="f1">{$order_query.order_status}</font><br />
+		<!--{if $order_query.invoice_no }-->
+	<b>{$lang.consignment}：</b>{$order_query.invoice_no}
+		<!--{/if}-->
+				{if $order_query.shipping_date}：{$lang.shipping_date} {$order_query.shipping_date}
+		<!--{/if}-->
+	 <!--{/if}-->
+
+ </div> 

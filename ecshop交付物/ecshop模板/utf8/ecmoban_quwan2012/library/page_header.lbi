@@ -1,0 +1,167 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="themes/ecmoban_quwan2012/qq/images/qq.css" rel="stylesheet" type="text/css" />
+<script language='javascript' src='themes/ecmoban_quwan2012/qq/ServiceQQ.js' type='text/javascript' charset='utf-8'></script>
+<script type="text/javascript">
+var process_request = "{$lang.process_request}";
+</script>
+
+<div class="top_nav">
+<div class="block  ">
+<div class="f_l">
+   {insert_scripts files='transport.js,utils.js'}
+ 
+   <font id="ECS_MEMBERZONE">{* ECSHOP 提醒您：根据用户id来调用member_info.lbi显示不同的界面  *}</font>{insert name='member_info'} 
+</div>
+
+ 
+
+<div class="f_r log">
+ 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+  <!--{if $navigator_list.top}-->
+    <ul>
+    <!-- {foreach name=nav_top_list from=$navigator_list.top item=nav} -->
+           | <a href="{$nav.url}" <!-- {if $nav.opennew eq 1} --> target="_blank" <!-- {/if} -->>{$nav.name}</a>
+      
+    <!-- {/foreach} -->  
+    </ul>
+   <!-- {/if} -->
+   
+ </div>
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+<div class="block header_bg" style="overflow:visible" >
+ <div class="f_l"  >
+ <a href="../index.php" name="top"><img style="float:left;" src="../images/logo.gif" /></a>
+</div>
+ 
+ 
+ 
+  
+ 
+
+<div class="top_link">
+<!-- 客服电话{if $service_phone} -->
+服务热线：{$service_phone}
+<!-- 结束客服电话{/if} -->
+ </div>
+
+ 
+</div>
+
+
+<div id="mainNav" class="clearfix">
+
+
+
+
+  <ul class="u1" onmouseover="this.className='u1 u1_over '" onmouseout="this.className='u1'"   {if $navigator_list.config.index eq 1} id="cur"{/if}  >
+  <a  class="a1 home_a"  href="../index.php">
+   
+  {$lang.home} 
+  
+  
+ 
+   </a>
+  </ul>
+
+  
+  
+  <!-- {foreach name=nav_middle_list from=$navigator_list.middle item=nav} -->
+  
+  <img style="float:left;   "  src="../images/meun_line.gif">
+  <ul class="u1" onmouseover="this.className='u1 u1_over'" onmouseout="this.className='u1'"  {if $nav.active eq 1} id="cur"   {/if} >
+   
+<a class="a1" href="{$nav.url}" {if $nav.opennew eq 1}target="_blank" {/if}>
+  {$nav.name}
+ 
+ 
+</a>
+
+
+
+  
+  </ul>
+  
+ <!-- {/foreach} -->
+ <div class="meun_float">
+ 
+<div class="buy_car_bg"  id="ECS_CARTINFO" onmouseover="this.className='buy_car_bg ul1_on'" onmouseout="this.className='buy_car_bg'">
+<a href="flow.php" style="color:#FFF">{insert name='cart_info'}</a>
+</div> 
+<a href="flow.php?step=checkout"><img style="float:right; padding-top:6px; padding-right:5px;"  src="../images/jiesuan.gif"></a>
+ 
+ </div>
+ 
+</div>
+
+<div id="search"  class="clearfix">
+
+
+
+
+
+
+
+
+
+
+
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+           alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+   
+
+  <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="f_l" style="padding-top:7px;">
+
+  <div style="float:left;  background:url(../images/search_input.gif) no-repeat;  width:229px; overflow:hidden; height:27px; margin-left:12px">
+    <input name="keywords" type="text"  value="输入商品关键字" onclick="javascript:this.value=''; " id="keyword"  class="B_input" style="width:217px; float:left; background:none; border:none; vertical-align:middle; height:27px; line-height:27px; padding:0 5px; color:#999"/>
+    </div>
+    
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer; float:left" />
+   
+ 
+   {if $searchkeywords} 
+    <div class="hot_search">热门关键词:
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+   {/foreach}
+   </div>
+   {/if}
+
+   </form>
+</div>
+
+
+<div class="blank5b"></div>

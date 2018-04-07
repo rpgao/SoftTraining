@@ -1,0 +1,7 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<h1 class="mod1Tit">{$lang.new_article}</h1>
+<div class="mod1box">
+	<!-- {foreach name=new_articles from=$new_articles item=article} -->
+	·<a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:15}</a><br />
+	<!--{/foreach}-->
+</div>

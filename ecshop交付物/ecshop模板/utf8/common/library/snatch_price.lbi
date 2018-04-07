@@ -1,0 +1,13 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<h4>{$lang.new_price}</h4>
+   <p>
+<!--{foreach from=$price_list item=item}-->
+   {$item.user_name}&nbsp;&nbsp;{$item.bid_price}
+    <!--{/foreach}-->
+   </p>
+  </div>
+ </div>
+</div>

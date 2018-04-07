@@ -1,0 +1,671 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="Keywords" content="{$keywords}" />
+  <meta name="Description" content="{$description}" />
+  <!-- TemplateBeginEditable name="doctitle" -->
+  <!-- TemplateEndEditable -->
+  <!-- TemplateBeginEditable name="head" -->
+  <!-- TemplateEndEditable -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="animated_favicon.gif" type="image/gif" />
+  <link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+  <link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+  <title>{$page_title}</title>
+  {* 包含脚本文件 *}{insert_scripts files='common.js,index.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="area clearfix">
+<div class="AreaLR f_l">
+<!-- #BeginLibraryItem "/library/category_tree.lbi" --><!-- #EndLibraryItem -->
+<!--商店公告 START-->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+ <div class="notice"></div>
+   <p>
+{$shop_notice}
+   </p>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!--商店公告 END-->
+<!-- TemplateBeginEditable name="左侧区域" -->
+<!-- #BeginLibraryItem "/library/cart.lbi" -->
+
+
+{insert_scripts files="transport.js"}
+<div class="ModOne">
+ <div class="car" id="ECS_CARTINFO">
+ {insert name="cart_info"}
+ </div>
+</div>
+<div class="blank5"></div>
+
+
+
+
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/email_list.lbi" -->
+
+
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	  <div class="email"></div>
+   <p>
+<input type="text" id="user_email" class="TextInput" /><br />
+<input type="button" value="{$lang.email_list_ok}" class="bnt_num2" onclick="add_email_list();" />
+<input type="button"  value="{$lang.email_list_cancel}" class="bnt_num2" onclick="cancel_email_list();" />
+   </p>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+var email = document.getElementById('user_email');
+function add_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=add&email=' + email.value, '', rep_add_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_add_email_list(text)
+{
+  alert(text);
+}
+function cancel_email_list()
+{
+  if (check_email())
+  {
+    Ajax.call('user.php?act=email_list&job=del&email=' + email.value, '', rep_cancel_email_list, 'GET', 'TEXT');
+  }
+}
+function rep_cancel_email_list(text)
+{
+  alert(text);
+}
+function check_email()
+{
+  if (Utils.isEmail(email.value))
+  {
+    return true;
+  }
+  else
+  {
+    alert('{$lang.email_invalid}');
+    return false;
+  }
+}
+</script>
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/top10.lbi" -->
+
+
+<!-- {if $top_goods} -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	 <div class="Top10">
+	 <h1></h1>
+	 <div  id="top10">
+    <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+  <ul class="clearfix">
+	<img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" class="iteration" />
+	<!-- {if $smarty.foreach.top_goods.iteration<4}-->
+      <li class="topimg">
+      <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a>
+      </li>
+	<!-- {/if} -->		
+      <li {if $smarty.foreach.top_goods.iteration<4}class="TextWid"{/if}>
+      <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a>      
+      </li>
+    </ul>
+  <!-- {/foreach} -->
+	</div>
+	<script language="javascript">
+	var top10 = document.getElementById("top10").getElementsByTagName("ul");
+	top10[top10.length-1].style.border="none";
+	</script>
+	</div>
+  </div>
+ </div>
+</div>
+<!-- {/if} -->
+<div class="blank5"></div>
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/auction.lbi" -->
+
+<!-- {if $auction_list} -->
+
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="Auticon" id="aution">
+	<h3></h3>
+	<a href="../auction.php"><span class="more"></span></a>
+<!-- {foreach from=$auction_list item=auction} -->
+  <div class="GoodsBox">
+   <p class="photo"><a href="{$auction.url}"><img src="{$auction.thumb}" alt="{$auction.goods_name|escape:html}" /></a></p>
+   <p><a href="{$auction.url}" title="{$auction.goods_name|escape:html}">{$auction.short_style_name|escape:html}</a></p>
+   {$lang.au_start_price}<font class="shop">{$auction.formated_start_price}</font>
+  </div>
+<!--{/foreach}-->
+<script language="javascript">
+	var GoodsBox = document.getElementById("aution").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.border = "none";
+	</script>	
+</div>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/promotion_info.lbi" -->
+
+<!-- {if $promotion_info} -->
+<!-- 促销信息 -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+   <h4>{$lang.promotion_info}</h4>
+	 <p>
+ <!-- {foreach from=$promotion_info item=item key=key} -->
+    <!-- {if $item.type eq "snatch"} -->
+    <a href="snatch.php" title="{$lang.$item.type}">{$lang.snatch_promotion}</a>
+    <!-- {elseif $item.type eq "group_buy"} -->
+    <a href="group_buy.php" title="{$lang.$item.type}">{$lang.group_promotion}</a>
+    <!-- {elseif $item.type eq "auction"} -->
+    <a href="auction.php" title="{$lang.$item.type}">{$lang.auction_promotion}</a>
+    <!-- {elseif $item.type eq "favourable"} -->
+    <a href="activity.php" title="{$lang.$item.type}">{$lang.favourable_promotion}</a>
+    <!-- {/if} -->
+    <a href="{$item.url}" title="{$lang.$item.type} {$item.act_name}{$item.time}" class="bgnone">{$item.act_name}</a><br />
+    <!-- {/foreach} -->
+   </p>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+
+
+
+
+
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+<div class="AreaCl f_l">
+<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateBeginEditable name="中间区域" -->
+<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" -->
+
+<!-- {if $promotion_goods} -->
+<div id="promotin">
+ <h3></h3><a href="../search.php?intro=promotion"><span class="titmore"></span></a>
+ <div class="cont clearfix">
+  <div class="bggoud">
+	<div class="clearfix scrollBox">
+			  <div class="scroL" onmouseover="moveLeft(); this.className='scroL_1'" onmousedown="clickLeft()" onmouseup="moveLeft()" onmouseout="scrollStop();this.className='scroL'"></div>
+				<div class="scroMid">
+				  <div id="demo">
+          <div id="demo1" style="float:left">
+					<ul>
+					<!--{foreach from=$promotion_goods item=goods name="promotion_foreach"}-->
+					<li>
+            <div class="today">
+            <div class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></div>
+            <p><a href="{$goods.url}">{$goods.short_name|escape:html}</a></p>
+            <font class="shop">{$lang.promote_price}{$goods.promote_price}</font><br>
+				    {$lang.market_price}<span class="market">{$goods.market_price}</span><br />
+            </div>
+						</li>
+<!--{/foreach}-->
+</ul>
+					</div>
+          <div id="demo2" style="display:inline; overflow:visible;"></div>
+          </div>
+				</div>
+				<div class="scroR" onmouseover="moveRight(); this.className='scroR_1'" onmousedown="clickRight()" onmouseup="moveRight()" onmouseout="scrollStop(); this.className='scroR';"></div>	
+			</div>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<script type="text/javascript">
+      function $(id){  
+        return (document.getElementById) ? document.getElementById(id): document.all[id]
+      }
+      
+      var boxwidth=166;//跟图片的实际尺寸相符
+      
+      var box=$("demo");
+      var obox=$("demo1");
+      var dulbox=$("demo2");
+      obox.style.width=obox.getElementsByTagName("li").length*boxwidth+'px';
+      dulbox.style.width=obox.getElementsByTagName("li").length*boxwidth+'px';
+      box.style.width=obox.getElementsByTagName("li").length*boxwidth*3+'px';
+      var canroll = false;
+      if (obox.getElementsByTagName("li").length >= 4) {
+        canroll = true;
+        dulbox.innerHTML=obox.innerHTML;
+      }
+      var step=5;temp=1;speed=50;
+      var awidth=obox.offsetWidth;
+      var mData=0;
+      var isStop = 1;
+      var dir = 1;
+      
+      function s(){
+        if (!canroll) return;
+        if (dir) {
+      if((awidth+mData)>=0)
+      {
+      mData=mData-step;
+      }
+      else
+      {
+      mData=-step;
+      }
+      } else {
+        if(mData>=0)
+        {
+        mData=-awidth;
+        }
+        else
+        {
+        mData+=step;
+        }
+      }
+      
+      obox.style.marginLeft=mData+"px";
+      
+      if (isStop) return;
+      
+      setTimeout(s,speed)
+      }
+      
+      
+      function moveLeft() {
+          var wasStop = isStop;
+          dir = 1;
+          speed = 50;
+          isStop=0;
+          if (wasStop) {
+            setTimeout(s,speed);
+          }
+      }
+      
+      function moveRight() {
+          var wasStop = isStop;
+          dir = 0;
+          speed = 50;
+          isStop=0;
+          if (wasStop) {
+            setTimeout(s,speed);
+          }
+      }
+      
+      function scrollStop() {
+        isStop=1;
+      }
+      
+      function clickLeft() {
+          var wasStop = isStop;
+          dir = 1;
+          speed = 25;
+          isStop=0;
+          if (wasStop) {
+            setTimeout(s,speed);
+          }
+      }
+      
+      function clickRight() {
+          var wasStop = isStop;
+          dir = 0;
+          speed = 25;
+          isStop=0;
+          if (wasStop) {
+            setTimeout(s,speed);
+          }
+      }
+      </script>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!-- {if $cat_goods} -->
+
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<h3 class="cat_goods">{$goods_cat.name|escape:html}</h3>
+	<a href="{$goods_cat.url}"><span class="titmore"></span></a>
+	<div id="cat_goods_area">
+<!--{foreach from=$cat_goods item=goods}-->
+  <div class="GoodsBox">
+   <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></p>
+   <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a></p>
+    {$lang.market_price}<font class="market"> {$goods.market_price}</font><br>        
+        <font class="shop">{$lang.shop_price}{$goods.shop_price}</font><br>        
+				<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a> </span> 
+  </div>
+<!--{/foreach}-->
+<script language="javascript">
+	var GoodsBox = document.getElementById("cat_goods_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>	
+	</div>
+<div class="blank5"></div>
+  </div>
+ </div>
+</div>
+<!--{/if}-->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" -->
+
+<!-- {if $new_goods} -->
+<!-- {if $cat_rec_sign neq 1} -->
+<div class="centerPadd">
+  <div class="itemNewTit" id="itemNew">
+	<div class="left_new f_l"></div>
+	<div class="right_new f_r">
+      {if $cat_rec[2]}
+      <h2><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, 0);">{$lang.all_goods}</a>
+   </h2>
+      {foreach from=$cat_rec[2] item=rec_data}
+      <h2 class="h2bg"><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemNew', 'h2', this);get_cat_recommend(2, {$rec_data.cat_id})">{$rec_data.cat_name}</a>     
+			</h2>					
+      {/foreach}			
+      {/if}
+	</div>
+  </div>
+  <div id="show_new_area" class="content clearfix">	
+  <!-- {/if} -->
+  <!--{foreach from=$new_goods item=goods}-->
+  <div class="GoodsBox">
+           <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"/></a></p>
+           <p><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a></p>          
+          {$lang.market_price}<span class="market">{$goods.market_price}</span><br />
+          <font class="shop">{$lang.shop_price} {$goods.shop_price}</font>	<br />
+					<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a></span>       				 
+  </div>	
+  <!--{/foreach}-->
+	<h1><a href="../search.php?intro=new"><span class="morepic f_r"></span></a></h1>
+  <!-- {if $cat_rec_sign neq 1} -->
+	<script language="javascript">
+	var GoodsBox = document.getElementById("show_new_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>
+
+  </div>	
+</div>
+<div class="blank5"></div>
+  <!-- {/if} -->
+<!-- {/if} -->
+
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_best.lbi" -->
+
+<!-- {if $best_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <div class="centerPadd">
+  <div class="itemNewTit" id="itemBest">
+  <div class="left_best f_l"></div>
+	<div class="right_new f_r">
+   {if $cat_rec[1]}
+   <h2><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, 0);">{$lang.all_goods}</a>
+	 </h2>
+   {foreach from=$cat_rec[1] item=rec_data}
+   <h2 class="h2bg"><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemBest', 'h2', this);get_cat_recommend(1, {$rec_data.cat_id})">{$rec_data.cat_name}</a>
+	 </h2>
+   {/foreach}
+  {/if}
+ </div>
+  </div>
+ <div id="show_best_area"  class="content clearfix">
+ <!-- {/if} -->
+  <!--{foreach from=$best_goods item=goods}-->
+<div class="GoodsBox">
+  <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></p>
+  <p><a href="{$goods.url}">{$goods.short_style_name}</a></p>       
+   {$lang.market_price}<font class="market"> {$goods.market_price}</font><br>        
+   <font class="shop">{$lang.shop_price}{$goods.shop_price}</font><br>        
+	<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a> </span> 
+  </div>
+  <!--{/foreach}-->
+<h1><a href="../search.php?intro=best"><span class="morepic f_r"></span></a></h1>
+ <!-- {if $cat_rec_sign neq 1} --> 
+<script language="javascript">
+	var GoodsBox = document.getElementById("show_best_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>	
+	  </div>	
+</div>
+<div class="blank5"></div>
+  <!-- {/if} -->
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/recommend_hot.lbi" -->
+
+<!-- {if $hot_goods} -->
+ <!-- {if $cat_rec_sign neq 1} -->
+ <div class="centerPadd">
+  <div class="itemNewTit" id="itemHot">
+	<div class="left_hot f_l"></div>
+	<div class="right_new f_r">
+   {if $cat_rec[3]}
+  <h2><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, 0);">{$lang.all_goods}</a>
+	</h2>
+  {foreach from=$cat_rec[3] item=rec_data}
+  <h2 class="h2bg"><span class="Hleft"></span><span class="Hright"></span><a href="javascript:void(0)" onclick="change_tab_style('itemHot', 'h2', this);get_cat_recommend(3, {$rec_data.cat_id})">{$rec_data.cat_name}</a>
+	</h2>
+  {/foreach}
+  {/if}  
+  </div>
+	</div>
+ <div id="show_hot_area" class="content clearfix">
+ <!-- {/if} -->
+  <!--{foreach from=$hot_goods item=goods}-->
+    <div class="GoodsBox">
+      <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" /></a></p>
+			 <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a><br>
+       {$lang.market_price}<font class="market"> {$goods.market_price}</font><br>        
+        <font class="shop">{$lang.shop_price}{$goods.shop_price}</font><br>        
+				<span><a href="javascript:collect({$goods.id})">{$lang.btn_collect}</a> | <a href="javascript:addToCart({$goods.id})">{$lang.btn_buy}</a> </span> 
+     </div>
+  <!--{/foreach}-->
+<h1><a href="../search.php?intro=hot"><span class="morepic f_r"></span></a></h1>
+ <!-- {if $cat_rec_sign neq 1} --> 
+ <script language="javascript">
+	var GoodsBox = document.getElementById("show_hot_area").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.background = "none";
+	</script>	   
+ </div>
+  </div>
+	<div class="blank5"></div>
+ <!-- {/if} -->
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+<div class="AreaLR f_r">
+<!-- TemplateBeginEditable name="右侧区域" -->
+<!-- #BeginLibraryItem "/library/new_articles.lbi" -->
+
+<!-- {if $new_articles} -->
+<div id="newArticles">
+<h3></h3>
+<div class="cont">
+ <ul> 
+ <!-- {foreach name=new_articles from=$new_articles item=article} -->
+   <li>
+    <a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title}</a>
+    </li> 
+	<!-- {/foreach} -->
+ </ul>
+</div>
+<div class="bot"></div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/brands.lbi" -->
+
+<!-- {if $brand_list} -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="brand">
+	<h3></h3>
+	<a href="../brand.php"><span class="more"></span></a>
+	
+   <p>	 
+	   <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+      {if $smarty.foreach.brand_foreach.index <= 9}
+      <!-- {if $brand.brand_logo} -->
+      <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div>
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+      {/if}
+  <!-- {/foreach} -->
+	 </p>
+	 </div>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/order_query.lbi" -->
+
+<!--{if empty($order_query)}-->
+<script>var invalid_order_sn = "{$lang.invalid_order_sn}"</script>
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+   <div class="query">
+	 </div>
+	 <div class="BorderBlank Fgrad">
+	  <form name="ecsOrderQuery">
+    <input type="text" name="order_sn" class="TextInput" /><br />
+    <div class="blank5"></div>
+    <input type="button" value="{$lang.query_order}" class="bnt_num6" onclick="orderQuery()" />
+    </form>
+    <div id="ECS_ORDER_QUERY" style="margin-top:8px;">
+      <!--{else}-->
+      <!--{if $order_query.user_id}-->
+{$lang.order_number}：<a href="user.php?act=order_detail&order_id={$order_query.order_id} class="fblck"">{$order_query.order_sn}</a><br>
+  <!--{else}-->
+{$lang.order_number}：{$order_query.order_sn}<br>
+  <!--{/if}-->
+{$lang.order_status}：<br><font class="fblck">{$order_query.order_status}</font><br>
+  <!--{if $order_query.invoice_no }-->
+{$lang.consignment}：{$order_query.invoice_no}<br>
+  <!--{/if}-->
+      <!--{if $order_query.shipping_date}-->
+			{$lang.shipping_date}： {$order_query.shipping_date}<br>
+  <!--{/if}-->
+  <!--{/if}-->
+ </div>
+  </div>
+ </div>
+</div>
+</div>
+<div class="blank5"></div>
+
+
+ 
+    
+ 
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/invoice_query.lbi" -->
+
+<!--{if $invoice_list}-->
+<style type="text/css">
+.boxCenterList form{display:inline;}
+.boxCenterList form a{color:#404040; text-decoration:underline;}
+</style>
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="delivery"></div>
+   <p class="Fgrad"> 
+	  <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+   {$lang.order_number}<font class="fblck"> {$invoice.order_sn}</font><br />
+   {$lang.consignment} <font class="fblck">{$invoice.invoice_no}</font><br /><br />
+   <!-- 结束发货单查询{/foreach}-->  
+	 </p>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/group_buy.lbi" -->
+
+<!-- {if $group_buy_goods} -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="group">
+	<h3></h3>
+	<a href="../group_buy.php"><span class="more"></span></a>
+	<p>
+	<div id="group">
+	<!--{foreach from=$group_buy_goods item=goods}-->
+  <div class="GoodsBox">
+   <p class="photo"><a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}" /></a></p>
+   <a href="{$goods.url}" title="{$goods.goods_name|escape:html}">{$goods.short_style_name|escape:html}</a><br />
+   <font class="shop">{$goods.last_price}</font>
+  </div>
+  <!--{/foreach}-->
+	<script language="javascript">
+	var GoodsBox = document.getElementById("group").getElementsByTagName("div");
+	GoodsBox[GoodsBox.length-1].style.border = "none";
+	</script>	 
+  </div>	
+</p>
+	</div>   
+  </div>
+ </div>
+</div>
+
+<!-- {/if} -->
+
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+</div>
+</div>
+<div class="area">
+<div class="blank10"></div>
+<!-- #BeginLibraryItem "/library/help.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/links.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</div>
+</body>
+<script language="javascript">
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</html>

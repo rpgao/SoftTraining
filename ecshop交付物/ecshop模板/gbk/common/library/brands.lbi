@@ -1,0 +1,28 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $brand_list} -->
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="brand">
+	<h3></h3>
+	<a href="../brand.php"><span class="more"></span></a>
+	
+   <p>	 
+	   <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+      {if $smarty.foreach.brand_foreach.index <= 9}
+      <!-- {if $brand.brand_logo} -->
+      <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div>
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+      {/if}
+  <!-- {/foreach} -->
+	 </p>
+	 </div>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

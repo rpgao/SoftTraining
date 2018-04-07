@@ -1,0 +1,31 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="box">
+ <div class="box_1">
+  <h3><span></span></h3>
+  <div class="boxCenterList RelaArticle">
+    
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+
+<!-- {if $filter_attr_list} -->
+<div class="general">
+	<h1>
+	<span class="left"></span><span class="right"></span>
+	<p>{$filter_attr_name}</p>
+	</h1>
+	<div class="content">
+	<div class="contentR vote">
+		<!-- {foreach from=$filter_attr_list item=attr} -->
+    {if $attr.selected}
+    ·<a href="{$attr.url}">{$attr.attr_value}{if $attr.goods_num}({$attr.goods_num}){/if}</a><br />
+    {else}
+    ·<a href="{$attr.url}">{$attr.attr_value}{if $attr.goods_num}({$attr.goods_num}){/if}</a><br />
+    {/if}
+    <!-- {/foreach} -->
+	</div>
+	</div>
+</div>
+<!-- {/if} -->

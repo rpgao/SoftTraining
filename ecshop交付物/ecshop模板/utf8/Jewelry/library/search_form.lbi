@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="SearchBg blank">
+ <!--search start-->
+   <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()">
+   <select name="category" id="category" style="position: relative; _top:3px;">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="InputBorder" size="20" style="position: relative; _top:3px;"/>
+   <input name="imageField" type="submit" value="搜索" class="go" /> 
+  <a href="search.php?act=advanced_search"><span class="ad">[高级搜索]</span></a>
+   </form>
+   <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("{$lang.no_keywords}");
+            return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+  <span class="KeyWord">
+    {if $searchkeywords}
+    <b>{$lang.hot_search} ：</b>
+    {foreach from=$searchkeywords item=val}
+    <a href="search.php?keywords={$val|escape:url}">{$val}</a>
+    {/foreach}
+    {/if} 
+  </span>
+   </div> 
+  <!--search end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

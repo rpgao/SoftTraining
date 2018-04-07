@@ -1,0 +1,22 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $brand_list} -->
+<div class="Modtow">
+  <h3 class="clearfix">
+   <div class="f_l">{$lang.brand}</div>
+   <div class="f_r f12"><a href="../brand.php">more</a></div>
+  </h3>
+  <div class="ModtowBox brands clearfix">
+   <!-- {foreach from=$brand_list item=brand name="brand_foreach"} -->
+      {if $smarty.foreach.brand_foreach.index <= 9}
+      <!-- {if $brand.brand_logo} -->
+      <a href="{$brand.url}"><img src="data/brandlogo/{$brand.brand_logo}" alt="{$brand.brand_name|escape:html} ({$brand.goods_num})" /></a>
+      <!-- {else} -->
+      <div>
+        <a href="{$brand.url}">{$brand.brand_name|escape:html} {if $brand.goods_num}({$brand.goods_num}){/if}</a>
+      </div>
+      <!-- {/if} -->
+      {/if}
+  <!-- {/foreach} -->
+  </div>
+</div>
+<!-- {/if} -->

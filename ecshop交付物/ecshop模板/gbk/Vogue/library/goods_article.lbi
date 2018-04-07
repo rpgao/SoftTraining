@@ -1,0 +1,15 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $goods_article_list} -->
+ <div class="PublicBorderTwo">
+   <h3 class="F14B">{$lang.article_releate} 
+   </h3>
+   <div class="Conwid2">
+  <ul>
+  <!-- {foreach from=$goods_article_list item=article} 相关文章 -->
+  <li class="DotList"><a href="{$article.url}" title="{$article.title|escape:html}">{$article.short_title|truncate:13}</a>
+  </li>
+  <!--{/foreach}-->
+  </ul>   
+  </div>
+ </div>
+<!-- {/if} -->

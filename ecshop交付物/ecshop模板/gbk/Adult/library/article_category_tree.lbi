@@ -1,0 +1,18 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!-- {if $article_categories } -->
+
+<div class="CommonModelOne clearfix">
+<h2 class="TitLext red">{$lang.article_cat}</h2>
+<ul>
+ <!--{foreach from=$article_categories item=cat}-->
+    <li><a href="{$cat.url}"><strong>{$cat.name|escape:html}</strong></a></li>
+      <li style="margin-left:10px;">
+      <!--{foreach from=$cat.children item=child}-->
+      <a href="{$child.url}" style="background:none;">{$child.name|escape:html}</a><br>
+      <!--{/foreach}-->
+      </li>
+    <!--{/foreach}-->
+</ul>
+</div>
+<div class="blank5"></div>
+<!--{/if} -->

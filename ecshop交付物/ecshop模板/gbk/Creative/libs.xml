@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="gb2312"?>
+<regions>
+  <file name="activity.dwt"/>
+  <file name="article.dwt">
+    <region name="">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="article_cat.dwt">
+    <region name="宸">
+      <lib>article_category_tree</lib>
+      <lib>history</lib>
+    </region>
+    <region name=""/>
+  </file>
+  <file name="article_pro.dwt"/>
+  <file name="auction.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="auction_list.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="brand.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="brand_list.dwt"/>
+  <file name="catalog.dwt"/>
+  <file name="category.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+    <region name=""/>
+  </file>
+  <file name="compare.dwt"/>
+  <file name="exchange_goods.dwt">
+    <region name="宸">
+      <lib>goods_attrlinked</lib>
+      <lib>history</lib>
+      <lib>goods_article</lib>
+    </region>
+    <region name="">
+      <lib>comments</lib>
+    </region>
+  </file>
+  <file name="exchange_list.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+    <region name="">
+      <lib>exchange_hot</lib>
+    </region>
+    <region name=""/>
+  </file>
+  <file name="flow.dwt"/>
+  <file name="gallery.dwt"/>
+  <file name="goods.dwt">
+    <region name="宸">
+      <lib>goods_attrlinked</lib>
+      <lib>history</lib>
+      <lib>goods_article</lib>
+    </region>
+    <region name="">
+      <lib>bought_note_guide</lib>
+      <lib>comments</lib>
+    </region>
+  </file>
+  <file name="group_buy_goods.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="group_buy_list.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="index.dwt">
+    <region name="宸">
+      <lib>recommend_new</lib>
+      <lib>group_buy</lib>
+    </region>
+    <region name="">
+      <lib>recommend_hot</lib>
+      <lib>auction</lib>
+    </region>
+  </file>
+  <file name="message.dwt"/>
+  <file name="message_board.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="myship.dwt"/>
+  <file name="package.dwt"/>
+  <file name="pick_out.dwt">
+    <region name="宸">
+      <lib>categorys</lib>
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="quotation.dwt"/>
+  <file name="receive.dwt"/>
+  <file name="respond.dwt"/>
+  <file name="search.dwt">
+    <region name="宸">
+      <lib>history</lib>
+    </region>
+  </file>
+  <file name="snatch.dwt"/>
+  <file name="style.css"/>
+  <file name="tag_cloud.dwt"/>
+  <file name="topic.dwt"/>
+  <file name="user_clips.dwt"/>
+  <file name="user_passport.dwt"/>
+  <file name="user_transaction.dwt"/>
+  <file name="wholesale_list.dwt"/>
+</regions>

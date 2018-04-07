@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $invoice_list}-->
+<style type="text/css">
+.boxCenterList form{display:inline;}
+.boxCenterList form a{color:#404040; text-decoration:underline;}
+</style>
+<div class="ModOne">
+ <div class="bgpic">
+  <div class="bottompic">
+	<div class="delivery"></div>
+   <p class="Fgrad"> 
+	  <!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+   {$lang.order_number}<font class="fblck"> {$invoice.order_sn}</font><br />
+   {$lang.consignment} <font class="fblck">{$invoice.invoice_no}</font><br /><br />
+   <!-- 结束发货单查询{/foreach}-->  
+	 </p>
+  </div>
+ </div>
+</div>
+<div class="blank5"></div>
+<!-- {/if} -->

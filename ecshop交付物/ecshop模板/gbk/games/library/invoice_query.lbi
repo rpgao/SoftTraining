@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!--{if $invoice_list}-->
+<div class="modTow">
+	<div class="modTow1 clearfix">
+		<h1><p><span>{$lang.shipping_query}</span></p></h1>
+		<div class="modContent">
+		<!-- 发货单查询{foreach from=$invoice_list item=invoice} -->
+		<div class="invoice">
+    <b>{$lang.order_number}</b> {$invoice.order_sn}<br />
+    <b>{$lang.consignment}</b> {$invoice.invoice_no}<br />
+		</div>
+    <!-- 结束发货单查询{/foreach}-->
+		</div>	
+	</div>	 
+</div>
+<!-- {/if} -->

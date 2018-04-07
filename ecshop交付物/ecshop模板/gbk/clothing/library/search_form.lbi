@@ -1,0 +1,39 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div id="search">
+  <div class="content clearfix">
+    <script type="text/javascript">
+    {literal}
+    <!--
+    function checkSearchForm()
+    {
+        if(document.getElementById('keyword').value)
+        {
+            return true;
+        }
+        else
+        {
+            alert("请输入关键词！")
+						return false;
+        }
+    }
+    -->
+    {/literal}
+    </script>
+   {if $searchkeywords}
+	 <div class="keywords">
+   {foreach from=$searchkeywords item=val}
+   <a href="search.php?keywords={$val|escape:url}">{$val}</a> | 
+   {/foreach}
+	 </div>
+   {/if}
+	 <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" class="formbox">
+   <select name="category" id="category">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" class="border" value="{$search_keywords}" />
+   <input name="imageField" type="submit" value="" class="go" style="cursor:pointer;" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="general">
+	<h1>
+	<span class="left"></span><span class="right"></span>
+	<p>{$lang.new_price}</p>
+	</h1>
+	<div class="content">
+	<div class="contentR vote">
+		<!--{foreach from=$price_list item=item}-->
+    {$item.user_name}&nbsp;&nbsp;{$item.bid_price}<br />
+    <!--{/foreach}-->
+	</div>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<div class="module" id="category_tree">
+  <h1><span></span>{$lang.goods_category}</h1>
+  <div class="content">
+    <dl>
+      <!--{foreach from=$categories item=cat}-->
+      <dt><a href="{$cat.url}">{$cat.name|escape:html}</a></dt>
+      <!--{if $cat.cat_id} -->
+			<dd>
+        <!--{foreach from=$cat.cat_id item=child}-->
+        <li>
+          <a href="{$child.url}" onfocus="this.blur()">{$child.name|escape:html}</a>
+        </li>
+        <!--{/foreach}-->
+      </dd>
+			<!--{/if}-->
+      <!--{/foreach}--> 
+    </dl>
+  </div>
+  <div class="bottom"><span></span></div>  
+</div>

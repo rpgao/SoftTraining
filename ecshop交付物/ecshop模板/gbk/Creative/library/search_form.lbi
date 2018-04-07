@@ -1,0 +1,16 @@
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<!--search start-->
+
+	 <form id="searchForm" name="searchForm" method="get" action="search.php" onSubmit="return checkSearchForm()" >
+	 <strong>商品搜索：</strong> 
+   <select name="category" id="category">
+      <option value="0">{$lang.all_category}</option>
+      {$category_list}
+    </select>
+   <input name="keywords" type="text" id="keyword" value="{$search_keywords|escape}" class="InputBorder fl"/>
+   <input name="imageField" type="image" src="../images/search_submit.jpg" style="position:relative; top:6px;" class="fl" />
+   <a href="search.php?act=advanced_search">{$lang.advanced_search}</a>
+   </form>
+ 
+
+<!--search end-->
